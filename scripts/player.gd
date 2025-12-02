@@ -4,7 +4,7 @@ static var Instance : Player
 
 @export_group("Input")
 @export_range (0.0, 1.0) var controller_dead_zone : float = 0.3
-
+@export var PlayerSprite : AnimatedSprite2D
 # Collectible
 var key_count : int
 
@@ -44,12 +44,24 @@ func _update_room() -> void:
 	if next_room != null:
 		enter_room(next_room)
 
-
 func _update_inputs() -> void:
+	var savedFrame = PlayerSprite.frame;
 	if _can_move():
 		_direction = Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Up", "Down"))
+		#print(_direction)
+		if(abs(_direction.x) > abs(_direction.y)):
+			if(_direction.x >= 0):
+				PlayerSprite.set_frame(2);
+			else:
+				PlayerSprite.set_frame(0);
+		elif(abs(_direction.x) < abs(_direction.y)):
+			if(_direction.y > 0):
+				PlayerSprite.set_frame(1);
+			else:
+				PlayerSprite.set_frame(3);
 		if _direction.length() < controller_dead_zone:
 			_direction = Vector2.ZERO
+			PlayerSprite.set_frame(savedFrame)
 		else:
 			_direction = _direction.normalized()
 
@@ -57,6 +69,8 @@ func _update_inputs() -> void:
 			_attack()
 	else:
 		_direction = Vector2.ZERO
+		PlayerSprite.set_frame(savedFrame)
+
 
 
 func _set_state(state : STATE) -> void:
