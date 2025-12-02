@@ -13,7 +13,7 @@ enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
 @export var invincibility_duration : float = 1.0
 @export var invincibility_blink_period : float = 0.2
 @export var dead_color : Color = Color.GRAY
-@export var sprites : Array[Sprite2D] = []
+@export var sprites : Array[AnimatedSprite2D] = []
 
 @export_group("Movement")
 @export var default_movement : MovementParameters
@@ -59,7 +59,7 @@ func _physics_process(_delta: float) -> void:
 	if _direction.length() > 0.000001:
 		velocity += _direction * _current_movement.acceleration * get_physics_process_delta_time()
 		velocity = velocity.limit_length(_current_movement.speed_max)
-		main_sprite.rotation = _compute_orientation_angle(_direction)
+		#main_sprite.rotation = _compute_orientation_angle(_direction)
 	else:
 		## If direction length == 0, Apply friction
 		var friction_length = _current_movement.friction * get_physics_process_delta_time()
