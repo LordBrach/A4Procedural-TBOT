@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://TheBindingOfTaxi/scripts/globals.gd"
+WorldGen="*res://TheBindingOfTaxi/scripts/WorldGenManager.gd"
 
 [dotnet]
 
