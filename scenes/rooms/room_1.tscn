@@ -16,5 +16,5 @@ tile_map_data = PackedByteArray("AAAJAPj/AAAAAAAAAgA=")
 tile_set = ExtResource("1_mlda8")
 
 [connection signal="body_entered" from="Floor/KeyCollectible" to="Floor/KeyCollectible" method="_on_body_entered"]
-[connection signal="body_entered" from="Floor/@Area2D@81283" to="Floor/@Area2D@81283" method="_on_body_entered"]
+[connection signal="body_entered" from="Floor/@Area2D@62573" to="Floor/@Area2D@62573" method="_on_body_entered"]
 [connection signal="body_entered" from="Props/HeartCollectible" to="Props/HeartCollectible" method="_on_body_entered"]
