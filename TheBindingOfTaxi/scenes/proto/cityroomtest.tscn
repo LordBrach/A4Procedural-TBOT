@@ -5,6 +5,8 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_8fllh")
+roomName = "bite"
+savePath = "TheBindingOfTaxi/ressources/roomdata/"
 ActiveExits = Dictionary[int, bool]({
 1: true,
 2: true,
