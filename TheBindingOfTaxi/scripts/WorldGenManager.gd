@@ -2,7 +2,7 @@ class_name WorldGenManager extends Node2D
 
 enum Biomes { None, Biome1, Biome2, Biome3 }
 
-@export var chunkSize : int = 9
+
 @export var roomPixelSize : Vector2 = Vector2.ONE
 
 @export var specialRooms : Dictionary[RoomData, Biomes]
