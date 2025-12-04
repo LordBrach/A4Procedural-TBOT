@@ -2,7 +2,7 @@ class_name Chunk extends Node2D
 
 @export var chunkPosition : Vector2i
 
-var roomTiles : Dictionary[Vector2i, Room]
+var roomTiles : Dictionary[Vector2i, RoomData]
 
 @export var roomPixelSize : Vector2
 
@@ -37,9 +37,9 @@ func _IsPosInside(a_pos : Vector2) -> bool:
 func _IsTileInside(a_pos : Vector2i) -> bool :
 	var result : bool = true
 	
-	if (!(0 < a_pos.x && a_pos.x < chunkSize)) :
+	if (!(0 < a_pos.x && a_pos.x < WorldGen.chunkSize)) :
 		result = false
-	elif (!(0 < a_pos.y && a_pos.y < chunkSize)) :
+	elif (!(0 < a_pos.y && a_pos.y < WorldGen.chunkSize)) :
 		result = false
 	
 	return result
@@ -54,9 +54,9 @@ func IsOccupied(a_roomTilePos : Vector2i, a_roomPixelSize : Vector2i = Vector2i(
 	
 	return true
 
-func IsPositionable(a_roomTilePos : Vector2i, a_room : Room) -> bool :
+func IsPositionable(a_roomTilePos : Vector2i, a_room : RoomData) -> bool :
 	
-	#Verification des accès des routes avec IsAccessible()
+	
 	
 	return false
 
@@ -64,7 +64,7 @@ func IsAccessible(a_roomTilePos : Vector2i, a_direction : int) -> bool :
 	
 	return false
 
-func _TryPlaceRoom(a_roomTilePos : Vector2i, a_room : Room) -> bool :
+func _TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomData) -> bool :
 	
 	if (!IsOccupied(a_roomTilePos, a_room.room_size) || !IsPositionable(a_roomTilePos, a_room)):
 		return false

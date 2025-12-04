@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg6p5nqpedj8s"]
+
+[ext_resource type="Script" uid="uid://5dyhrm5ml28n" path="res://TheBindingOfTaxi/scripts/WorldGenManager.gd" id="1_bc0lw"]
+
+[node name="GenTestScene" type="Node2D"]
+
+[node name="WorldGenManager" type="Node2D" parent="."]
+script = ExtResource("1_bc0lw")
+metadata/_custom_type_script = "uid://5dyhrm5ml28n"

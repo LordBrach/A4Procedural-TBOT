@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=2 format=3 uid="uid://ccmc34n5lwf2x"]
+
+[ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="1_fdi7y"]
+
+[resource]
+script = ExtResource("1_fdi7y")
+room_name = "test"
+room_size = Vector2i(1, 1)
+road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/test/road_layer.tres"
+wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/test/wall_layer.tres"
+empty_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/test/empty_layer.tres"
