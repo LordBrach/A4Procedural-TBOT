@@ -20,7 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	_update_inputs()
-	_update_room()
+	#_update_room()
 
 
 func enter_room(room : Room) -> void:

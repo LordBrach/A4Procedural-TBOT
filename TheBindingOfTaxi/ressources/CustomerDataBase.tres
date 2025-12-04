@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=2 format=3 uid="uid://bwt1nlqgdjnr0"]
+
+[ext_resource type="Script" uid="uid://cktjqncw6fv4b" path="res://TheBindingOfTaxi/scripts/customer_data.gd" id="1_vqvqw"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "TestName"
+script = ExtResource("1_vqvqw")
+DifficultyOptions = Dictionary[int, bool]({
+0: true,
+1: true,
+2: true,
+3: false,
+4: false
+})
+DrivingConditions = Dictionary[int, bool]({
+0: true,
+1: false,
+2: false,
+3: false,
+4: false
+})

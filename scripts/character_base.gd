@@ -13,7 +13,7 @@ enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
 @export var invincibility_duration : float = 1.0
 @export var invincibility_blink_period : float = 0.2
 @export var dead_color : Color = Color.GRAY
-@export var sprites : Array[AnimatedSprite2D] = []
+#@export var sprites : Array[Sprite2D] = []
 
 @export_group("Movement")
 @export var default_movement : MovementParameters
@@ -44,7 +44,7 @@ var _is_blinking : bool
 # Dungeon position
 var _room #: Room
 
-@onready var main_sprite : Sprite2D = $"BodySprite"
+#@onready var main_sprite : Sprite2D = $"BodySprite"
 
 
 func _process(delta: float) -> void:
@@ -132,8 +132,10 @@ func _end_blink() -> void:
 
 
 func _set_color(color : Color) -> void:
-	for sprite in sprites:
-		sprite.modulate = color
+	#for sprite in sprites:
+		#sprite.modulate = color
+	pass;
+	
 
 
 func _compute_orientation_angle(direction : Vector2) -> float:
