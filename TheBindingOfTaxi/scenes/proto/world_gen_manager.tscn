@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://hal8wo2d5im2"]
+
+[ext_resource type="Script" uid="uid://5dyhrm5ml28n" path="res://TheBindingOfTaxi/scripts/WorldGenManager.gd" id="1_u6qgw"]
+[ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="2_obu3s"]
+[ext_resource type="Resource" uid="uid://cj386hdrogsdq" path="res://TheBindingOfTaxi/ressources/roomdata/new_room/new_room.tres" id="3_al6d5"]
+
+[node name="WorldGenManager" type="Node2D"]
+script = ExtResource("1_u6qgw")
+biome1Rooms = Array[ExtResource("2_obu3s")]([ExtResource("3_al6d5"), ExtResource("3_al6d5")])
+metadata/_custom_type_script = "uid://5dyhrm5ml28n"

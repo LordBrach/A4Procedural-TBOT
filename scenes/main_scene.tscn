@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://4eq20em80d1w" path="res://scripts/camera_follow.gd" id="2_liovv"]
 [ext_resource type="PackedScene" uid="uid://buuwp4chbvml5" path="res://scenes/rooms/room_2.tscn" id="4_m4k51"]
 [ext_resource type="PackedScene" uid="uid://s6ah3dc0wqxd" path="res://scenes/rooms/room_3.tscn" id="5_8ykb7"]
-[ext_resource type="PackedScene" uid="uid://d4d3uq0lkjps4" path="res://TheBindingOfTaxi/scenes/Chunk.tscn" id="5_18nlu"]
+[ext_resource type="PackedScene" uid="uid://d4d3uq0lkjps4" path="res://TheBindingOfTaxi/scenes/proto/Chunk.tscn" id="5_18nlu"]
 [ext_resource type="PackedScene" uid="uid://d2bd4nrdruls4" path="res://scenes/rooms/room_4.tscn" id="6_jg4hf"]
 [ext_resource type="PackedScene" uid="uid://b20085rng87fk" path="res://scenes/hud.tscn" id="7_i43eg"]
 
@@ -38,6 +38,8 @@ position = Vector2(704, 0)
 room_pos = Vector2i(2, 0)
 
 [node name="Cluster" parent="Dungeon" instance=ExtResource("5_18nlu")]
+chunkPosition = null
+chunkBiome = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(175, -145)

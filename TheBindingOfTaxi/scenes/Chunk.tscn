@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4d3uq0lkjps4"]
-
-[ext_resource type="Script" uid="uid://6ypi3p65861q" path="res://TheBindingOfTaxi/scripts/cluster.gd" id="1_lhbrh"]
-
-[node name="Cluster" type="Node2D"]
-script = ExtResource("1_lhbrh")

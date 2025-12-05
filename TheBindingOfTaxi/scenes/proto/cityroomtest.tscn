@@ -10,9 +10,12 @@ WallLayer = NodePath("WallLayer")
 EmptyLayer = NodePath("EmptyLayer")
 ActiveExits = Dictionary[int, bool]({
 1: true,
-2: true,
-4: true,
+2: false,
+4: false,
 8: true
+})
+exits = Dictionary[Vector2i, int]({
+Vector2i(0, 0): 9
 })
 
 [node name="RoadLayer" type="TileMapLayer" parent="."]
