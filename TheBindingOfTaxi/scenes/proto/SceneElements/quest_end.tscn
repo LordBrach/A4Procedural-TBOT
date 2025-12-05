@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ble85riwql7h0"]
+
+[ext_resource type="Script" uid="uid://dtv8mfwxst5" path="res://TheBindingOfTaxi/scripts/quest_end.gd" id="1_l3iok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
+size = Vector2(39, 30)
+
+[node name="Quest_End" type="Area2D"]
+script = ExtResource("1_l3iok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_qxpyt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

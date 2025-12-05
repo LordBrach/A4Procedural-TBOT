@@ -44,14 +44,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "sprites", "attack_spawn_point")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "attack_spawn_point")]
 collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ups2j")
 PlayerSprite = NodePath("AnimatedSprite2D")
 dead_color = Color(0.413595, 0.399579, 0.385991, 1)
-sprites = [NodePath("AnimatedSprite2D")]
 default_movement = ExtResource("2_ay78m")
 stunned_movemement = ExtResource("3_8ktro")
 attack_scene = ExtResource("4_u74pk")
@@ -67,3 +66,6 @@ sprite_frames = SubResource("SpriteFrames_y4r1p")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("5_qlg0r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

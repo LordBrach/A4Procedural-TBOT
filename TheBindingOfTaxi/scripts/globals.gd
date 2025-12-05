@@ -9,8 +9,13 @@ const RoomScnPath : String = "res://TheBindingOfTaxi/scenes/proto/cityroomtest.t
 const ChunkScnPath : String = "res://TheBindingOfTaxi/scenes/proto/Chunk.tscn"
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 
+enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }
+enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong} 
+enum DRIVING_CONDITIONS {None, Quick, Careful, HurtPeople, LawAbiding}
+
 func _GetPixelChunkSize() -> Vector2 :
 	return chunkSize * roomSize * tileSize
 
 func _GetPixelRoomSize() -> Vector2 :
 	return roomSize * tileSize
+
