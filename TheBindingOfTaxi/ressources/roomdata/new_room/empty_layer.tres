@@ -4,3 +4,5 @@
 
 [resource]
 script = ExtResource("1_xgkpy")
+size = Vector2i(13, 5)
+tilesbit = PackedByteArray(0, 0, 12, 0, 11, 0, 5, 0, 0, 0, 0, 0, 2, 0, 15, 0, 11, 0, 5, 0, 0, 0, 0, 0, 2, 0, 3, 0, 7, 0, 5, 0, 0, 0, 0, 0, 3, 0, 15, 0, 7, 0, 5, 0, 0, 0, 0, 0, 3, 0)

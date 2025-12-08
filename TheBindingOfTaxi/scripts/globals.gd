@@ -18,4 +18,3 @@ func _GetPixelChunkSize() -> Vector2 :
 
 func _GetPixelRoomSize() -> Vector2 :
 	return roomSize * tileSize
-

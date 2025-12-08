@@ -4,12 +4,24 @@ enum Biomes { None, Biome1, Biome2, Biome3 }
 
 @export var chunksTiles : Dictionary[Vector2i, Chunk] = {}
 
+@export_category("Rooms")
 @export var specialRooms : Dictionary[RoomResource, Biomes]
 var specialRoomsCount : Dictionary[RoomResource, bool]
 
+@export_group("Regular Rooms")
 @export var biome1Rooms : Array[RoomResource]
 @export var biome2Rooms : Array[RoomResource]
 @export var biome3Rooms : Array[RoomResource]
+
+@export_group("Dead Ends Rooms")
+@export var biome1DeadEnds : Array[RoomResource]
+@export var biome2DeadEnds : Array[RoomResource]
+@export var biome3DeadEnds : Array[RoomResource]
+
+@export_group("NoRoads Rooms")
+@export var biome1NoRoads : Array[RoomResource]
+@export var biome2NoRoads : Array[RoomResource]
+@export var biome3NoRoads : Array[RoomResource]
 
 func _ready() -> void:
 	var chunk = preload(Globals.ChunkScnPath)
@@ -36,35 +48,47 @@ func GetChunkConnections(a_selfPos : Vector2i, a_targetPos : Vector2i) -> Dictio
 	if (chunk != null) :
 		match a_targetPos - a_selfPos :
 			Vector2i.LEFT :
-				var catch = chunk.GetExits(Globals.Directions.WEST)
-				for exit in catch :
-					result.set(exit + Vector2i.LEFT, Globals.Directions.EAST as int)
-			Vector2i.RIGHT :
 				var catch = chunk.GetExits(Globals.Directions.EAST)
 				for exit in catch :
-					result.set(exit + Vector2i.RIGHT, Globals.Directions.WEST as int)
-			Vector2i.UP :
-				var catch = chunk.GetExits(Globals.Directions.SOUTH)
+					result.set(Vector2i(-1, exit.y), Globals.Directions.EAST as int)
+			Vector2i.RIGHT :
+				var catch = chunk.GetExits(Globals.Directions.WEST)
 				for exit in catch :
-					result.set(exit + Vector2i.UP, Globals.Directions.NORTH as int)
-			Vector2i.DOWN :
+					result.set(Vector2i(Globals.chunkSize.x, exit.y), Globals.Directions.WEST as int)
+			Vector2i.UP :
 				var catch = chunk.GetExits(Globals.Directions.NORTH)
 				for exit in catch :
-					result.set(exit + Vector2i.DOWN, Globals.Directions.SOUTH as int)
+					result.set(Vector2i(exit.x, -1), Globals.Directions.NORTH as int)
+			Vector2i.DOWN :
+				var catch = chunk.GetExits(Globals.Directions.SOUTH)
+				for exit in catch :
+					result.set(Vector2i(exit.x, Globals.chunkSize.y), Globals.Directions.SOUTH as int)
 	
 	return result
 
-#func _GetBiomeRoomSet(a_biome : Biomes) -> Array[String] :
-	#match a_biome :
-		#Biomes.Biome1 :
-			#return biome1Rooms
-		#Biomes.Biome2 :
-			#return biome2Rooms
-		#Biomes.Biome3 :
-			#return biome3Rooms
-			#
-		#_:
-			#return biome1Rooms
+func GetBiomeNoRoads(a_biome : Biomes) -> Array[RoomResource] :
+	match a_biome :
+		Biomes.Biome1 :
+			return biome1NoRoads
+		Biomes.Biome2 :
+			return biome2NoRoads
+		Biomes.Biome3 :
+			return biome3NoRoads
+			
+		_:
+			return biome1NoRoads
+
+func GetBiomeDeadEnd(a_biome : Biomes) -> Array[RoomResource] :
+	match a_biome :
+		Biomes.Biome1 :
+			return biome1DeadEnds
+		Biomes.Biome2 :
+			return biome2DeadEnds
+		Biomes.Biome3 :
+			return biome3DeadEnds
+			
+		_:
+			return biome1DeadEnds
 
 func GetRooms(a_biome : Biomes) -> Array[RoomResource] :
 	var result : Array[RoomResource] = []
