@@ -5,5 +5,6 @@ enum Directions {NONE = 0, WEST = 1 << 0, EAST = 1 << 1, NORTH = 1 << 2, SOUTH =
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 
 enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }
-enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong} 
+enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong}
+enum EXIT_TYPES { Any, Parking, Bench, Park , House , Shop} 
 enum DRIVING_CONDITIONS {None, Quick, Careful, HurtPeople, LawAbiding}
