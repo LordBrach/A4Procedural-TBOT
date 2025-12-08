@@ -30,6 +30,8 @@ func _process(delta: float) -> void:
 	super(delta)
 	_update_inputs()
 	#_update_room()
+	
+	
 
 
 #region prototype
