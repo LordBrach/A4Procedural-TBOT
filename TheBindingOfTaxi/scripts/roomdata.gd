@@ -60,12 +60,11 @@ func save_direction() -> void : #Editor Only
 		return
 	
 	if (exits.size() < roomSize.x * roomSize.y || exits.size() > roomSize.x * roomSize.y) :
-		if (exits.size() > roomSize.x * roomSize.y) :
-			exits.clear()
+		exits.clear()
 		
 		for x in range(roomSize.x) :
 			for y in range(roomSize.y) :
-				exits.get_or_add({Vector2i(x, y): 0})
+				exits.set(Vector2i(x, y), 0)
 	
 	
 	var count : int = 0
