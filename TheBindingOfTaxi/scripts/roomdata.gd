@@ -23,7 +23,7 @@ var lastSaveTry : bool = false
 @export var RoadLayer : TileMapLayer
 @export var WallLayer : TileMapLayer
 @export var ClientNPropsLayer : TileMapLayer
-@export var EmptyLayer : TileMapLayer
+@export var DecorationLayer : TileMapLayer
 
 @export_group("")
 @export var roomSize : Vector2i = Vector2i.ONE
@@ -160,7 +160,7 @@ func save_room() -> void : #Editor Only
 	var road_layer_data : TilemapResource
 	var wall_layer_data : TilemapResource
 	var clientNProps_layer_data : TilemapResource
-	var empty_layer_data : TilemapResource
+	var decoration_layer_data : TilemapResource
 	
 	if(RoadLayer == null):
 		print("Save Room Failed : Missing RoadLayer TileMapLayer value")
@@ -177,11 +177,11 @@ func save_room() -> void : #Editor Only
 		return
 	else :
 		clientNProps_layer_data = get_tilemap_data(ClientNPropsLayer)
-	if(EmptyLayer == null):
-		print("Save Room Failed : Missing EmptyLayer TileMapLayer value")
+	if(DecorationLayer == null):
+		print("Save Room Failed : Missing DecorationLayer TileMapLayer value")
 		return
 	else :
-		empty_layer_data = get_tilemap_data(EmptyLayer)
+		decoration_layer_data = get_tilemap_data(DecorationLayer)
 	
 	if (road_layer_data.size.x % Globals.roomSize.x != 0 || road_layer_data.size.y % Globals.roomSize.y != 0 || road_layer_data.size.x * road_layer_data.size.y <= 0) :
 		print("Save Room Failed : Room size (", road_layer_data.size.x, ", ", road_layer_data.size.y, ") is not correct, make sure the RoadLayer size is a multiple of (", Globals.roomSize.x, ", ", Globals.roomSize.y, ")")
@@ -211,8 +211,8 @@ func save_room() -> void : #Editor Only
 	room_data.wall_layer_path = dirPath + "/wall_layer.tres"
 	ResourceSaver.save(clientNProps_layer_data, dirPath + "/clientNProps_layer.tres")
 	room_data.clientNProps_layer_path = dirPath + "/ClientNProps_layer.tres"
-	ResourceSaver.save(empty_layer_data, dirPath + "/empty_layer.tres")
-	room_data.empty_layer_path = dirPath + "/empty_layer.tres"
+	ResourceSaver.save(decoration_layer_data, dirPath + "/decoration_layer.tres")
+	room_data.decoration_layer_path = dirPath + "/decoration_layer.tres"
 	
 	ResourceSaver.save(room_data, dirPath + "/" + roomName + ".tres")
 	
@@ -267,7 +267,7 @@ func load_room_data(a_roomData : RoomResource) -> void :
 	set_tilemap_data(RoadLayer, load(a_roomData.road_layer_path))
 	set_tilemap_data(WallLayer, load(a_roomData.wall_layer_path))
 	set_tilemap_data(ClientNPropsLayer, load(a_roomData.clientNProps_layer_path))
-	set_tilemap_data(EmptyLayer, load(a_roomData.empty_layer_path))
+	set_tilemap_data(DecorationLayer, load(a_roomData.decoration_layer_path))
 	print(roomName, " file loaded")
 
 func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> void :
