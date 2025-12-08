@@ -10,7 +10,8 @@ const ChunkScnPath : String = "res://TheBindingOfTaxi/scenes/proto/Chunk.tscn"
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 
 enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }
-enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong} 
+enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong}
+enum EXIT_TYPES { Any, Parking, Bench, Park , House , Shop} 
 enum DRIVING_CONDITIONS {None, Quick, Careful, HurtPeople, LawAbiding}
 
 func _GetPixelChunkSize() -> Vector2 :
