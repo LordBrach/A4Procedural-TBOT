@@ -73,9 +73,9 @@ func _GetPositionFromRoomTile(a_roomTilePos : Vector2i) -> Vector2:
 func _IsPosInside(a_pos : Vector2) -> bool:
 	var result : bool = true
 	
-	if (!(position.x < a_pos.x && a_pos.x < position.x + Globals._GetPixelChunkSize().x)) :
+	if (!(position.x < a_pos.x && a_pos.x < position.x + Globals.GetPixelChunkSize().x)) :
 		result = false
-	elif (!(position.y < a_pos.y && a_pos.y < position.y + Globals._GetPixelChunkSize().y)) :
+	elif (!(position.y < a_pos.y && a_pos.y < position.y + Globals.GetPixelChunkSize().y)) :
 		result = false
 	
 	return result
@@ -92,10 +92,11 @@ func _IsTileInside(a_pos : Vector2i) -> bool :
 
 func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
 	chunkPosition = a_pos
-	position =Vector2(chunkPosition.x * Globals._GetPixelChunkSize().x, chunkPosition.y * Globals._GetPixelChunkSize().y)\
-	 - Vector2(Globals._GetPixelChunkSize().x / 2, - Globals._GetPixelChunkSize().y / 2)
+	position =Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
+	 - Vector2(Globals.GetPixelChunkSize().x / 2, - Globals.GetPixelChunkSize().y / 2)
 	
 	chunkBiome = a_biome
+	name = "Chunk (" + a_pos.x.tostring() + ", " + a_pos.y.tostring() + ") - " + a_biome.tostring()
 	
 	var roomlist : Array[RoomResource] = WorldGen.GetRooms(a_biome)
 	if (roomlist.is_empty()) :
@@ -126,37 +127,14 @@ func Generation(a_roomList : Array[RoomResource]) -> void :
 	while (roadsAvailables.size() > 0 && iteration < 10000) :
 		iteration += 1
 		
-		#if (aimPos == Vector2i(-10, -10) && !chunkExitsLinked.is_empty()) :
-			#var values = chunkExitsLinked.values()
-			#aimPos = chunkExitsLinked.find_key(values.pick_random())
-		
-		shuffledRooms.shuffle()
 		var placed : bool = false
 		
-		if (aimPos !=  Vector2i(-10, -10)) :
-			var nextPos = GetClosestAvailableRoad(aimPos)
-			var startDir = roadsAvailables[nextPos]
-			var aimDir : int = GetDir(nextPos, aimPos)
-			
-			if (aimDir == 0) :
-				for deadEnd in WorldGen.GetBiomeDeadEnd(chunkBiome) :
-					if (TryPlaceRoomBySize(nextPos, deadEnd)) :
-						placed = true
-						break
-			else :
-				for room in shuffledRooms :
-					if (room.allExits & startDir && room.allExits & aimDir &&
-					TryPlaceRoomBySize(nextPos, room)) :
-						placed = true
-						break
-			
-			if (IsOccupied(aimPos)) :
-				aimPos = Vector2i(-10, -10)
-		elif !chunkExitsLinked.is_empty() : #Condition rajouter à la dernière minute
+		if !chunkExitsLinked.is_empty() : #Condition rajouter à la dernière minute
 			for exitTile in chunkExitsLinked :
 				shuffledRooms.shuffle()
 				for room in shuffledRooms :
-					if (room.allExits & chunkExits[chunkExitsLinked[exitTile]]
+					var target = GetTilesFacingExit(chunkExitsLinked[exitTile], chunkExits[chunkExitsLinked[exitTile]])
+					if (room.allExits & target[exitTile]
 					&& TryPlaceRoomBySize(exitTile, room)) :
 						placed = true
 						break
@@ -194,117 +172,46 @@ func IsOccupied(a_roomTilePos : Vector2i, a_roomSize : Vector2i = Vector2i(1, 1)
 
 func IsPositionable(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	
-	#region method2
-	#var west_x = - 1
-	#var east_x = a_room.room_size.x
-	#for y in a_room.room_size.y :
-		#var localPos = Vector2i(0, y)
-		#var adjacent = Vector2i(west_x, y)
-		#
-		#var tile = roomTiles.get(adjacent + a_roomTilePos, null)
-		#var exit = chunkExits.get(adjacent + a_roomTilePos, null)
-		#if (tile != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, tile.exits.get((adjacent + a_roomTilePos) - tile.currentPos))) : return false
-		#elif (exit != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, exit)) : return false
-		#elif (a_room.exits[localPos] & GetDir(localPos, adjacent) && _IsPosInside(adjacent + a_roomTilePos)) :
-			#return false
-		#
-		#
-		#localPos = Vector2i(east_x - 1, y)
-		#adjacent = Vector2i(east_x, y)
-		#
-		#tile = roomTiles.get(adjacent + a_roomTilePos, null)
-		#exit = chunkExits.get(adjacent + a_roomTilePos, null)
-		#if (tile != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, tile.exits.get((adjacent + a_roomTilePos) - tile.currentPos))) : return false
-		#elif (exit != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, exit)) : return false
-		#elif (a_room.exits[localPos] & GetDir(localPos, adjacent) && _IsPosInside(adjacent + a_roomTilePos)) :
-			#return false
-	#
-	#var south_y = - 1
-	#var north_y = a_room.room_size.y
-	#for x in a_room.room_size.x :
-		#var localPos = Vector2i(x, 0)
-		#var adjacent = Vector2i(x, south_y)
-		#
-		#var tile = roomTiles.get(adjacent + a_roomTilePos, null)
-		#var exit = chunkExits.get(adjacent + a_roomTilePos, null)
-		#if (tile != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, tile.exits.get((adjacent + a_roomTilePos) - tile.currentPos))) : return false
-		#elif (exit != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, exit)) : return false
-		#elif (a_room.exits[localPos] & GetDir(localPos, adjacent) && _IsPosInside(adjacent + a_roomTilePos)) :
-			#return false
-		#
-		#
-		#localPos = Vector2i(x, north_y - 1)
-		#adjacent = Vector2i(x, north_y)
-		#
-		#tile = roomTiles.get(adjacent + a_roomTilePos, null)
-		#exit = chunkExits.get(adjacent + a_roomTilePos, null)
-		#if (tile != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, tile.exits.get((adjacent + a_roomTilePos) - tile.currentPos))) : return false
-		#elif (exit != null) :
-			#if (!CanConnect(localPos, a_room.exits.get(localPos, 0),
-			#adjacent, exit)) : return false
-		#elif (a_room.exits[localPos] & GetDir(localPos, adjacent) && _IsPosInside(adjacent + a_roomTilePos)) :
-			#return false
-	#endregion
+	var tiles : Dictionary[Vector2i, int] = {}
 	
-	#region method1
-	for x in range(a_room.room_size.x) :
-		var current = Vector2i(a_roomTilePos.x + x, a_roomTilePos.y)
-		var target = current - Vector2i(0, 1)
-		var tile = roomTiles.get(target)
-		if (tile != null) :
-			var tileExits = tile.getExits(target)
-			if(!(tileExits & 1 << 2 && a_room.exits[current - a_roomTilePos] & 1 << 3) && 
-			(tileExits & 1 << 2 || a_room.exits[current - a_roomTilePos] & 1 << 3)) :
-				return false
-		elif (chunkExits.get(target) != null && !(a_room.exits[current - a_roomTilePos] & 1 << 3)) :
-			return false
-		
-		target = current + Vector2i(0, a_room.room_size.y)
-		tile = roomTiles.get(target)
-		if (tile != null) :
-			var tileExits = tile.getExits(target)
-			if(!(tileExits & 1 << 3 && a_room.exits[current - a_roomTilePos] & 1 << 2) && 
-			(tileExits & 1 << 3 || a_room.exits[current - a_roomTilePos] & 1 << 2)) :
-				return false
-		elif (chunkExits.get(target) != null && !(a_room.exits[current - a_roomTilePos] & 1 << 2)) :
-			return false
+	for exit in a_room.exits :
+		tiles.merge(GetTilesFacingExit(exit, a_room.exits[exit]), true)
 	
-	for y in range(a_room.room_size.y) :
-		var current = Vector2i(a_roomTilePos.x, a_roomTilePos.y + y)
-		var target = current - Vector2i(1, 0)
-		var tile = roomTiles.get(target)
-		if (tile != null) :
-			var tileExits = tile.getExits(target)
-			if(!(tileExits & 1 << 1 && a_room.exits[current - a_roomTilePos] & 1 << 0) && 
-			(tileExits & 1 << 1 || a_room.exits[current - a_roomTilePos] & 1 << 0)) :
+	for tile in tiles :
+		var tilePos = tile + a_roomTilePos
+		if (!_IsTileInside(tilePos)) :
+			if (chunkExits.has(tilePos) == false) :
 				return false
-		elif (chunkExits.get(target) != null && !(a_room.exits[current - a_roomTilePos] & 1 << 0)) :
-			return false
+			elif (chunkExits.get(tilePos) != tiles[tile]) :
+				return false
+		elif (roomTiles.has(tilePos)) :
+			if (!roomTiles.get(tilePos).getExits(tilePos) & tiles[tile]) :
+				return false
+	
+	tiles.clear()
+	for y in a_room.room_size.y :
+		if (roomTiles.has(a_roomTilePos + Vector2i(-1, y))) :
+			var room = roomTiles.get(a_roomTilePos + Vector2i(-1, y))
+			tiles.set(a_roomTilePos + Vector2i(-1, y), room.getExits(a_roomTilePos + Vector2i(-1, y)))
+		if (roomTiles.has(a_roomTilePos + Vector2i(a_room.room_size.x, y))) :
+			var room = roomTiles.get(a_roomTilePos + Vector2i(a_room.room_size.x, y))
+			tiles.set(a_roomTilePos + Vector2i(a_room.room_size.x, y), room.getExits(a_roomTilePos + Vector2i(a_room.room_size.x, y)))
+	
+	for x in a_room.room_size.x :
+		if (roomTiles.has(a_roomTilePos + Vector2i(x, -1))) :
+			var room = roomTiles.get(a_roomTilePos + Vector2i(x, -1))
+			tiles.set(a_roomTilePos + Vector2i(x, -1), room.getExits(a_roomTilePos + Vector2i(x, -1)))
+		if (roomTiles.has(a_roomTilePos + Vector2i(x, a_room.room_size.y))) :
+			var room = roomTiles.get(a_roomTilePos + Vector2i(x, a_room.room_size.y))
+			tiles.set(a_roomTilePos + Vector2i(x, a_room.room_size.y), room.getExits(a_roomTilePos + Vector2i(x, a_room.room_size.y)))
+	
+	for tile in tiles :
+		var target = GetTilesFacingExit(tile, tiles[tile])
 		
-		target = current + Vector2i(a_room.room_size.x, 0)
-		tile = roomTiles.get(target)
-		if (tile != null) :
-			var tileExits = tile.getExits(target)
-			if(!(tileExits & 1 << 0 && a_room.exits[current - a_roomTilePos] & 1 << 1) && 
-			(tileExits & 1 << 0 || a_room.exits[current - a_roomTilePos] & 1 << 1)) :
+		for current in target :
+			if (a_room.exits.has(current - a_roomTilePos) &&
+			!a_room.exits.get(current - a_roomTilePos) & target[current]) :
 				return false
-		elif (chunkExits.get(target) != null && !(a_room.exits[current - a_roomTilePos] & 1 << 1)) :
-			return false
-	#endregion
 	
 	return true
 
@@ -320,7 +227,7 @@ func CanConnect(a_posA : Vector2i, a_roadA : int, a_posB : Vector2i, a_roadB : i
 func TryPlaceRoomBySize(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	for x in a_room.room_size.x :
 		for y in a_room.room_size.y :
-			if (TryPlaceRoom(Vector2i(a_roomTilePos.x + x, a_roomTilePos.y + y), a_room)) :
+			if (TryPlaceRoom(Vector2i(a_roomTilePos.x - x, a_roomTilePos.y - y), a_room)) :
 				return true
 	
 	return false
@@ -337,7 +244,7 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	self.add_child(roomInstance)
 	
 	roomInstance.currentPos = a_roomTilePos
-	roomInstance.position = Vector2(position.x + (a_roomTilePos.x * Globals._GetPixelRoomSize().x), position.y + -(a_roomTilePos.y * Globals._GetPixelRoomSize().y))
+	roomInstance.position = Vector2(position.x + (a_roomTilePos.x * Globals.GetPixelRoomSize().x), position.y + -(a_roomTilePos.y * Globals.GetPixelRoomSize().y))
 	roomInstance.load_room_data(a_room)
 	
 	#print("Room Gen Info : Room Instance '", roomInstance.name, "' created at (", roomInstance.position.x, ", ", roomInstance.position.y, ")")

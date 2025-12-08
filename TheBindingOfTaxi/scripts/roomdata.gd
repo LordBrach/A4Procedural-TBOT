@@ -60,12 +60,11 @@ func save_direction() -> void : #Editor Only
 		return
 	
 	if (exits.size() < roomSize.x * roomSize.y || exits.size() > roomSize.x * roomSize.y) :
-		if (exits.size() > roomSize.x * roomSize.y) :
-			exits.clear()
+		exits.clear()
 		
 		for x in range(roomSize.x) :
 			for y in range(roomSize.y) :
-				exits.get_or_add({Vector2i(x, y): 0})
+				exits.set(Vector2i(x, y), 0)
 	
 	
 	var count : int = 0
@@ -95,23 +94,23 @@ func show_direction() -> void : #Editor Only
 			var dir : int = exits[Vector2i(x, y)]
 			
 			if (dir & 1 << 2) :
-				top += "X|X"
+				top += "XX|XX"
 			else :
-				top += "XXX"
+				top += "XXXXX"
 			
 			if (dir & 1 << 0 && dir & 1 << 1) :
-				middle += "- -"
+				middle += "-   -"
 			elif (dir & 1 << 0) :
-				middle += "- X"
+				middle += "-   X"
 			elif (dir & 1 << 1) :
-				middle += "X -"
+				middle += "X   -"
 			else :
-				middle += "X X"
+				middle += "X   X"
 			
 			if (dir & 1 << 3) :
-				bottom += "X|X"
+				bottom += "XX|XX"
 			else :
-				bottom += "XXX"
+				bottom += "XXXXX"
 		
 		text.append(top)
 		text.append(middle)
@@ -260,6 +259,7 @@ func load_room() -> void : #Editor Only
 func load_room_data(a_roomData : RoomResource) -> void :
 	roomName = a_roomData.room_name
 	name = roomName
+	roomSize = a_roomData.room_size
 	
 	isImportantBuilding = a_roomData.is_special_room
 	exits = a_roomData.exits
