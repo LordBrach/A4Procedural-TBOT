@@ -1,13 +1,22 @@
 class_name Player extends CharacterBase
 
 static var Instance : Player
-
+# Base
 @export_group("Input")
 @export_range (0.0, 1.0) var controller_dead_zone : float = 0.3
 @export var PlayerSprite : AnimatedSprite2D
+# Customer related stuff
+@export var MaxCustomerCount : int = 1;
+@export var  CustomerList : Dictionary[int, Customer]
+var idCustomer : int = 0;
+
 # Collectible
 var key_count : int
 
+# Signals
+var OnPickupCustomer : Signal
+var OnPickupCustomerFailed : Signal
+var OnQuestFinished : Signal
 
 func _init() -> void:
 	Instance = self
@@ -25,6 +34,7 @@ func _process(delta: float) -> void:
 	
 
 
+#region prototype
 func enter_room(room : Room) -> void:
 	var previous = _room
 	_room = room
@@ -45,7 +55,6 @@ func _update_room() -> void:
 
 	if next_room != null:
 		enter_room(next_room)
-
 func _update_inputs() -> void:
 	var savedFrame = PlayerSprite.frame;
 	if _can_move():
@@ -73,8 +82,6 @@ func _update_inputs() -> void:
 		_direction = Vector2.ZERO
 		PlayerSprite.set_frame(savedFrame)
 
-
-
 func _set_state(state : STATE) -> void:
 	super(state)
 	match _state:
@@ -89,9 +96,30 @@ func _set_state(state : STATE) -> void:
 	if !_can_move():
 		_direction = Vector2.ZERO
 
-
 func _update_state(_delta : float) -> void:
 	match _state:
 		STATE.ATTACKING:
 			_spawn_attack_scene()
 			_set_state(STATE.IDLE)
+#endregion
+#region customerHandling
+## Try picking up a customer
+func add_customer(data : Customer) -> void:
+	print("Current num of customers: ", CustomerList.size())
+	if(CustomerList.size() < MaxCustomerCount) :
+		print(data.SelectedCustomer)
+		CustomerList[idCustomer] = data
+		idCustomer += 1
+		OnPickupCustomer.emit() 
+		data.pickup_result(true)
+	else :
+		OnPickupCustomerFailed.emit()
+		data.pickup_result(false)
+		pass
+
+## When a quest is completed, removes the client linked to the quest from the car
+func complete_quest(LinkedClientId : int) ->void:
+	CustomerList.erase(LinkedClientId)
+	OnQuestFinished.emit()
+	pass
+#endregion

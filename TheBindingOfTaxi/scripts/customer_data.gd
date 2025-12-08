@@ -7,6 +7,10 @@ enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }
 @export var DifficultyOptions : Dictionary[Globals.DIFFICULTY_OPTIONS, float]
 ## Options de conditions de conduite de la quête générée par le pnj, si plusieurs => choix random basé sur le float attaché (proba)
 @export var DrivingConditions : Dictionary[Globals.DRIVING_CONDITIONS, float]
+# Options d'arrivées
+@export var TargetDestinations : Dictionary[Globals.EXIT_TYPES, float] = {
+	Globals.EXIT_TYPES.Any: 1
+}
 
 
 
