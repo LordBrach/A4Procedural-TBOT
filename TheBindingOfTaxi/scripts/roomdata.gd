@@ -37,7 +37,7 @@ var lastSaveTry : bool = false
 {Globals.Directions.WEST: false, Globals.Directions.EAST: false,\
 Globals.Directions.NORTH: false, Globals.Directions.SOUTH: false};
 
-var exits : Dictionary[Vector2i, int] = {}
+@export var exits : Dictionary[Vector2i, int] = {}
 
 func _ready() -> void:
 	pass
@@ -60,12 +60,12 @@ func save_direction() -> void : #Editor Only
 		return
 	
 	if (exits.size() < roomSize.x * roomSize.y || exits.size() > roomSize.x * roomSize.y) :
-		if (exits.size() > roomSize.x * roomSize.y) :
-			exits.clear()
+		exits.clear()
 		
 		for x in range(roomSize.x) :
 			for y in range(roomSize.y) :
-				exits.get_or_add({Vector2i(x, y): 0})
+				exits.set(Vector2i(x, y), 0)
+
 	
 	
 	var count : int = 0
