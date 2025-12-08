@@ -8,7 +8,7 @@ class_name RoomResource extends Resource
 @export var road_layer_path : String = ""
 @export var wall_layer_path : String = ""
 @export var clientNProps_layer_path : String = ""
-@export var empty_layer_path : String = ""
+@export var decoration_layer_path : String = ""
 
 @export var exits : Dictionary[Vector2i, int] = {}
 @export var allExits : int = 0

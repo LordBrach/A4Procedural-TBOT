@@ -273,6 +273,8 @@ func IsPositionable(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 		elif (chunkExits.get(target) != null && !(a_room.exits[current - a_roomTilePos] & 1 << 3)) :
 			return false
 		
+		
+		
 		target = current + Vector2i(0, a_room.room_size.y)
 		tile = roomTiles.get(target)
 		if (tile != null) :
