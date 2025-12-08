@@ -96,7 +96,7 @@ func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
 	 - Vector2(Globals.GetPixelChunkSize().x / 2, - Globals.GetPixelChunkSize().y / 2)
 	
 	chunkBiome = a_biome
-	name = "Chunk (" + a_pos.x.tostring() + ", " + a_pos.y.tostring() + ") - " + a_biome.tostring()
+	
 	
 	var roomlist : Array[RoomResource] = WorldGen.GetRooms(a_biome)
 	if (roomlist.is_empty()) :
