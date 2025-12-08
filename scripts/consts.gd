@@ -1,6 +1,6 @@
 class_name Utils extends Node
 
-enum ORIENTATION {NONE = 0, NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4}
+enum ORIENTATION {NONE = 0, NORTH = 1, EAST = 2, SOUTH = 4, WEST = 8}
 
 
 ## Transforms an ORIENTATION into angle

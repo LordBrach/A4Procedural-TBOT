@@ -1,0 +1,27 @@
+[gd_scene load_steps=19 format=3 uid="uid://hal8wo2d5im2"]
+
+[ext_resource type="Script" uid="uid://5dyhrm5ml28n" path="res://TheBindingOfTaxi/scripts/WorldGenManager.gd" id="1_u6qgw"]
+[ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="2_obu3s"]
+[ext_resource type="Resource" uid="uid://cj386hdrogsdq" path="res://TheBindingOfTaxi/ressources/roomdata/new_room/new_room.tres" id="3_al6d5"]
+[ext_resource type="Resource" uid="uid://g6yiga3m65ak" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-NE/Corner-NE.tres" id="3_rvagh"]
+[ext_resource type="Resource" uid="uid://deh6goyrddmfv" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-NW/Corner-NW.tres" id="4_hb658"]
+[ext_resource type="Resource" uid="uid://dn1x1qxvse3t1" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-SE/Corner-SE.tres" id="5_ueo2w"]
+[ext_resource type="Resource" uid="uid://dhhoymb4iisq2" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-SW/Corner-SW.tres" id="6_g211k"]
+[ext_resource type="Resource" uid="uid://dfbml8ftpt0am" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_East/Cross_East.tres" id="7_xdyai"]
+[ext_resource type="Resource" uid="uid://0l4uragl4v3v" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_North/Cross_North.tres" id="8_yhiil"]
+[ext_resource type="Resource" uid="uid://cy7dokmw4s7ox" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_South/Cross_South.tres" id="9_r2871"]
+[ext_resource type="Resource" uid="uid://lxyjgc7djqyb" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_West/Cross_West.tres" id="10_idx2x"]
+[ext_resource type="Resource" uid="uid://dm5275matrtkx" path="res://TheBindingOfTaxi/ressources/roomdata/Horizontal/Horizontal.tres" id="11_72kcc"]
+[ext_resource type="Resource" uid="uid://orxnbppw1jr1" path="res://TheBindingOfTaxi/ressources/roomdata/Vertical/Vertical.tres" id="12_7m4w8"]
+[ext_resource type="Resource" uid="uid://dtamwwpylaph0" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-East/DeadEnd-East.tres" id="14_8v853"]
+[ext_resource type="Resource" uid="uid://bknx8vsb0rah1" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-North/DeadEnd-North.tres" id="15_rvfow"]
+[ext_resource type="Resource" uid="uid://cjkvms74fwtfc" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/DeadEnd-South.tres" id="16_woj30"]
+[ext_resource type="Resource" uid="uid://lvoubg5xnn2q" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-West/DeadEnd-West.tres" id="17_rxjh1"]
+[ext_resource type="Resource" uid="uid://rycagntgfyj7" path="res://TheBindingOfTaxi/ressources/roomdata/NoRoad/NoRoad.tres" id="18_fvmrl"]
+
+[node name="WorldGenManager" type="Node2D"]
+script = ExtResource("1_u6qgw")
+biome1Rooms = Array[ExtResource("2_obu3s")]([ExtResource("3_rvagh"), ExtResource("4_hb658"), ExtResource("5_ueo2w"), ExtResource("6_g211k"), ExtResource("7_xdyai"), ExtResource("8_yhiil"), ExtResource("9_r2871"), ExtResource("10_idx2x"), ExtResource("11_72kcc"), ExtResource("12_7m4w8"), ExtResource("3_al6d5")])
+biome1DeadEnds = Array[ExtResource("2_obu3s")]([ExtResource("14_8v853"), ExtResource("15_rvfow"), ExtResource("16_woj30"), ExtResource("17_rxjh1")])
+biome1NoRoads = Array[ExtResource("2_obu3s")]([ExtResource("18_fvmrl")])
+metadata/_custom_type_script = "uid://5dyhrm5ml28n"

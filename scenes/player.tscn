@@ -1,37 +1,71 @@
-[gd_scene load_steps=7 format=3 uid="uid://bib07te5reau7"]
+[gd_scene load_steps=12 format=3 uid="uid://bib07te5reau7"]
 
-[ext_resource type="Texture2D" uid="uid://coomnanjg4knk" path="res://sprites/placeholder.png" id="1_4grqu"]
 [ext_resource type="Script" uid="uid://c0tc77spyevjo" path="res://scripts/player.gd" id="1_ups2j"]
 [ext_resource type="Resource" uid="uid://b3nexs1nbtrff" path="res://resources/player_default_movement.tres" id="2_ay78m"]
 [ext_resource type="Resource" uid="uid://132vux808d1f" path="res://resources/player_stunned_movement.tres" id="3_8ktro"]
 [ext_resource type="PackedScene" uid="uid://dtdfaefxq5nnw" path="res://scenes/player_attack.tscn" id="4_u74pk"]
+[ext_resource type="Texture2D" uid="uid://ba6noocs7rl74" path="res://sprites/playertaxi.png" id="5_qlg0r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eidcf"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprites", "attack_spawn_point")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("5_qlg0r")
+region = Rect2(0, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("5_qlg0r")
+region = Rect2(32, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("5_qlg0r")
+region = Rect2(64, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("5_qlg0r")
+region = Rect2(96, 0, 32, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4r1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "attack_spawn_point")]
 collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ups2j")
+PlayerSprite = NodePath("AnimatedSprite2D")
 dead_color = Color(0.413595, 0.399579, 0.385991, 1)
-sprites = [NodePath("BodySprite"), NodePath("BodySprite/NoseSprite")]
 default_movement = ExtResource("2_ay78m")
 stunned_movemement = ExtResource("3_8ktro")
 attack_scene = ExtResource("4_u74pk")
-attack_spawn_point = NodePath("BodySprite/NoseSprite")
+attack_spawn_point = NodePath(".")
 orientation = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eidcf")
 
-[node name="BodySprite" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-z_index = 2
-scale = Vector2(5, 5)
-texture = ExtResource("1_4grqu")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y4r1p")
 
-[node name="NoseSprite" type="Sprite2D" parent="BodySprite"]
-z_index = 2
-position = Vector2(2, 2.98023e-08)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_4grqu")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_qlg0r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)

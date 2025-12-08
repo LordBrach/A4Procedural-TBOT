@@ -8,6 +8,8 @@
 
 config_version=5
 
+show_default_buttons=false
+
 [application]
 
 config/name="Procedural"
@@ -15,9 +17,18 @@ run/main_scene="res://scenes/main_scene.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+WorldGen="*res://TheBindingOfTaxi/scenes/proto/world_gen_manager.tscn"
+Globals="*res://TheBindingOfTaxi/scripts/globals.gd"
+
 [dotnet]
 
 project/assembly_name="Procedural"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/tool_button/plugin.cfg")
 
 [input]
 
@@ -59,5 +70,6 @@ Attack={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

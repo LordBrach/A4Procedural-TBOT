@@ -13,7 +13,7 @@ enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
 @export var invincibility_duration : float = 1.0
 @export var invincibility_blink_period : float = 0.2
 @export var dead_color : Color = Color.GRAY
-@export var sprites : Array[Sprite2D] = []
+#@export var sprites : Array[Sprite2D] = []
 
 @export_group("Movement")
 @export var default_movement : MovementParameters
@@ -44,7 +44,7 @@ var _is_blinking : bool
 # Dungeon position
 var _room #: Room
 
-@onready var main_sprite : Sprite2D = $"BodySprite"
+#@onready var main_sprite : Sprite2D = $"BodySprite"
 
 
 func _process(delta: float) -> void:
@@ -59,7 +59,7 @@ func _physics_process(_delta: float) -> void:
 	if _direction.length() > 0.000001:
 		velocity += _direction * _current_movement.acceleration * get_physics_process_delta_time()
 		velocity = velocity.limit_length(_current_movement.speed_max)
-		main_sprite.rotation = _compute_orientation_angle(_direction)
+		#main_sprite.rotation = _compute_orientation_angle(_direction)
 	else:
 		## If direction length == 0, Apply friction
 		var friction_length = _current_movement.friction * get_physics_process_delta_time()
@@ -114,8 +114,8 @@ func blink() -> void:
 
 		invincibility_timer += get_process_delta_time()
 		var isVisible : bool = (int)(invincibility_timer/ invincibility_blink_period) % 2 == 1
-		for sprite in sprites:
-			sprite.visible = isVisible
+		#for sprite in sprites:
+			#sprite.visible = isVisible
 		await get_tree().process_frame
 
 	_end_blink()
@@ -125,15 +125,17 @@ func _end_blink() -> void:
 	if !_is_blinking:
 		return
 
-	for sprite in sprites:
-		sprite.visible = true
+	#for sprite in sprites:
+		#sprite.visible = true
 
 	_is_blinking = false
 
 
 func _set_color(color : Color) -> void:
-	for sprite in sprites:
-		sprite.modulate = color
+	#for sprite in sprites:
+		#sprite.modulate = color
+	pass;
+	
 
 
 func _compute_orientation_angle(direction : Vector2) -> float:

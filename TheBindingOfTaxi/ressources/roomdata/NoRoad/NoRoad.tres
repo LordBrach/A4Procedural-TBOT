@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=2 format=3 uid="uid://rycagntgfyj7"]
+
+[ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="1_iiui6"]
+
+[resource]
+script = ExtResource("1_iiui6")
+room_name = "NoRoad"
+road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/NoRoad/road_layer.tres"
+wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/NoRoad/wall_layer.tres"
+clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/NoRoad/ClientNProps_layer.tres"
+empty_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/NoRoad/empty_layer.tres"
+exits = Dictionary[Vector2i, int]({
+Vector2i(0, 0): 0
+})
