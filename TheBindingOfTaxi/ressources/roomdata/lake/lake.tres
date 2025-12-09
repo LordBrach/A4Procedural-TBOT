@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=2 format=3 uid="uid://dq2u2mthdok2t"]
+
+[ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="1_k4nlc"]
+
+[resource]
+script = ExtResource("1_k4nlc")
+room_name = "lake"
+room_size = Vector2i(4, 3)
+road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/road_layer.tres"
+wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/wall_layer.tres"
+clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/ClientNProps_layer.tres"
+decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/decoration_layer.tres"
+exits = Dictionary[Vector2i, int]({
+Vector2i(0, 0): 0,
+Vector2i(0, 1): 0,
+Vector2i(0, 2): 0,
+Vector2i(1, 0): 0,
+Vector2i(1, 1): 0,
+Vector2i(1, 2): 0,
+Vector2i(2, 0): 0,
+Vector2i(2, 1): 0,
+Vector2i(2, 2): 0,
+Vector2i(3, 0): 0,
+Vector2i(3, 1): 0,
+Vector2i(3, 2): 8
+})
