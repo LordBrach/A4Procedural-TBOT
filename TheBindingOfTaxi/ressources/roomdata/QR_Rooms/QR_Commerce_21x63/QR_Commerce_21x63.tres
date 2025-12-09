@@ -12,8 +12,8 @@ wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Commer
 clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Commerce_21x63/ClientNProps_layer.tres"
 decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Commerce_21x63/decoration_layer.tres"
 exits = Dictionary[Vector2i, int]({
-Vector2i(0, 0): 1,
-Vector2i(1, 0): 12,
-Vector2i(2, 0): 2
+Vector2i(0, 0): 0,
+Vector2i(1, 0): 0,
+Vector2i(2, 0): 8
 })
-allExits = 15
+allExits = 8
