@@ -18,22 +18,22 @@ func SetExits() -> void :
 	if (chunkExits.find_key(1 << 0) == null) :
 		var rand : int = randi_range(Globals.chunkExitsRange.x, Globals.chunkExitsRange.y)
 		for x in range(rand) :
-			var pos : int = randi_range(0, Globals.chunkSize.y - 1)
+			var pos : int = randi_range(1, Globals.chunkSize.y - 2)
 			chunkExits.get_or_add(Vector2i(Globals.chunkSize.x, pos), 1 << 0)
 	if (chunkExits.find_key(1 << 1) == null) :
 		var rand : int = randi_range(Globals.chunkExitsRange.x, Globals.chunkExitsRange.y)
 		for x in range(rand) :
-			var pos : int = randi_range(0, Globals.chunkSize.y - 1)
+			var pos : int = randi_range(1, Globals.chunkSize.y - 2)
 			chunkExits.get_or_add(Vector2i(-1, pos), 1 << 1)
 	if (chunkExits.find_key(1 << 2) == null) :
 		var rand : int = randi_range(Globals.chunkExitsRange.x, Globals.chunkExitsRange.y)
 		for x in range(rand) :
-			var pos : int = randi_range(0, Globals.chunkSize.x - 1)
+			var pos : int = randi_range(1, Globals.chunkSize.x - 2)
 			chunkExits.get_or_add(Vector2i(pos, -1), 1 << 2)
 	if (chunkExits.find_key(1 << 3) == null) :
 		var rand : int = randi_range(Globals.chunkExitsRange.x, Globals.chunkExitsRange.y)
 		for x in range(rand) :
-			var pos : int = randi_range(0, Globals.chunkSize.x - 1)
+			var pos : int = randi_range(1, Globals.chunkSize.x - 2)
 			chunkExits.get_or_add(Vector2i(pos, Globals.chunkSize.y), 1 << 3)
 	
 	for exit in chunkExits :
@@ -48,19 +48,19 @@ func GetExits(a_direction : Globals.Directions = Globals.Directions.NONE) -> Dic
 	var list : Dictionary[Vector2i, int] = {}
 	if (dirNum & 1 << 0) :
 		for exit in chunkExits :
-			if (chunkExits[exit] & 1 << 1) :
+			if (chunkExits[exit] & 1 << 0) :
 				list.set(exit, chunkExits[exit])
 	elif (dirNum & 1 << 1) :
 		for exit in chunkExits :
-			if (chunkExits[exit] & 1 << 0) :
+			if (chunkExits[exit] & 1 << 1) :
 				list.set(exit, chunkExits[exit])
 	elif (dirNum & 1 << 2) :
 		for exit in chunkExits :
-			if (chunkExits[exit] & 1 << 3) :
+			if (chunkExits[exit] & 1 << 2) :
 				list.set(exit, chunkExits[exit])
 	elif (dirNum & 1 << 3) :
 		for exit in chunkExits :
-			if (chunkExits[exit] & 1 << 2) :
+			if (chunkExits[exit] & 1 << 3) :
 				list.set(exit, chunkExits[exit])
 	
 	return list
@@ -69,6 +69,9 @@ func _GetPositionFromRoomTile(a_roomTilePos : Vector2i) -> Vector2:
 	var localPos = Vector2(a_roomTilePos.x * Globals.tileSize.x, a_roomTilePos.y * Globals.tileSize.y)
 	var result : Vector2 = localPos + position
 	return result
+
+func _GetTilePosFromGlobalPos(a_pos : Vector2) -> Vector2i :
+	return Vector2i(a_pos.x - global_position.x, a_pos.y - global_position.x)
 
 func _IsPosInside(a_pos : Vector2) -> bool:
 	var result : bool = true
@@ -92,9 +95,10 @@ func _IsTileInside(a_pos : Vector2i) -> bool :
 
 func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
 	chunkPosition = a_pos
-	position =Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
+	global_position = Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
 	 - Vector2(Globals.GetPixelChunkSize().x / 2, - Globals.GetPixelChunkSize().y / 2)
 	
+	name = "Chunk_" + str(chunkPosition)
 	chunkBiome = a_biome
 	
 	
@@ -111,33 +115,67 @@ func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
 
 func Generation(a_roomList : Array[RoomResource]) -> void :
 	
-	var firstRoom : RoomResource = a_roomList.pick_random()
-	if (firstRoom == null) :
-		print("Chunk Generation error : First room is null")
-		return
+	var placed : bool = false
 	
-	var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(firstRoom.room_size.x / 2, firstRoom.room_size.y / 2)
+	#region FirstRoom
+	var specials = WorldGen.GetSpecialRooms(chunkBiome)
+	specials.shuffle()
 	
-	if (!TryPlaceRoom(position, firstRoom)) :
-		print("Chunk Generation error : First room is invalid")
+	for room in specials :
+		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(room.room_size.x / 2, room.room_size.y / 2)
+		if (TryPlaceRoom(position, room)) :
+			placed = true
+			break
+	
+	if (placed == false) :
+		var firstRoom : RoomResource = a_roomList.pick_random()
+		if (firstRoom == null) :
+			print("Chunk Generation error : First room is null")
+			return
+	
+		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(firstRoom.room_size.x / 2, firstRoom.room_size.y / 2)
+		if (!TryPlaceRoom(position, firstRoom)) :
+			print("Chunk Generation error : First room is invalid")
+			return
+	#endregion
 	
 	var iteration = 0 # Debug purpose only
 	var shuffledRooms : Array[RoomResource] = a_roomList
+	shuffledRooms.append(specials)
 	var aimPos : Vector2i = Vector2i(-10, -10)
 	while (roadsAvailables.size() > 0 && iteration < 10000) :
 		iteration += 1
+		placed = false
+		shuffledRooms.shuffle()
 		
-		var placed : bool = false
-		
+		#region Link Exits
 		if !chunkExitsLinked.is_empty() : #Condition rajouter à la dernière minute
 			for exitTile in chunkExitsLinked :
+				placed = false
 				shuffledRooms.shuffle()
+				
+				var target = GetTilesFacingExit(chunkExitsLinked[exitTile], chunkExits[chunkExitsLinked[exitTile]])
+				print(target[exitTile])
+				
 				for room in shuffledRooms :
-					var target = GetTilesFacingExit(chunkExitsLinked[exitTile], chunkExits[chunkExitsLinked[exitTile]])
-					if (room.allExits & target[exitTile]
+					if (room.NumbOfExits() >= 3
+					&& room.allExits & target[exitTile]
 					&& TryPlaceRoomBySize(exitTile, room)) :
 						placed = true
+						print(room.allExits)
 						break
+				if (placed == false) :
+					print("Failed 3+ exits")
+					for room in shuffledRooms :
+						print(room.allExits & target[exitTile], " in ", room.allExits, " and ", TryPlaceRoomBySize(exitTile, room))
+						if (room.allExits & target[exitTile]
+						&& TryPlaceRoomBySize(exitTile, room)) :
+							placed = true
+							print(room.allExits)
+							break
+				print("")
+		#endregion
+		#region Fill Left Roads
 		else :
 			var nextPos = roadsAvailables.keys().pick_random()
 			var startDir = roadsAvailables[nextPos]
@@ -152,12 +190,31 @@ func Generation(a_roomList : Array[RoomResource]) -> void :
 					if (TryPlaceRoomBySize(nextPos, room)) :
 						placed = true
 						break
-		
+		#endregion
 	
-	for x in Globals.chunkSize.x :
-		for y in Globals.chunkSize.y :
-			if (!IsOccupied(Vector2i(x, y))) :
-				TryPlaceRoom(Vector2i(x, y), WorldGen.GetBiomeNoRoads(chunkBiome).pick_random())
+	#region Fill the gaps
+	iteration = 0
+	while (roomTiles.size() < Globals.chunkSize.x * Globals.chunkSize.y && iteration < 3) :
+		iteration += 1
+		for x in Globals.chunkSize.x :
+			for y in Globals.chunkSize.y :
+				if (!roomTiles.has(Vector2i(x, y))) :
+					placed = false
+					for room in shuffledRooms :
+						if (TryPlaceRoomBySize(Vector2i(x, y), room)) :
+							placed = true
+							break
+					if (placed == false) :
+						for room in WorldGen.GetBiomeDeadEnd(chunkBiome) :
+							if (TryPlaceRoomBySize(Vector2i(x, y), room)) :
+								placed = true
+								break
+					if (placed == false) :
+						TryPlaceRoomBySize(Vector2i(x, y), WorldGen.GetBiomeNoRoads(chunkBiome).pick_random())
+	#endregion
+	
+	if (iteration >= 3) :
+		print("Chunk Generation Error : Cannot generate the required numbers of tiles")
 	
 	return
 
@@ -244,7 +301,8 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	self.add_child(roomInstance)
 	
 	roomInstance.currentPos = a_roomTilePos
-	roomInstance.position = Vector2(position.x + (a_roomTilePos.x * Globals.GetPixelRoomSize().x), position.y + -(a_roomTilePos.y * Globals.GetPixelRoomSize().y))
+	roomInstance.name = str(roomInstance.currentPos) + a_room.room_name
+	roomInstance.position = Vector2((a_roomTilePos.x * Globals.GetPixelRoomSize().x), -(a_roomTilePos.y * Globals.GetPixelRoomSize().y))
 	roomInstance.load_room_data(a_room)
 	
 	#print("Room Gen Info : Room Instance '", roomInstance.name, "' created at (", roomInstance.position.x, ", ", roomInstance.position.y, ")")
@@ -255,7 +313,6 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 			roomTiles.set(pos, roomInstance)
 			if(chunkExitsLinked.has(pos)) :
 				chunkExitsLinked.erase(pos)
-				print("erase chunk exits")
 			if(roadsAvailables.has(pos)) :
 				roadsAvailables.erase(pos)
 	
@@ -335,3 +392,21 @@ func GetDir(a_start : Vector2i, a_target : Vector2i) -> int :
 		return 1 << 3
 	
 	return 0
+
+func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Vector2 :
+	var target : Vector2 = Vector2.ZERO
+	
+	var tile : RoomData = roomTiles.get(_GetTilePosFromGlobalPos(a_pos))
+	if (tile != null) :
+		target = tile.GetClosestQuestEnd(a_pos, a_exitType)
+	
+	if (target == Vector2.ZERO) :
+		var distance : float = -1
+		for room in roomTiles :
+			var current : Vector2 = roomTiles[room].GetClosestQuestEnd(a_pos, a_exitType)
+			
+			if (distance == -1 || (a_pos - current).length() < distance) :
+				distance = (a_pos - current).length() 
+				target = current
+	
+	return target

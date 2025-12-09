@@ -6,6 +6,9 @@ var isAddedToPlayer : bool = false
 @export var PossibleDestinations : Array[Globals.EXIT_TYPES] = [Globals.EXIT_TYPES.Any]
 @export var LinkedClientId:int = 0;
 
+func _getPos() -> Vector2 :
+	return position
+
 func _ready() -> void:
 	if(!isAddedToPlayer) : 
 		Player.Instance.SavedExits.append(self)
