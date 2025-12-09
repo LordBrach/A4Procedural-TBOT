@@ -36,4 +36,4 @@ tile_set = ExtResource("2_o41lp")
 tile_set = ExtResource("2_o41lp")
 
 [connection signal="body_entered" from="Client&PropsLayer/Customer" to="Client&PropsLayer/Customer" method="_on_body_entered"]
-[connection signal="body_entered" from="Client&PropsLayer/@Area2D@136284" to="Client&PropsLayer/@Area2D@136284" method="_on_body_entered"]
+[connection signal="body_entered" from="Client&PropsLayer/@Area2D@21281" to="Client&PropsLayer/@Area2D@21281" method="_on_body_entered"]

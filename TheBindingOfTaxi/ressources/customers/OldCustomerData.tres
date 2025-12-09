@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 resource_name = "OldDude"
 script = ExtResource("2_kg5t7")
-CustomerType = 1
+CustomerType = 2
 Visuals = ExtResource("1_557cy")
 DifficultyOptions = Dictionary[int, float]({
 0: 1.0,
