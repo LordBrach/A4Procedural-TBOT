@@ -23,20 +23,21 @@ var specialRoomsCount : Dictionary[RoomResource, bool]
 @export var biome2NoRoads : Array[RoomResource]
 @export var biome3NoRoads : Array[RoomResource]
 
-var last_chunk : Vector2i = Vector2i(1000, 1000)
+var last_Player_Pos : Vector2i = Vector2i(1000, 1000)
 
 func _ready() -> void:
 	CreateChunk(Vector2i.ZERO, Biomes.Biome1)
+	CreateChunk(Vector2i.DOWN, Biomes.Biome1)
 
 func _process(delta: float) -> void:
 	
 	var playerChunkPos : Vector2i = InsideChunk(Vector2.ZERO) #Position du player
-	if (last_chunk != playerChunkPos) : 
-		last_chunk = playerChunkPos
-		for x in range(-1, 2) :
-			for y in range(-1, 2) :
-				if (!chunksTiles.has(last_chunk + Vector2i(x, y))) :
-					CreateChunk(last_chunk + Vector2i(x, y), Biomes.Biome1)
+	#print ("Player position : ", playerChunkPos)
+	#if (last_Player_Pos != playerChunkPos) :
+		#for x in range(-1, 2) :
+			#for y in range(-1, 2) :
+				#if (!chunksTiles.has(Vector2i(x, y))) :
+					#CreateChunk(Vector2i(x, y), Biomes.Biome1)
 
 func InsideChunk(a_pos : Vector2) -> Vector2i :
 	
@@ -74,19 +75,19 @@ func GetChunkConnections(a_selfPos : Vector2i, a_targetPos : Vector2i) -> Dictio
 			Vector2i.LEFT :
 				var catch = chunk.GetExits(Globals.Directions.EAST)
 				for exit in catch :
-					result.set(Vector2i(-1, exit.y), Globals.Directions.EAST as int)
+					result.set(Vector2i(Globals.chunkSize.x, exit.y), Globals.Directions.WEST as int)
 			Vector2i.RIGHT :
 				var catch = chunk.GetExits(Globals.Directions.WEST)
 				for exit in catch :
-					result.set(Vector2i(Globals.chunkSize.x, exit.y), Globals.Directions.WEST as int)
+					result.set(Vector2i(-1, exit.y), Globals.Directions.EAST as int)
 			Vector2i.UP :
 				var catch = chunk.GetExits(Globals.Directions.NORTH)
 				for exit in catch :
-					result.set(Vector2i(exit.x, -1), Globals.Directions.NORTH as int)
+					result.set(Vector2i(exit.x, Globals.chunkSize.y), Globals.Directions.SOUTH as int)
 			Vector2i.DOWN :
 				var catch = chunk.GetExits(Globals.Directions.SOUTH)
 				for exit in catch :
-					result.set(Vector2i(exit.x, Globals.chunkSize.y), Globals.Directions.SOUTH as int)
+					result.set(Vector2i(exit.x, -1), Globals.Directions.NORTH as int)
 	
 	return result
 
@@ -124,5 +125,14 @@ func GetRooms(a_biome : Biomes) -> Array[RoomResource] :
 			result = biome2Rooms
 		Biomes.Biome3 :
 			result = biome3Rooms
+	
+	return result
+
+func GetSpecialRooms(a_biome : Biomes) -> Array[RoomResource] :
+	var result : Array[RoomResource] = []
+	
+	for room in specialRooms :
+		if (specialRooms[room] == a_biome) :
+			result.append(room)
 	
 	return result

@@ -8,7 +8,8 @@ room_name = "new_room"
 road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/new_room/road_layer.tres"
 wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/new_room/wall_layer.tres"
 clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/new_room/ClientNProps_layer.tres"
-empty_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/new_room/empty_layer.tres"
+decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/new_room/decoration_layer.tres"
 exits = Dictionary[Vector2i, int]({
-Vector2i(0, 0): 10
+Vector2i(0, 0): 15
 })
+allExits = 15
