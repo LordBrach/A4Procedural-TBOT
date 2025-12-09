@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	var playerChunkPos : Vector2i = InsideChunk(Vector2.ZERO) #Position du player
+	var playerChunkPos : Vector2i = WorldToChunkPos(Vector2.ZERO) #Position du player
 	#print ("Player position : ", playerChunkPos)
 	#if (last_Player_Pos != playerChunkPos) :
 		#for x in range(-1, 2) :
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 				#if (!chunksTiles.has(Vector2i(x, y))) :
 					#CreateChunk(Vector2i(x, y), Biomes.Biome1)
 
-func InsideChunk(a_pos : Vector2) -> Vector2i :
+func WorldToChunkPos(a_pos : Vector2) -> Vector2i :
 	
 	var center = chunksTiles[Vector2i(0, 0)].position
 	var result = (a_pos - center) / Globals.GetPixelChunkSize()
@@ -136,3 +136,11 @@ func GetSpecialRooms(a_biome : Biomes) -> Array[RoomResource] :
 			result.append(room)
 	
 	return result
+
+func GetQuestEnd(a_data : ClientData) -> Vector2 :
+	
+	
+	if (a_data.TargetDestinations.has(Globals.EXIT_TYPES.Any)) :
+		pass
+	
+	return Vector2.ZERO

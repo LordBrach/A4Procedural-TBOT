@@ -25,6 +25,10 @@ var lastSaveTry : bool = false
 @export var ClientNPropsLayer : TileMapLayer
 @export var DecorationLayer : TileMapLayer
 
+@export_group("Quest Ends")
+@export var QuestEndParent : Node
+@export var QuestEndList : Array[QuestEnd] = []
+
 @export_group("")
 @export var roomSize : Vector2i = Vector2i.ONE
 @export_group("Exits Parameters")
@@ -44,6 +48,18 @@ func _ready() -> void:
 
 func getExits(a_worldPos : Vector2i) -> int:
 	return exits.get(a_worldPos - currentPos, 0)
+
+func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Vector2 :
+	var choosen : Vector2 = Vector2.ZERO
+	var distance : float = -1
+	for end in QuestEndList :
+		var index : int = end.PossibleDestinations.rfind(a_exitType)
+		if (index != -1 &&
+		(distance == -1 || (a_pos - end.global_position).length() < distance)) :
+			distance = (a_pos - end.global_position).length()
+			choosen = end.global_position
+	
+	return choosen
 
 #region Save-Load
 
@@ -124,14 +140,24 @@ func show_direction() -> void : #Editor Only
 	print("")
 
 func save_room() -> void : #Editor Only
+	#region Error Proof
 	if (roomName == null || roomName.is_empty()) :
 		print("Save Room Failed : Room Name is empty")
 	
 	if (directory != null && !directory.is_empty() && !directory.ends_with("/")) :
 		directory += "/"
 	
-	var dirPath = "res://" + directory
+	var dirPath : String
 	
+	if (directory.begins_with("res://")) :
+		dirPath = directory
+	if (directory.begins_with("/")) :
+		dirPath = "res:/" + directory
+	else :
+		dirPath = "res://" + directory
+	#endregion
+	
+	#region Check Directory
 	var dir = DirAccess.open(dirPath)
 	if (dir == null) :
 		DirAccess.make_dir_recursive_absolute(dirPath)
@@ -149,6 +175,7 @@ func save_room() -> void : #Editor Only
 			return
 	else :
 		dir = DirAccess.make_dir_recursive_absolute(dirPath)
+	#endregion
 	
 	lastSaveName = ""
 	lastSaveTry = false
@@ -161,6 +188,7 @@ func save_room() -> void : #Editor Only
 	var clientNProps_layer_data : TilemapResource
 	var decoration_layer_data : TilemapResource
 	
+	#region Layers
 	if(RoadLayer == null):
 		print("Save Room Failed : Missing RoadLayer TileMapLayer value")
 		return
@@ -192,6 +220,12 @@ func save_room() -> void : #Editor Only
 		print("Save Room Failed : indicated Rome size wasn't accurate, it was fix and Exits have been reset")
 		show_direction()
 		return
+	#endregion
+	
+	#region Quest End
+	for end in QuestEndList :
+		room_data.quest_end_list.set(end._getPos(), end.PossibleDestinations)
+	#endregion
 	
 	room_data.room_name = roomName
 	room_data.is_special_room = isImportantBuilding
@@ -268,6 +302,9 @@ func load_room_data(a_roomData : RoomResource) -> void :
 	set_tilemap_data(WallLayer, load(a_roomData.wall_layer_path))
 	set_tilemap_data(ClientNPropsLayer, load(a_roomData.clientNProps_layer_path))
 	set_tilemap_data(DecorationLayer, load(a_roomData.decoration_layer_path))
+	
+	set_quest_end(a_roomData)
+	
 	#print(roomName, " file loaded")
 
 func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> void :
@@ -280,5 +317,22 @@ func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> voi
 	
 	a_tilemap.clear()
 	a_tilemap.tile_map_data = a_data.tilesbit
+
+func set_quest_end(a_roomData : RoomResource) :
+	if (QuestEndParent == null):
+		QuestEndParent = Node.new()
+		QuestEndParent.name = "Exits"
+		self.add_child(QuestEndParent)
+	
+	var n : int = 0
+	for data in  a_roomData.quest_end_list :
+		var questObj = QuestEnd.new()
+		questObj.name = "Quest_End_" + str(n)
+		questObj.position = data
+		questObj.PossibleDestinations = a_roomData.quest_end_list[data]
+		
+		QuestEndList.append(questObj)
+		QuestEndParent.add_child(questObj)
+		n += 1
 
 #endregion

@@ -70,6 +70,9 @@ func _GetPositionFromRoomTile(a_roomTilePos : Vector2i) -> Vector2:
 	var result : Vector2 = localPos + position
 	return result
 
+func _GetTilePosFromGlobalPos(a_pos : Vector2) -> Vector2i :
+	return Vector2i(a_pos.x - global_position.x, a_pos.y - global_position.x)
+
 func _IsPosInside(a_pos : Vector2) -> bool:
 	var result : bool = true
 	
@@ -92,9 +95,10 @@ func _IsTileInside(a_pos : Vector2i) -> bool :
 
 func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
 	chunkPosition = a_pos
-	position =Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
+	global_position = Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
 	 - Vector2(Globals.GetPixelChunkSize().x / 2, - Globals.GetPixelChunkSize().y / 2)
 	
+	name = "Chunk_" + str(chunkPosition)
 	chunkBiome = a_biome
 	
 	
@@ -297,6 +301,7 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	self.add_child(roomInstance)
 	
 	roomInstance.currentPos = a_roomTilePos
+	roomInstance.name = str(roomInstance.currentPos) + a_room.room_name
 	roomInstance.position = Vector2((a_roomTilePos.x * Globals.GetPixelRoomSize().x), -(a_roomTilePos.y * Globals.GetPixelRoomSize().y))
 	roomInstance.load_room_data(a_room)
 	
@@ -387,3 +392,21 @@ func GetDir(a_start : Vector2i, a_target : Vector2i) -> int :
 		return 1 << 3
 	
 	return 0
+
+func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Vector2 :
+	var target : Vector2 = Vector2.ZERO
+	
+	var tile : RoomData = roomTiles.get(_GetTilePosFromGlobalPos(a_pos))
+	if (tile != null) :
+		target = tile.GetClosestQuestEnd(a_pos, a_exitType)
+	
+	if (target == Vector2.ZERO) :
+		var distance : float = -1
+		for room in roomTiles :
+			var current : Vector2 = roomTiles[room].GetClosestQuestEnd(a_pos, a_exitType)
+			
+			if (distance == -1 || (a_pos - current).length() < distance) :
+				distance = (a_pos - current).length() 
+				target = current
+	
+	return target
