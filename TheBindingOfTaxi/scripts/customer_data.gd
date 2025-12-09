@@ -1,9 +1,8 @@
 class_name ClientData extends Resource
 
-enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar } 
 
 #@export var Testets = load("res://imports/kenney_rpg-urban-pack/Tiles/tile_0001.png")
-@export var CustomerType: CUSTOMER_TYPE
+@export var CustomerType: Globals.CUSTOMER_TYPE
 
 @export var Visuals : customer_sprite_collection
 
