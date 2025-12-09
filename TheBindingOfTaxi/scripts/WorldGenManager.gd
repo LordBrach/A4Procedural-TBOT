@@ -23,12 +23,36 @@ var specialRoomsCount : Dictionary[RoomResource, bool]
 @export var biome2NoRoads : Array[RoomResource]
 @export var biome3NoRoads : Array[RoomResource]
 
+var last_chunk : Vector2i = Vector2i(1000, 1000)
+
 func _ready() -> void:
+	CreateChunk(Vector2i.ZERO, Biomes.Biome1)
+
+func _process(delta: float) -> void:
+	
+	var playerChunkPos : Vector2i = InsideChunk(Vector2.ZERO) #Position du player
+	if (last_chunk != playerChunkPos) : 
+		last_chunk = playerChunkPos
+		for x in range(-1, 2) :
+			for y in range(-1, 2) :
+				if (!chunksTiles.has(last_chunk + Vector2i(x, y))) :
+					CreateChunk(last_chunk + Vector2i(x, y), Biomes.Biome1)
+
+func InsideChunk(a_pos : Vector2) -> Vector2i :
+	
+	var center = chunksTiles[Vector2i(0, 0)].position
+	var result = (a_pos - center) / Globals.GetPixelChunkSize()
+
+	return Vector2i(result.x, result.y)
+
+func CreateChunk(a_pos : Vector2i, a_biome : Biomes) :
+	
 	var chunk = preload(Globals.ChunkScnPath)
 	var instance : Chunk = chunk.instantiate()
 	self.add_child(instance)
 	
-	instance.StartGeneration(Vector2i.ZERO, Biomes.Biome1)
+	instance.StartGeneration(a_pos, a_biome)
+	chunksTiles.set(a_pos, instance)
 
 func Getchunk(a_pos : Vector2i) -> Chunk :
 	return chunksTiles.get(a_pos, null)
@@ -102,7 +126,3 @@ func GetRooms(a_biome : Biomes) -> Array[RoomResource] :
 			result = biome3Rooms
 	
 	return result
-
-func GetRandomImportant(a_biome : Biomes, a_direction : Globals.Directions) -> String:
-	
-	return ""

@@ -94,23 +94,23 @@ func show_direction() -> void : #Editor Only
 			var dir : int = exits[Vector2i(x, y)]
 			
 			if (dir & 1 << 2) :
-				top += "X|X"
+				top += "XX|XX"
 			else :
-				top += "XXX"
+				top += "XXXXX"
 			
 			if (dir & 1 << 0 && dir & 1 << 1) :
-				middle += "- -"
+				middle += "-   -"
 			elif (dir & 1 << 0) :
-				middle += "- X"
+				middle += "-   X"
 			elif (dir & 1 << 1) :
-				middle += "X -"
+				middle += "X   -"
 			else :
-				middle += "X X"
+				middle += "X   X"
 			
 			if (dir & 1 << 3) :
-				bottom += "X|X"
+				bottom += "XX|XX"
 			else :
-				bottom += "XXX"
+				bottom += "XXXXX"
 		
 		text.append(top)
 		text.append(middle)
@@ -259,6 +259,7 @@ func load_room() -> void : #Editor Only
 func load_room_data(a_roomData : RoomResource) -> void :
 	roomName = a_roomData.room_name
 	name = roomName
+	roomSize = a_roomData.room_size
 	
 	isImportantBuilding = a_roomData.is_special_room
 	exits = a_roomData.exits
