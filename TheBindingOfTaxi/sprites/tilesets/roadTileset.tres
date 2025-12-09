@@ -1263,6 +1263,7 @@ texture = ExtResource("7_vnqca")
 1:16/0/terrains_peering_bit/top_side = 0
 1:16/0/terrains_peering_bit/top_right_corner = 0
 1:16/1 = 1
+1:16/1/modulate = Color(0.92941177, 0.8784314, 0.70980394, 1)
 1:17/next_alternative_id = 2
 1:17/0 = 0
 1:17/0/terrain_set = 0
