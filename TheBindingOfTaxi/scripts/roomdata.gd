@@ -252,7 +252,7 @@ func load_room() -> void : #Editor Only
 	if (DirAccess.open(dirPath) == null) :
 		print("Load Room Failed : no directory")
 	
-	print("loading ", roomName, " file...")
+	#print("loading ", roomName, " file...")
 	var room_data : RoomResource = load(dirPath + "/" + roomName + ".tres")
 	load_room_data(room_data)
 
@@ -268,11 +268,11 @@ func load_room_data(a_roomData : RoomResource) -> void :
 	set_tilemap_data(WallLayer, load(a_roomData.wall_layer_path))
 	set_tilemap_data(ClientNPropsLayer, load(a_roomData.clientNProps_layer_path))
 	set_tilemap_data(DecorationLayer, load(a_roomData.decoration_layer_path))
-	print(roomName, " file loaded")
+	#print(roomName, " file loaded")
 
 func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> void :
 	if (a_data == null) :
-		print("Load Room Error : Given TilemapRessource is null and cannot be read")
+		print("Load Room Failed : Given TilemapRessource is null and cannot be read")
 		return
 	
 	a_tilemap.clear()
