@@ -13,6 +13,7 @@ enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }
 enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong}
 enum EXIT_TYPES { Any, Parking, Bench, Park , House , Shop} 
 enum DRIVING_CONDITIONS {None, Quick, Careful, HurtPeople, LawAbiding}
+enum SPRITE_DIRECTION { UP, DOWN , LEFT , RIGHT , MISC }
 
 func _GetPixelChunkSize() -> Vector2 :
 	return chunkSize * roomSize * tileSize

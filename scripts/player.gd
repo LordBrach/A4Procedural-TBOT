@@ -8,6 +8,8 @@ static var Instance : Player
 # Customer related stuff
 @export var MaxCustomerCount : int = 1;
 @export var  CustomerList : Dictionary[int, Customer]
+@export var SavedExits : Array[QuestEnd]
+
 var idCustomer : int = 0;
 
 # Collectible
@@ -112,10 +114,19 @@ func add_customer(data : Customer) -> void:
 		idCustomer += 1
 		OnPickupCustomer.emit() 
 		data.pickup_result(true)
+		link_to_quest(data)
 	else :
 		OnPickupCustomerFailed.emit()
 		data.pickup_result(false)
 		pass
+
+func link_to_quest(customer : Customer) -> void:
+	for element in SavedExits :
+		if(element.PossibleDestinations.has(customer.SelectedDestination)) :
+			print("Linked Customer to exit !")
+			element.activate(idCustomer)
+			return
+	print("Couldnt find suitable exit for client...")
 
 ## When a quest is completed, removes the client linked to the quest from the car
 func complete_quest(LinkedClientId : int) ->void:

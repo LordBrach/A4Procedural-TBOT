@@ -45,6 +45,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "attack_spawn_point")]
+z_index = 256
 collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -68,4 +69,4 @@ visible = false
 texture = ExtResource("5_qlg0r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(4, 4)

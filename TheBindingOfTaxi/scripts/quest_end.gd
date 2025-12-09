@@ -1,9 +1,17 @@
 class_name QuestEnd extends CollectibleBase
 
 var isActive: bool = false;
+var isAddedToPlayer : bool = false
 
 @export var PossibleDestinations : Array[Globals.EXIT_TYPES] = [Globals.EXIT_TYPES.Any]
 @export var LinkedClientId:int = 0;
+
+func _ready() -> void:
+	if(!isAddedToPlayer) : 
+		Player.Instance.SavedExits.append(self)
+		isAddedToPlayer = true
+	 #await get_tree().create_timer(1.0).timeout
+
 func on_collect() -> void:
 	super()
 	# end quest

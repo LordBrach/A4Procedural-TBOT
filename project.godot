@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+PlayerGlobal="*res://scenes/player.tscn"
 WorldGen="*res://TheBindingOfTaxi/scenes/proto/world_gen_manager.tscn"
 Globals="*res://TheBindingOfTaxi/scripts/globals.gd"
 
