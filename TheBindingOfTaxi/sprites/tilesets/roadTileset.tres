@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://dqy6nw870lq50"]
+[gd_resource type="TileSet" load_steps=20 format=3 uid="uid://dqy6nw870lq50"]
 
 [ext_resource type="PackedScene" uid="uid://nmpi1435amt" path="res://scenes/key_collectible.tscn" id="1_n87tu"]
 [ext_resource type="PackedScene" uid="uid://dov4nkfsf27hs" path="res://scenes/heart_collectible.tscn" id="2_bf4ht"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c0tfbsm6oqvxt" path="res://imports/kenney_rpg-urban-pack/Tilemap/tilemap_packed.png" id="7_vnqca"]
 [ext_resource type="Script" uid="uid://dfvrya3wq8tod" path="res://TheBindingOfTaxi/scripts/exitdata.gd" id="8_bf4ht"]
 [ext_resource type="PackedScene" uid="uid://dhpfd5occg8hd" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/customer_base.tscn" id="9_paueh"]
-[ext_resource type="PackedScene" uid="uid://ble85riwql7h0" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn" id="10_hch8v"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ci8pb"]
 tile_data = PackedInt32Array(0, 65539, 15, 65536, 65539, 16, 131072, 65539, 17, 1, 65539, 15, 65537, 65539, 16, 131073, 65539, 17, 2, 65539, 15, 65538, 65539, 16, 131074, 65539, 17, 3, 65539, 15, 65539, 65539, 16, 131075, 65539, 17)
@@ -1667,7 +1666,6 @@ _bundled = {
 resource_name = "TBOT Tiles"
 scenes/1/scene = SubResource("PackedScene_hch8v")
 scenes/2/scene = ExtResource("9_paueh")
-scenes/3/scene = ExtResource("10_hch8v")
 
 [resource]
 resource_name = "RoadTileset"

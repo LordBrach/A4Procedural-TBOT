@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=3 format=3 uid="uid://dbdkidxgnxyud"]
+
+[ext_resource type="Resource" uid="uid://du0ch8yuhspft" path="res://TheBindingOfTaxi/ressources/customers/MafiaCustomerSpriteCollection.tres" id="1_q8cro"]
+[ext_resource type="Script" uid="uid://cktjqncw6fv4b" path="res://TheBindingOfTaxi/scripts/customer_data.gd" id="2_afsdn"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "TestName"
+script = ExtResource("2_afsdn")
+CustomerType = 1
+Visuals = ExtResource("1_q8cro")
+DifficultyOptions = Dictionary[int, float]({
+0: 0.0,
+1: 2.0,
+2: 3.0,
+3: 4.0,
+4: 0.1
+})
+DrivingConditions = Dictionary[int, float]({
+0: 0.0,
+1: 2.0,
+2: 0.2,
+3: 10.0,
+4: 10.0
+})
+TargetDestinations = Dictionary[int, float]({
+0: 0.1,
+1: 2.0,
+2: 4.0,
+3: 0.0,
+4: 5.0,
+5: 0.0,
+6: 2.0,
+7: 0.0
+})

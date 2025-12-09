@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TexturePerDirection" load_steps=2 format=3 uid="uid://dsox45dlgr4co"]
+
+[ext_resource type="Script" uid="uid://bm7blovk4wjy0" path="res://TheBindingOfTaxi/scripts/texture_per_direction.gd" id="1_htiha"]
+
+[resource]
+script = ExtResource("1_htiha")
+Sprites = Array[Texture2D]([null])

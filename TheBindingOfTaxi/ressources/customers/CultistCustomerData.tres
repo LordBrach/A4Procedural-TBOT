@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=3 format=3 uid="uid://c5swxlv1ws6nb"]
+
+[ext_resource type="Resource" uid="uid://31kem3xwh8jy" path="res://TheBindingOfTaxi/ressources/customers/CultistCustomerSpriteCollection.tres" id="1_gtxpl"]
+[ext_resource type="Script" uid="uid://cktjqncw6fv4b" path="res://TheBindingOfTaxi/scripts/customer_data.gd" id="2_wriek"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "OldDude"
+script = ExtResource("2_wriek")
+CustomerType = 2
+Visuals = ExtResource("1_gtxpl")
+DifficultyOptions = Dictionary[int, float]({
+0: 0.2,
+1: 2.0,
+2: 4.0,
+3: 3.0,
+4: 1.0
+})
+DrivingConditions = Dictionary[int, float]({
+0: 0.1,
+3: 5.0,
+4: 3.0
+})
+TargetDestinations = Dictionary[int, float]({
+0: 0.2,
+1: 1.0,
+2: 1.0,
+4: 1.0,
+5: 1.0,
+6: 1.0,
+7: 1.0
+})

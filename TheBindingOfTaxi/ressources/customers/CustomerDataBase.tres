@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=3 format=3 uid="uid://bwt1nlqgdjnr0"]
+
+[ext_resource type="Resource" uid="uid://cs0b6pw3jprcn" path="res://TheBindingOfTaxi/ressources/customers/CustomerSpriteCollection.tres" id="1_ta7qv"]
+[ext_resource type="Script" uid="uid://cktjqncw6fv4b" path="res://TheBindingOfTaxi/scripts/customer_data.gd" id="2_obsjr"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "TestName"
+script = ExtResource("2_obsjr")
+Visuals = ExtResource("1_ta7qv")
+DifficultyOptions = Dictionary[int, float]({
+0: 0.2,
+1: 5.0,
+2: 4.0,
+3: 2.0,
+4: 1.0
+})
+DrivingConditions = Dictionary[int, float]({
+0: 3.0,
+1: 1.0,
+2: 2.0,
+3: 0.1,
+4: 0.0
+})
+TargetDestinations = Dictionary[int, float]({
+0: 0.1,
+1: 1.0,
+2: 3.0,
+3: 4.0,
+4: 2.0,
+5: 3.0,
+6: 3.0,
+7: 2.0
+})

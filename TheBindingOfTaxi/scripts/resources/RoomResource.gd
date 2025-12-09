@@ -10,6 +10,8 @@ class_name RoomResource extends Resource
 @export var clientNProps_layer_path : String = ""
 @export var decoration_layer_path : String = ""
 
+@export var quest_end_list : Dictionary[Vector2, int]
+
 @export var exits : Dictionary[Vector2i, int] = {}
 @export var allExits : int = 0
 
