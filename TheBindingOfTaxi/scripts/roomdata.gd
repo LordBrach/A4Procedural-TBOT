@@ -271,11 +271,11 @@ func load_room_data(a_roomData : RoomResource) -> void :
 	#print(roomName, " file loaded")
 
 func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> void :
-	if (a_data == null) :
-		print("Load Room Error : Given TilemapRessource is null and cannot be read for '", a_tilemap.name, "'")
-		return
 	if (a_tilemap == null) :
 		print("Load Room Error : Current TilemapLayer is null, pls check if the TileMapLayers are correctly set")
+		return
+	if (a_data == null) :
+		print("Load Room Error : Given TilemapRessource is null and cannot be read for '", a_tilemap.name, "'")
 		return
 	
 	a_tilemap.clear()
