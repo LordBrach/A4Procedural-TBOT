@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TilemapResource" load_steps=2 format=3 uid="uid://dugpbnofkxbgf"]
+
+[ext_resource type="Script" uid="uid://brvtu63u0yhby" path="res://TheBindingOfTaxi/scripts/resources/TilemapResource.gd" id="1_10vxp"]
+
+[resource]
+script = ExtResource("1_10vxp")
+size = Vector2i(7, 3)
+tilesbit = PackedByteArray(0, 0, 7, 0, 2, 0, 3, 0, 10, 0, 3, 0, 0, 0, 7, 0, 3, 0, 3, 0, 10, 0, 4, 0, 0, 0, 9, 0, 1, 0, 3, 0, 7, 0, 6, 0, 0, 0, 13, 0, 1, 0, 3, 0, 7, 0, 6, 0, 0, 0)
