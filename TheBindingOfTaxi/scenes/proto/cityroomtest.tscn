@@ -39,4 +39,4 @@ position = Vector2(256, 112)
 PossibleDestinations = Array[int]([1])
 
 [connection signal="body_entered" from="Client&PropsLayer/Customer" to="Client&PropsLayer/Customer" method="_on_body_entered"]
-[connection signal="body_entered" from="Client&PropsLayer/@Area2D@23953" to="Client&PropsLayer/@Area2D@23953" method="_on_body_entered"]
+[connection signal="body_entered" from="Client&PropsLayer/@Area2D@31476" to="Client&PropsLayer/@Area2D@31476" method="_on_body_entered"]

@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="customer_sprite_collection" load_steps=19 format=3 uid="uid://31kem3xwh8jy"]
+
+[ext_resource type="Script" uid="uid://dqisaygy3bj1x" path="res://TheBindingOfTaxi/scripts/customer_sprite_collection.gd" id="1_6gfkx"]
+[ext_resource type="Script" uid="uid://bm7blovk4wjy0" path="res://TheBindingOfTaxi/scripts/texture_per_direction.gd" id="2_o8126"]
+[ext_resource type="Texture2D" uid="uid://gqd1jtxeauvh" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0266.png" id="3_r5t01"]
+[ext_resource type="Texture2D" uid="uid://c0f87f14nlu32" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0293.png" id="4_e8bah"]
+[ext_resource type="Texture2D" uid="uid://8l5bk8jcvf1" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0320.png" id="5_4xd7e"]
+[ext_resource type="Texture2D" uid="uid://dh6x8gsf3vccm" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0268.png" id="6_63nq7"]
+[ext_resource type="Texture2D" uid="uid://d0sa8fdrne4k1" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0295.png" id="7_eo15x"]
+[ext_resource type="Texture2D" uid="uid://6eyrupowbt5w" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0322.png" id="8_ygdvl"]
+[ext_resource type="Texture2D" uid="uid://41phfcebenca" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0269.png" id="9_pdn3i"]
+[ext_resource type="Texture2D" uid="uid://160q63n3iyjk" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0323.png" id="10_7osq0"]
+[ext_resource type="Texture2D" uid="uid://bd4u0oo5dyeat" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0296.png" id="11_j1yfa"]
+[ext_resource type="Texture2D" uid="uid://gw4jvpc0fpcm" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0267.png" id="12_nn0b3"]
+[ext_resource type="Texture2D" uid="uid://c2nevvspx0mm" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0321.png" id="13_ynk61"]
+[ext_resource type="Texture2D" uid="uid://eoxb5bq6tuh1" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0294.png" id="14_w3c2e"]
+
+[sub_resource type="Resource" id="Resource_wpfiy"]
+script = ExtResource("2_o8126")
+Direction = 2
+Sprites = Array[Texture2D]([ExtResource("3_r5t01"), ExtResource("4_e8bah"), ExtResource("5_4xd7e")])
+metadata/_custom_type_script = "uid://bm7blovk4wjy0"
+
+[sub_resource type="Resource" id="Resource_8vigs"]
+script = ExtResource("2_o8126")
+Sprites = Array[Texture2D]([ExtResource("6_63nq7"), ExtResource("7_eo15x"), ExtResource("8_ygdvl")])
+metadata/_custom_type_script = "uid://bm7blovk4wjy0"
+
+[sub_resource type="Resource" id="Resource_mhc3y"]
+script = ExtResource("2_o8126")
+Direction = 3
+Sprites = Array[Texture2D]([ExtResource("9_pdn3i"), ExtResource("10_7osq0"), ExtResource("11_j1yfa")])
+metadata/_custom_type_script = "uid://bm7blovk4wjy0"
+
+[sub_resource type="Resource" id="Resource_bug54"]
+script = ExtResource("2_o8126")
+Direction = 1
+Sprites = Array[Texture2D]([ExtResource("12_nn0b3"), ExtResource("13_ynk61"), ExtResource("14_w3c2e")])
+metadata/_custom_type_script = "uid://bm7blovk4wjy0"
+
+[resource]
+script = ExtResource("1_6gfkx")
+sprites = Array[ExtResource("2_o8126")]([SubResource("Resource_wpfiy"), SubResource("Resource_8vigs"), SubResource("Resource_mhc3y"), SubResource("Resource_bug54")])
