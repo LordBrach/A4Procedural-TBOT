@@ -307,7 +307,8 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	
 	roomInstance.currentPos = a_roomTilePos
 	roomInstance.name = str(roomInstance.currentPos) + a_room.room_name
-	roomInstance.position = Vector2((a_roomTilePos.x * Globals.GetPixelRoomSize().x), -(a_roomTilePos.y * Globals.GetPixelRoomSize().y))
+	roomInstance.position = Vector2((a_roomTilePos.x * Globals.GetPixelRoomSize().x),
+	-(a_roomTilePos.y * Globals.GetPixelRoomSize().y) - (a_room.room_size.y * Globals.GetPixelRoomSize().y))
 	roomInstance.load_room_data(a_room)
 	
 	#print("Room Gen Info : Room Instance '", roomInstance.name, "' created at (", roomInstance.position.x, ", ", roomInstance.position.y, ")")
