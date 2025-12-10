@@ -2,9 +2,7 @@
 class_name Tracery
 extends RefCounted
 		
-		
 class Modifiers extends RefCounted:
-	
 	
 	static func _is_consonant( character : String ) -> bool:
 		var lower_case_character = character.to_lower()
@@ -28,7 +26,6 @@ class Modifiers extends RefCounted:
 			
 			
 class UniversalModifiers extends Modifiers:
-	
 	
 	static func get_modifiers():
 		var modifiers = {
@@ -139,7 +136,6 @@ class UniversalModifiers extends Modifiers:
 				
 # Main grammar
 class Grammar extends RefCounted:
-	
 
 	var rng : RandomNumberGenerator: # The random number generator
 		set(value):
@@ -185,7 +181,7 @@ class Grammar extends RefCounted:
 	func flatten( rule : String ) -> String:
 		var expansion_matches = _expansion_regex.search_all( rule )
 		
-		if expansion_matches.empty():
+		if expansion_matches.is_empty():
 			_resolve_save_symbols( rule )
 			
 		for match_result in expansion_matches:
@@ -236,7 +232,7 @@ class Grammar extends RefCounted:
 		return rule
 		
 		
-	func _resolve_save_symbols( rule : String ) -> void:
+	func _resolve_save_symbols( rule : String ): ##todo return a string here
 		var save_matches = _save_symbol_regex.search_all( rule )
 		for match_result in save_matches:
 			var match_value = match_result.strings[0]
@@ -257,7 +253,7 @@ class Grammar extends RefCounted:
 				
 	func _get_modifiers( symbol : String ) -> Array:
 		var modifiers = symbol.replace( "#", "" ).split( "." )
-		modifiers.remove( 0 )
+		modifiers.remove_at( 0 )
 		return modifiers
 		
 		

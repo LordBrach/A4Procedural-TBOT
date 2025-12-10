@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba3eux3e67oea"]
+
+[ext_resource type="Script" uid="uid://ctgc61rvqgoe5" path="res://TheBindingOfTaxi/scripts/textbox.gd" id="1_lyn75"]
+[ext_resource type="Texture2D" uid="uid://dekpmc640ypay" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0066.png" id="1_ojprh"]
+[ext_resource type="FontFile" uid="uid://c6uut6uco2c1s" path="res://TheBindingOfTaxi/sprites/GrapeSoda.ttf" id="2_jvihg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jvihg"]
+font = ExtResource("2_jvihg")
+
+[node name="CanvasTextbox" type="CanvasLayer"]
+script = ExtResource("1_lyn75")
+
+[node name="BG" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.7058824)
+anchors_preset = -1
+anchor_left = 0.601
+anchor_top = 0.12900001
+anchor_right = 1.0
+anchor_bottom = 0.82000005
+texture = ExtResource("1_ojprh")
+expand_mode = 1
+
+[node name="Text" type="Label" parent="BG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.34
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = -26.0
+offset_bottom = -74.360016
+label_settings = SubResource("LabelSettings_jvihg")
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.09090909
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
