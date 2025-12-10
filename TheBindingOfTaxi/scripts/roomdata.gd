@@ -6,11 +6,6 @@ var buttonSave = save_room
 @export_tool_button("Load Room")
 var buttonLoad = load_room
 
-@export_group("Edit Exits Data")
-@export_tool_button("Serialize Exits at Current Pos")
-var buttonDirection = save_direction
-@export_tool_button("Show Exits Saved")
-var buttonShowDirection = show_direction
 
 @export_category("General Infos")
 @export var roomName : String = "new_room"
@@ -31,7 +26,13 @@ var lastSaveTry : bool = false
 
 @export_group("")
 @export var roomSize : Vector2i = Vector2i.ONE
+
 @export_group("Exits Parameters")
+@export_tool_button("Serialize Exits at Current Pos")
+var buttonDirection = save_direction
+@export_tool_button("Show Exits Saved")
+var buttonShowDirection = show_direction
+
 @export var currentPos : Vector2i = Vector2i.ONE
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 #@export var exits : Array[Exit]
@@ -49,15 +50,15 @@ func _ready() -> void:
 func getExits(a_worldPos : Vector2i) -> int:
 	return exits.get(a_worldPos - currentPos, 0)
 
-func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Vector2 :
-	var choosen : Vector2 = Vector2.ZERO
+func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> QuestEnd :
+	var choosen : QuestEnd = null
 	var distance : float = -1
 	for end in QuestEndList :
 		var index : int = end.PossibleDestinations.rfind(a_exitType)
-		if (index != -1 &&
+		if ((a_exitType == Globals.EXIT_TYPES.Any || index != -1) &&
 		(distance == -1 || (a_pos - end.global_position).length() < distance)) :
 			distance = (a_pos - end.global_position).length()
-			choosen = end.global_position
+			choosen = end
 	
 	return choosen
 

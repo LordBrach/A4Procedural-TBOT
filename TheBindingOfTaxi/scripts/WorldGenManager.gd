@@ -5,8 +5,9 @@ enum Biomes { None, Biome1, Biome2, Biome3 }
 @export var chunksTiles : Dictionary[Vector2i, Chunk] = {}
 
 @export_category("Rooms")
-@export var specialRooms : Dictionary[RoomResource, Biomes]
-var specialRoomsCount : Dictionary[RoomResource, bool]
+@export var specialsBiome : Dictionary[RoomResource, Biomes]
+@export var typeSpecials : Dictionary[RoomResource, Globals.EXIT_TYPES]
+var existingSpecials : Array[RoomData]
 
 @export_group("Regular Rooms")
 @export var biome1Rooms : Array[RoomResource]
@@ -31,7 +32,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	var playerChunkPos : Vector2i = WorldToChunkPos(Vector2.ZERO) #Position du player
+	last_Player_Pos = WorldToChunkPos(PlayerGlobal.global_position) #Position du player
 	#print ("Player position : ", playerChunkPos)
 	#if (last_Player_Pos != playerChunkPos) :
 		#for x in range(-1, 2) :
@@ -46,13 +47,24 @@ func WorldToChunkPos(a_pos : Vector2) -> Vector2i :
 
 	return Vector2i(result.x, result.y)
 
-func CreateChunk(a_pos : Vector2i, a_biome : Biomes) :
-	
+func CreateChunk(a_pos : Vector2i, a_biome : Biomes) -> void :
 	var chunk = preload(Globals.ChunkScnPath)
 	var instance : Chunk = chunk.instantiate()
 	self.add_child(instance)
 	
 	instance.StartGeneration(a_pos, a_biome)
+	chunksTiles.set(a_pos, instance)
+
+func CreateChunkSpecialRoom(a_pos : Vector2i, a_room : RoomResource) -> void :
+	var chunk = preload(Globals.ChunkScnPath)
+	var instance : Chunk = chunk.instantiate()
+	self.add_child(instance)
+	
+	var biome = specialsBiome.get(a_room, Biomes.None)
+	if (biome == Biomes.None) :
+		print("Generate Chunk Warning : the given room '", a_room.room_name, "' didn't have an associated biome")
+	
+	instance.StartGeneration(a_pos, biome, a_room)
 	chunksTiles.set(a_pos, instance)
 
 func Getchunk(a_pos : Vector2i) -> Chunk :
@@ -128,19 +140,98 @@ func GetRooms(a_biome : Biomes) -> Array[RoomResource] :
 	
 	return result
 
-func GetSpecialRooms(a_biome : Biomes) -> Array[RoomResource] :
+func GetSpecialsBiome(a_biome : Biomes) -> Array[RoomResource] :
 	var result : Array[RoomResource] = []
 	
-	for room in specialRooms :
-		if (specialRooms[room] == a_biome) :
+	for room in specialsBiome :
+		if (specialsBiome[room] == a_biome) :
 			result.append(room)
 	
 	return result
 
+func GetSpecialsExitType(a_exit : Globals.EXIT_TYPES) -> Array[RoomResource] :
+	var result : Array[RoomResource] = []
+	
+	for room in specialsBiome :
+		if (specialsBiome[room] == a_exit) :
+			result.append(room)
+	
+	return result
+
+func GetExistingSpecial(a_data : RoomResource) -> Array[RoomData] :
+	var rooms : Array[RoomData] = []
+	
+	for special in existingSpecials :
+		if (special.roomName == a_data.room_name) :
+			rooms.append(special)
+	
+	return rooms
+
+func SetSpecialsQuestEnd(a_data : RoomData) -> void :
+	existingSpecials.append(a_data)
+	return
+
 func GetQuestEnd(a_data : ClientData) -> Vector2 :
+	var destination : QuestEnd = null
+	var exit : Globals.EXIT_TYPES = a_data.GetDestination()
 	
+	if (exit == Globals.EXIT_TYPES.Any || 
+	exit == Globals.EXIT_TYPES.Parking ||
+	exit == Globals.EXIT_TYPES.Bench ||
+	exit == Globals.EXIT_TYPES.House) :
+		var distance : Globals.DIFFICULTY_OPTIONS = a_data.GetDifficulty()
+		var target = PlayerGlobal.global_position + Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * distance
+		
+		var chunkTarget : Vector2i = WorldToChunkPos(target)
+		if (chunksTiles.has(chunkTarget)) :
+			destination = chunksTiles[chunkTarget].GetClosestQuestEnd(target, exit)
+		else :
+			CreateChunk(chunkTarget, Globals.GetRandomBiome())
+			destination = chunksTiles[chunkTarget].GetClosestQuestEnd(target, exit)
+	else :
+		var rooms = GetSpecialsExitType(exit)
+		var list : Array[RoomData] = []
+		for room in rooms :
+			list.append_array(GetExistingSpecial(room))
+		
+		if (list.is_empty()) :
+			GenerateClosestChunk(last_Player_Pos, rooms.pick_random())
+			for room in rooms :
+				list.append_array(GetExistingSpecial(room))
+		
+		var distance : float = -1
+		for room in list :
+			var target : QuestEnd = room.GetClosestQuestEnd(PlayerGlobal.global_position, exit)
+			if (distance == -1 || distance > (target.global_position - PlayerGlobal.global_position). length()) :
+				distance = (target.global_position - PlayerGlobal.global_position).length()
+				destination = target
 	
-	if (a_data.TargetDestinations.has(Globals.EXIT_TYPES.Any)) :
-		pass
+	destination.activate(PlayerGlobal.idCustomer)
+	return destination.global_position
+
+func GenerateClosestChunk(a_pos : Vector2i, a_room : RoomResource) -> Vector2i :
+	var toVerify : Array[Vector2i] = []
 	
-	return Vector2.ZERO
+	toVerify.append_array([
+		a_pos + Vector2i.UP,
+		a_pos + Vector2i.LEFT,
+		a_pos + Vector2i.DOWN,
+		a_pos + Vector2i.RIGHT
+	])
+	
+	for chunk in toVerify :
+		if (!chunksTiles.has(chunk)) :
+			CreateChunkSpecialRoom(chunk, a_room)
+			return chunk
+		
+		if (!toVerify.has(a_pos + Vector2i.UP)) :
+			toVerify.append(a_pos + Vector2i.UP)
+		if (!toVerify.has(a_pos + Vector2i.LEFT)) :
+			toVerify.append(a_pos + Vector2i.LEFT)
+		if (!toVerify.has(a_pos + Vector2i.DOWN)) :
+			toVerify.append(a_pos + Vector2i.DOWN)
+		if (!toVerify.has(a_pos + Vector2i.RIGHT)) :
+			toVerify.append(a_pos + Vector2i.RIGHT)
+	
+	#for security
+	return Vector2i.ZERO
