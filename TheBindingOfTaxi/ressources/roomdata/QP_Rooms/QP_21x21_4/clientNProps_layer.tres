@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="TilemapResource" load_steps=2 format=3 uid="uid://w7qhdxriupqx"]
+
+[ext_resource type="Script" uid="uid://brvtu63u0yhby" path="res://TheBindingOfTaxi/scripts/resources/TilemapResource.gd" id="1_e52ro"]
+
+[resource]
+script = ExtResource("1_e52ro")
