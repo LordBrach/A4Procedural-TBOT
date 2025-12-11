@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcdrnlpx8ldu6" path="res://TheBindingOfTaxi/sprites/FinishZone.png" id="2_hpihp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
-size = Vector2(39, 30)
+size = Vector2(32, 32)
 
 [node name="Quest_End" type="Area2D" node_paths=PackedStringArray("hitbox", "zoneSprite1", "zoneSprite2")]
 script = ExtResource("1_l3iok")
@@ -14,7 +14,6 @@ zoneSprite1 = NodePath("ArriveZone1")
 zoneSprite2 = NodePath("ArriveZone2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_qxpyt")
 
 [node name="ArriveZone1" type="Sprite2D" parent="."]
