@@ -316,11 +316,11 @@ func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> voi
 	if (a_tilemap == null) :
 		printerr("Load Room Error : Current TilemapLayer is null, pls check if the TileMapLayers are correctly set")
 		return
+	a_tilemap.clear()
+	
 	if (a_data == null) :
 		printerr("Load Room Error : Given TilemapRessource is null and cannot be read for '", a_tilemap.name, "'")
 		return
-	
-	a_tilemap.clear()
 	a_tilemap.tile_map_data = a_data.tilesbit
 
 func set_quest_end(a_roomData : RoomResource) :
