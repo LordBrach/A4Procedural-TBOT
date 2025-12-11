@@ -1,17 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://ble85riwql7h0"]
+[gd_scene load_steps=4 format=3 uid="uid://ble85riwql7h0"]
 
 [ext_resource type="Script" uid="uid://dtv8mfwxst5" path="res://TheBindingOfTaxi/scripts/quest_end.gd" id="1_l3iok"]
+[ext_resource type="Texture2D" uid="uid://dcdrnlpx8ldu6" path="res://TheBindingOfTaxi/sprites/FinishZone.png" id="2_hpihp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
 size = Vector2(39, 30)
 
-[node name="Quest_End" type="Area2D" node_paths=PackedStringArray("hitbox")]
+[node name="Quest_End" type="Area2D" node_paths=PackedStringArray("hitbox", "zoneSprite1", "zoneSprite2")]
 script = ExtResource("1_l3iok")
 PossibleDestinations = Array[int]([0, 2, 1])
 hitbox = NodePath("CollisionShape2D")
+zoneSprite1 = NodePath("ArriveZone1")
+zoneSprite2 = NodePath("ArriveZone2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_qxpyt")
+
+[node name="ArriveZone1" type="Sprite2D" parent="."]
+texture = ExtResource("2_hpihp")
+
+[node name="ArriveZone2" type="Sprite2D" parent="."]
+texture = ExtResource("2_hpihp")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

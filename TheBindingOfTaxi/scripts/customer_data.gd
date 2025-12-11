@@ -12,7 +12,7 @@ class_name ClientData extends Resource
 @export var DrivingConditions : Dictionary[Globals.DRIVING_CONDITIONS, float]
 # Options d'arrivées
 @export var TargetDestinations : Dictionary[Globals.EXIT_TYPES, float] = {
-	Globals.EXIT_TYPES.Random: 1
+	Globals.EXIT_TYPES.Any: 1
 }
 
 "res://imports/kenney_rpg-urban-pack/Tiles/tile_0050.png"

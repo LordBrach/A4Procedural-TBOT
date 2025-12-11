@@ -185,6 +185,7 @@ func save_room() -> void : #Editor Only
 	print_rich("[color=yellow]Saving ", roomName, " file...")
 	
 	var room_data = RoomResource.new()
+	
 	var road_layer_data : TilemapResource
 	var wall_layer_data : TilemapResource
 	var clientNProps_layer_data : TilemapResource
@@ -329,7 +330,8 @@ func set_quest_end(a_roomData : RoomResource) :
 		self.add_child(QuestEndParent)
 	
 	for quest in QuestEndList :
-		quest.free()
+		if (quest != null) :
+			quest.free()
 	
 	QuestEndList.clear()
 	

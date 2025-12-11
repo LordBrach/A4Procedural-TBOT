@@ -26,11 +26,13 @@ enum SPRITE_DIRECTION { UP, DOWN , LEFT , RIGHT , MISC }
 enum CUSTOMER_DIALOGUE_TYPE { INTRO, COMMENT , REACT , OUTRO }
 
 var ExitDialogueSnippets : Dictionary [EXIT_TYPES, String] = {
-	EXIT_TYPES.Random : " [debug] ",
+	EXIT_TYPES.Any : " [debug] ",
 	EXIT_TYPES.Parking : " au parking ",
 	EXIT_TYPES.Bench : " sur mon banc ",
-	EXIT_TYPES.Park : " au parc ",
 	EXIT_TYPES.House : " chez moi ",
+	EXIT_TYPES.Park : " au parc ",
+	EXIT_TYPES.Lake : " au lac ",
+	EXIT_TYPES.University : " à l'université ",
 	EXIT_TYPES.Shop : " au magasin "
 
 }

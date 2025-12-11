@@ -35,7 +35,7 @@ func _init() -> void:
 func _ready() -> void:
 	_set_state(STATE.IDLE)
 	hasDestination = false
-	arrowSprite.modulate.a = 1
+	arrowSprite.modulate.a = 0
 
 
 func _process(delta: float) -> void:
@@ -133,7 +133,7 @@ func add_customer(data : Customer) -> void:
 			CustomerList[idCustomer] = data
 			idCustomer += 1
 			data.pickup_result(true)
-			PlayerQuestAccepted.play()zz
+			PlayerQuestAccepted.play()
 	else :
 		OnPickupCustomerFailed.emit()
 		data.pickup_result(false)
