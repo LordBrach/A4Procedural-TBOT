@@ -3,7 +3,7 @@ class_name QuestEnd extends CollectibleBase
 var isActive: bool = false;
 var isAddedToPlayer : bool = false
 
-@export var PossibleDestinations : Array[Globals.EXIT_TYPES] = [Globals.EXIT_TYPES.Any]
+@export var PossibleDestinations : Array[Globals.EXIT_TYPES] = [Globals.EXIT_TYPES.Random]
 @export var LinkedClientId:int = 0;
 
 func _getPos() -> Vector2 :
