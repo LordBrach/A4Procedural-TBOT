@@ -10,14 +10,15 @@
 [node name="PlayerUI" type="Node"]
 
 [node name="CanvasTextbox" parent="." instance=ExtResource("1_qwd5t")]
+DelayBetweenLetters = 0.05
 
 [node name="Text" parent="CanvasTextbox/BG" index="0"]
-text = "Bonsoir, j'aimerais savoir si vous pouvez m'emmenez pas trop vite chez moi s'il vous plait?"
-visible_characters = 91
-visible_ratio = 1.0
+text = ""
+visible_characters = 93
 
 [node name="AudioStreamPlayer2D" parent="CanvasTextbox" index="1"]
 stream = ExtResource("2_ocsoo")
+pitch_scale = 0.6
 max_polyphony = 2
 
 [node name="TraceryHelper" type="Node" parent="." node_paths=PackedStringArray("outputbox")]
