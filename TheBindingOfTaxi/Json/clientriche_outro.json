@@ -1,7 +1,32 @@
 {
-"origin":["[myPlace:#path#]#line#"],
-"line":["#remerciement#, #paiement#. Gain #somme#"],
-"remerciement":["dépêchez-vous j'ai un rendez-vous" ,"Je vais être en retard" ,"Déposez-moi là"],
-"paiement":["tenez et gardez la monnaie", "'tend son bras avec un billet et ne dis rien'", "tenez"],
-"somme":["(100)", "(85)", "(80)", "(75)", "(60)", "(125)", "(95)", "(90)", "(65)", "(110)", "(120)" ,"(500)"]
+	"origin": [
+		"[myPlace:#path#]#line#"
+	],
+	"line": [
+		"#remerciement#, #paiement#. Gain #somme#"
+	],
+	"remerciement": [
+		"dépêchez-vous j'ai un rendez-vous",
+		"Je vais être en retard",
+		"Déposez-moi là"
+	],
+	"paiement": [
+		"tenez et gardez la monnaie",
+		"'tend son bras avec un billet et ne dis rien'",
+		"tenez"
+	],
+	"somme": [
+		"(100)",
+		"(85)",
+		"(80)",
+		"(75)",
+		"(60)",
+		"(125)",
+		"(95)",
+		"(90)",
+		"(65)",
+		"(110)",
+		"(120)",
+		"(500)"
+	]
 }

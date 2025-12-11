@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://mlkoce8y5cto" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/TraceryHelperFuncs.gd" id="2_pf331"]
 [ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="3_50c3i"]
 [ext_resource type="Resource" uid="uid://btmnr2d3ph8dq" path="res://TheBindingOfTaxi/ressources/dialogue/default_dialogue.tres" id="3_b1whj"]
-[ext_resource type="Resource" uid="uid://cnq8y3v82v6th" path="res://TheBindingOfTaxi/ressources/dialogue/example_otherdialogue.tres" id="5_5mut0"]
+[ext_resource type="Resource" uid="uid://ubu82c20dkrp" path="res://TheBindingOfTaxi/ressources/dialogue/richeclient_dialogue.tres" id="5_5mut0"]
 
 [node name="PlayerUI" type="Node"]
 
