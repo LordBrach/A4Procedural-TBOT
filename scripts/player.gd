@@ -11,7 +11,9 @@ static var Instance : Player
 @export var SavedExits : Array[QuestEnd]
 
 @onready var TraceryFuncs : TraceryHelperFuncs = $PlayerUI/TraceryHelper
-
+@onready var PlayerQuestComplete : AudioStreamPlayer = $Sounds/SFXQuestComplete
+@onready var PlayerQuestAccepted : AudioStreamPlayer = $Sounds/SFXQuestAccepted
+@onready var PlayerQuestRefused : AudioStreamPlayer = $Sounds/SFXQuestRefused
 var idCustomer : int = 0;
 
 # Collectible
@@ -118,9 +120,11 @@ func add_customer(data : Customer) -> void:
 		TraceryFuncs._SendLineToTextbox(data.SelectedCustomer.CustomerType, Globals.CUSTOMER_DIALOGUE_TYPE.INTRO)
 		data.pickup_result(true)
 		link_to_quest(data)
+		PlayerQuestAccepted.play()
 	else :
 		OnPickupCustomerFailed.emit()
 		data.pickup_result(false)
+		PlayerQuestRefused.play()
 		pass
 
 func link_to_quest(customer : Customer) -> void:
@@ -133,6 +137,7 @@ func link_to_quest(customer : Customer) -> void:
 
 ## When a quest is completed, removes the client linked to the quest from the car
 func complete_quest(LinkedClientId : int) ->void:
+	PlayerQuestComplete.play()
 	CustomerList.erase(LinkedClientId)
 	OnQuestFinished.emit()
 	pass
