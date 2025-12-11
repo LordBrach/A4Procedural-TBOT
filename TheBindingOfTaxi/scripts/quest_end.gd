@@ -7,6 +7,8 @@ var isAddedToPlayer : bool = false
 @export var PossibleDestinations : Array[Globals.EXIT_TYPES] = [Globals.EXIT_TYPES.Any]
 @export var LinkedClientId:int = 0;
 
+@export var hitbox : CollisionShape2D
+
 
 func _ready() -> void:
 	#if(!isAddedToPlayer) : 
@@ -23,10 +25,13 @@ func on_collect() -> void:
 	# spawn customer in map (?)
 
 func _on_body_entered(body:Node2D) -> void:
+	if !body is Player:
+		return
+		
 	if(isActive) :
 		if(Player.Instance.CustomerList.has(LinkedClientId)):
-			Player.Instance.ComlpeteQuest(LinkedClientId)
-			super(body)
+			Player.Instance.complete_quest(LinkedClientId)
+			#super(body)
 	else:
 		print("No quest linked to this quest end area");
 

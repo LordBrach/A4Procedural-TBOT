@@ -15,6 +15,7 @@ enum Directions {NONE = 0, WEST = 1 << 0, EAST = 1 << 1, NORTH = 1 << 2, SOUTH =
 
 const RoomScnPath : String = "res://TheBindingOfTaxi/scenes/proto/cityroomtest.tscn"
 const ChunkScnPath : String = "res://TheBindingOfTaxi/scenes/proto/Chunk.tscn"
+const QuestEndScnPath : String = "res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn"
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 
 enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }

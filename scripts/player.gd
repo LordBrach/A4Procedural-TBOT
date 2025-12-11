@@ -11,10 +11,10 @@ static var Instance : Player
 @export var SavedExits : Array[QuestEnd]
 
 var idCustomer : int = 0;
-var customerDestination : Vector2 = Vector2.ZERO
+var customerDestination : Vector2
 
 var hasDestination : bool = false
-@export var arrowSprite : Sprite2D
+@export var arrowSprite : Node2D
 
 # Collectible
 var key_count : int
@@ -31,7 +31,7 @@ func _init() -> void:
 func _ready() -> void:
 	_set_state(STATE.IDLE)
 	hasDestination = false
-	arrowSprite.modulate.a = 0
+	arrowSprite.modulate.a = 1
 
 
 func _process(delta: float) -> void:
@@ -40,8 +40,9 @@ func _process(delta: float) -> void:
 	#_update_room()
 
 	if (hasDestination) :
-		var target = (customerDestination - global_position).normalized()
-		arrowSprite.rotation = target.angle()
+		if (arrowSprite.modulate.a == 0) :
+			arrowSprite.modulate.a = 1
+		arrowSprite.look_at(customerDestination)
 
 
 #region prototype
@@ -118,14 +119,14 @@ func add_customer(data : Customer) -> void:
 	print("Current num of customers: ", CustomerList.size())
 	if(CustomerList.size() < MaxCustomerCount) :
 		print(data.SelectedCustomer)
-		CustomerList[idCustomer] = data
-		idCustomer += 1
 		if (!link_to_quest(data)) :
 			CustomerList.erase(idCustomer)
 			OnPickupCustomerFailed.emit()
 			data.pickup_result(false)
 		else :
-			OnPickupCustomer.emit() 
+			OnPickupCustomer.emit()
+			CustomerList[idCustomer] = data
+			idCustomer += 1
 			data.pickup_result(true)
 	else :
 		OnPickupCustomerFailed.emit()
@@ -146,16 +147,8 @@ func link_to_quest(customer : Customer) -> bool:
 			print("OK")
 			return true
 	else :
-		OnPickupCustomerFailed.emit()
 		printerr("Customer Pickup Error : WorldGenManager instance not found")
 		return false
-	
-	#for element in SavedExits :
-		#if(element.PossibleDestinations.has(customer.SelectedDestination)) :
-			#print("Linked Customer to exit !")
-			#element.activate(idCustomer)
-			#return
-	#print("Couldnt find suitable exit for client...")
 
 ## When a quest is completed, removes the client linked to the quest from the car
 func complete_quest(LinkedClientId : int) ->void:

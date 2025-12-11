@@ -52,7 +52,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ups2j")
 PlayerSprite = NodePath("AnimatedSprite2D")
-arrowSprite = NodePath("Node2D/Sprite2D")
+arrowSprite = NodePath("Node2D/Arrow")
 dead_color = Color(0.413595, 0.399579, 0.385991, 1)
 default_movement = ExtResource("2_ay78m")
 stunned_movemement = ExtResource("3_8ktro")
@@ -71,12 +71,13 @@ visible = false
 texture = ExtResource("5_qlg0r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(0.5, 0.5)
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0, -21)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+[node name="Arrow" type="Sprite2D" parent="Node2D"]
 z_index = 1024
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_tuyoq")
+flip_h = true

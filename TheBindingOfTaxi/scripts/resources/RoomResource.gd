@@ -12,6 +12,7 @@ class_name RoomResource extends Resource
 
 @export var quest_end_list : Dictionary[Vector2, int]
 @export var quest_end_values : Array[Array]
+@export var quest_end_size : Array[Vector2]
 
 @export var exits : Dictionary[Vector2i, int] = {}
 @export var allExits : int = 0

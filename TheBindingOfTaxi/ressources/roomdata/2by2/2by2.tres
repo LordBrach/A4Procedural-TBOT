@@ -15,6 +15,7 @@ Vector2(56, 107): 0,
 Vector2(256, 112): 1
 })
 quest_end_values = Array[Array]([Array[int]([0, 2, 1]), Array[int]([1])])
+quest_end_size = Array[Vector2]([Vector2(39, 30), Vector2(39, 30)])
 exits = Dictionary[Vector2i, int]({
 Vector2i(0, 0): 8,
 Vector2i(0, 1): 1,

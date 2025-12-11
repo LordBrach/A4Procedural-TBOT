@@ -13,6 +13,7 @@ var buttonLoad = load_room
 @export var isImportantBuilding : bool = false
 var lastSaveName : String = ""
 var lastSaveTry : bool = false
+const tg : String = "res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn"
 
 @export_group("TileMapLayers")
 @export var RoadLayer : TileMapLayer
@@ -226,6 +227,7 @@ func save_room() -> void : #Editor Only
 	#region Quest End
 	for end in QuestEndList :
 		room_data.quest_end_values.append(end.PossibleDestinations)
+		room_data.quest_end_size.append(end.hitbox.shape.get_rect().size)
 		room_data.quest_end_list.set(end.global_position, room_data.quest_end_values.size() -1)
 	#endregion
 	
@@ -307,7 +309,7 @@ func load_room_data(a_roomData : RoomResource) -> void :
 	
 	set_quest_end(a_roomData)
 	
-	#print(roomName, " file loaded")
+	print_rich("[color=green]", roomName, " file loaded")
 
 func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> void :
 	if (a_tilemap == null) :
@@ -333,7 +335,8 @@ func set_quest_end(a_roomData : RoomResource) :
 	
 	var n : int = 0
 	for data in  a_roomData.quest_end_list :
-		var questObj : QuestEnd = QuestEnd.new()
+		var loadedQuest = preload(tg)
+		var questObj : QuestEnd = loadedQuest.instantiate()
 		QuestEndList.append(questObj)
 		QuestEndParent.add_child(questObj)
 		questObj.owner = self
@@ -341,6 +344,7 @@ func set_quest_end(a_roomData : RoomResource) :
 		questObj.name = "Quest_End_" + str(n)
 		questObj.position = data
 		questObj.PossibleDestinations = a_roomData.quest_end_values[a_roomData.quest_end_list[data]]
+		questObj.hitbox.shape.get_rect().size = a_roomData.quest_end_size[a_roomData.quest_end_list[data]]
 		
 		n += 1
 

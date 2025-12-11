@@ -213,6 +213,7 @@ func GetQuestEnd(a_customer : Customer, a_clientID : int) -> Vector2 :
 	
 	if (destination != null) :
 		destination.activate(a_clientID)
+		print("Destination : ", destination.global_position, " - ", destination.name)
 		return destination.global_position
 	else :
 		printerr("Get QuestEnd Error : No quest end found")

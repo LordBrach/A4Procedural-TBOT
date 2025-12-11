@@ -321,6 +321,11 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	
 	roadsAvailables.merge(GetTilesFromExits(roomInstance))
 	
+	var index = 0
+	for end in roomInstance.QuestEndList :
+		end.global_position = roomInstance.global_position + a_room.quest_end_list.find_key(index)
+		index += 1
+	
 	if (roomInstance.isImportantBuilding) :
 		WorldGen.SetSpecialsQuestEnd(roomInstance)
 	
