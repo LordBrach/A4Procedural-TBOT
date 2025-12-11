@@ -316,11 +316,11 @@ func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> voi
 	if (a_tilemap == null) :
 		printerr("Load Room Error : Current TilemapLayer is null, pls check if the TileMapLayers are correctly set")
 		return
+	a_tilemap.clear()
+	
 	if (a_data == null) :
 		printerr("Load Room Error : Given TilemapRessource is null and cannot be read for '", a_tilemap.name, "'")
 		return
-	
-	a_tilemap.clear()
 	a_tilemap.tile_map_data = a_data.tilesbit
 
 func set_quest_end(a_roomData : RoomResource) :
@@ -331,23 +331,28 @@ func set_quest_end(a_roomData : RoomResource) :
 	
 	for quest in QuestEndList :
 		if (quest != null) :
+			print("delete : ", quest.name)
 			quest.free()
-	
 	QuestEndList.clear()
+	
+	print("reset : ", QuestEndParent.get_child_count())
 	
 	var n : int = 0
 	for data in  a_roomData.quest_end_list :
-		var loadedQuest = preload(questEndPath)
+		var loadedQuest = load(questEndPath)
 		var questObj : QuestEnd = loadedQuest.instantiate()
-		QuestEndList.append(questObj)
 		QuestEndParent.add_child(questObj)
 		questObj.owner = self
 		
+		QuestEndList.append(questObj)
 		questObj.name = "Quest_End_" + str(n)
 		questObj.position = data
 		questObj.PossibleDestinations = a_roomData.quest_end_values[a_roomData.quest_end_list[data]]
 		questObj.hitbox.shape.get_rect().size = a_roomData.quest_end_size[a_roomData.quest_end_list[data]]
 		
+		print("new : ", questObj.name)
 		n += 1
+	
+	print("loaded : ", QuestEndParent.get_child_count())
 
 #endregion
