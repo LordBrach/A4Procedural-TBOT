@@ -1,0 +1,8 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#remerciement#, #payment# #résolution# Gain#somme#"],
+"remerciement":["Merci pour la course" ,"Mes remerciements monsieur" ,"Merci de m'avoir déposé ici", "Merci du dépôt"],
+"payment":["combien je vous dois?", "la course était a combien?", "combien?", "le tarif?", "votre tarif?"],
+"résolution":["Tenez!", "Voici!", "Voila!", "Voici, merci encore!", "Voila, je vous ai mis un petit pourboire(5)!", "Voila, je vous ai mis un petit pourboire(10)!"],
+"somme":["(50)", "(45)", "(40)", "(35)", "(30)", "(25)", "(55)", "(60)", "(65)", "(70)", "(20)" ,"(1)"]
+}

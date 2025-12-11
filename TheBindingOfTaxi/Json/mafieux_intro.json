@@ -1,0 +1,8 @@
+{
+"origin":["[myPlace:#path#]#lineMafia#"],
+"lineMafia":["#salutation# tu peux #action# #superlatif# #destination#? Le patron paiera les dégâts."],
+"salutation":["Yo,", "Hé,", "Toi là-bas,", "Taxi!"],
+"superlatif":["le plus vite que tu puisses pousser cette caisse", "aussi vite que possible", "tout de suite", "en grillant les feus", "en renversant un ou deux passants", "en respectant tout sauf le code de la route", "le plus vite que tu peux, pelouses, trottoirs tu connais"],
+"action":["m'emmener", "me conduire", "m'amener"],
+"destination":["$LOCATION$"]
+}

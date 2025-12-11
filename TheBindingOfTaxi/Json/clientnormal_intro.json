@@ -1,0 +1,10 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#salutation#, #people# #verbe# #action# #superlatif# #destination# s'il vous plait?"],
+"salutation":["Bonjour", "Salut", "Bonsoir", "Salutations"],
+"people":["j'aimerais", "je souhaiterais", "je voudrais"],
+"verbe":["savoir si c'était possible", "savoir si vous pouvez"],
+"superlatif":["rapidement", "aussi vite que vous pouvez", "pas trop vite", "doucement", "d'ici 15 minutes", "d'ici 20 minutes", "d'ici 10 minutes"],
+"action":["me déposer", "me conduire", "m'amener", "m'emmener"],
+"destination":["$LOCATION$"]
+} 

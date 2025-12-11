@@ -1,0 +1,10 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#intro# #verbe# que #sujet# #information#, #action#. #consequence#."],
+"intro":["'Allo' Fils,", "'Allo' Mark,", "'Allo' Chérie,"],
+"verbe":["il parait", "les nouvelles racontent", "il semblerait"],
+"sujet":["les statistiques des Uber par rapport au taxi seraient", "la hausse de la bourse serait", "la location d'appartement serait", "les ventes d'œuvres d'art"],
+"information":["largement en hausse", "sur une montée fulgurante", "dans le bas de la courbe", "sur le point de remonter, il faut que tu me trust sur ce coup"],
+"action":["il est clairement le temps d'investir", "il faut investir au plus vite"],
+"consequence":["Je vais me positionner et tenter de regarder ce que ça donne d'ici quelques semaines", "Je pense que d'ici 2 semaines on peut maximiser le profit", "Si on arrive à sécuriser une partie des parts on pourra en tirer un gros profit et en tirer une bonne marge"]
+}

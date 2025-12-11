@@ -1,0 +1,8 @@
+"origin":["[myPlace:#path#]#line#"],
+"line":["#intro# #verbe#  #sujet#, #information#.  #consequence#."],
+"intro":["Chef,", "Mec,", "Frérot,", "Taximan,"],
+"verbe":["je sais pas si t'as vu", "y parait", "faut que tu regardes ça", "j'ai une info intéressante pour toi"],
+"sujet":["le dernier braquage du gang des vtc", "la montée de la violence dans Néo-Courbevoie", "une secte de fou malade qui vénère une sorte de dieu train là", "le maire douglas fréquenterait avec les chauffeurs Uber pour monter un accord"],
+"information":["en tant que taxi fais attention et reste aux aguets", "fais gaffe ça pourrait avoir des retombées relou", "les ennuis arrive si j'étais toi je me préparerais"],
+"consequence":["Ce serais dommage qu'il t'arrives quelque chose", "Evitez les emmerdes c'est quand même mieux généralement"]
+}

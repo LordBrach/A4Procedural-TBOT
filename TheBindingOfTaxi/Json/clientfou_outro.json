@@ -1,0 +1,8 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#remerciement#, #ambiance#. #paiement# #somme#"],
+"remerciement":["Merci ô âme éclairée de m'avoir montrer le chemin jusqu'à lui" ,"Merci âme éveillée 'ferme les yeux et fait une prière'" ,"Le dieu machine soit loué nous voila arrivé"],
+"ambiance":["Je dois faire vite tant que son influence demeure" ,"le temps presse, je dois me dépêcher" ,"ils m'attends je peux le sentir"],
+"paiement":["Voici je dois filer!", "Tenez son influence vous protègera", "Tenez âme éveillée c'est un cadeau de sa part"],
+"somme":["(boulons)", "(courroie de train)", "(wagon miniature)", "(rail miniature)", "(écrous)", "(locomotive miniature)", "(pièce de ferraille)", "(billets de monopoly)", "(cailloux)", "(ticket d'excuse de la RAPT 2025)"]
+}

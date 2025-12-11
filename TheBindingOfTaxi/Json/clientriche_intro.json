@@ -1,0 +1,8 @@
+{
+"origin":["[myPlace:#path#]#lineRich#"],
+"lineRich":["#action##people# #superlatif# #destination#"],
+"people":["moi", "ma personne", "mon altesse"],
+"superlatif":["le plus vite possible", "dans les plus brefs délais", "le plus vite que vous pouvez", "le lus rapidement possible", "le plus rapidement que vous pouvez", "le plus tôt possible", "le plus tôt que vous pouvez"],
+"action":["Déposez-", "Conduisez-", "Amenez-", "Convoyez-"],
+"destination":["$LOCATION$"]
+}

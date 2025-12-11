@@ -1,0 +1,10 @@
+{
+"origin":["[myPlace:#path#]#lineFou#"],
+"lineFou":["#salutation#. J'ai besoin que vous #action# #people# #superlatif#, Il se trouve #destination#, #fou#"],
+"salutation":["Vous là bas rejeton du dieu Machine", "Mes salutations engeance du dieu machine", "Il s'approche, Il est là, le dieu Machine est parmi nous"],
+"people":["le digne ménestrel célesto-cosmique face à vous", "mon âme éveillée", "l'humble héraut que je suis"],
+"superlatif":["immédiatement", "sans attendre" ,"avant son départ"],
+"action":["me guidiez jusqu'à lui", "m'emmeniez près de lui", "me conduisiez là bas", "m'amenez jusqu'à lui", ""],
+"destination":["$LOCATION$"],
+"fou":["je peux sentir sa présence", "je le sens", "je peux entrevoir sa puissance"]
+}
