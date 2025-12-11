@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=2 format=3 uid="uid://dq6nu85x1w620"]
+
+[ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="1_geaf6"]
+
+[resource]
+script = ExtResource("1_geaf6")
+room_name = "QR_21x21_4_E"
+road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_E/road_layer.tres"
+wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_E/wall_layer.tres"
+clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_E/ClientNProps_layer.tres"
+decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_E/decoration_layer.tres"
+exits = Dictionary[Vector2i, int]({
+Vector2i(0, 0): 2
+})
+allExits = 2

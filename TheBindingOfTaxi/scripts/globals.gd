@@ -9,9 +9,9 @@ const RoomScnPath : String = "res://TheBindingOfTaxi/scenes/proto/cityroomtest.t
 const ChunkScnPath : String = "res://TheBindingOfTaxi/scenes/proto/Chunk.tscn"
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 
-enum CUSTOMER_TYPE { Default, Old , Gangster , Student , Balthazar }
+enum CUSTOMER_TYPE { Default , Gangster , Cultist , Uber }
 enum DIFFICULTY_OPTIONS { SameRoom, Short, Medium , Long , ExtraLong}
-enum EXIT_TYPES { Random, Parking, Bench, Park , House , Shop} 
+enum EXIT_TYPES { Any, Parking, Bench, Park , House , Shop , Lake , Place} 
 enum DRIVING_CONDITIONS {None, Quick, Careful, HurtPeople, LawAbiding}
 enum SPRITE_DIRECTION { UP, DOWN , LEFT , RIGHT , MISC }
 enum CUSTOMER_DIALOGUE_TYPE { INTRO, COMMENT , REACT , OUTRO }
