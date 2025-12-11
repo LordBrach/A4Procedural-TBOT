@@ -1,8 +1,39 @@
 {
-"origin":["[myPlace:#path#]#line#"],
-"line":["#remerciement#, #Montant# #paiement#. Gain #somme#"],
-"remerciement":["Cimer mon frère" ,"Carré dépose moi là" ,"Dépose moi là je dois filer", "Ca urge pour moi je te laisse"],
-"Montant":["C'est combien?" ,"Le montant?" ,"ça te va si je ta paye de manière discrète?"],
-"paiement":["'tend son bras avec un billet et le glisse dans votre poche en faisant 'chut' avec son doigt'", "'Vous glisse un billet dans la poche et sors de la voiture en précipitation'", "tiens et si quelqu'un te demande s'il a vu quelqu'un comme moi ne dis rien(15)"],
-"somme":["(100)", "(85)", "(80)", "(75)", "(60)", "(125)", "(95)", "(90)", "(65)", "(110)", "(120)" ,"(50)", "(faux billet)"]
+	"origin": [
+		"[myPlace:#path#]#line#"
+	],
+	"line": [
+		"#remerciement#, #Montant# #paiement#. Gain #somme#"
+	],
+	"remerciement": [
+		"Cimer mon frère",
+		"Carré dépose moi là",
+		"Dépose moi là je dois filer",
+		"Ca urge pour moi je te laisse"
+	],
+	"Montant": [
+		"C'est combien?",
+		"Le montant?",
+		"ça te va si je ta paye de manière discrète?"
+	],
+	"paiement": [
+		"'tend son bras avec un billet et le glisse dans votre poche en faisant 'chut' avec son doigt'",
+		"'Vous glisse un billet dans la poche et sors de la voiture en précipitation'",
+		"tiens et si quelqu'un te demande s'il a vu quelqu'un comme moi ne dis rien(15)"
+	],
+	"somme": [
+		"(100)",
+		"(85)",
+		"(80)",
+		"(75)",
+		"(60)",
+		"(125)",
+		"(95)",
+		"(90)",
+		"(65)",
+		"(110)",
+		"(120)",
+		"(50)",
+		"(faux billet)"
+	]
 }

@@ -1,3 +1,4 @@
+{
 "origin":["[myPlace:#path#]#line#"],
 "line":["#intro# #verbe#  #sujet#, #information#.  #consequence#."],
 "intro":["Chef,", "Mec,", "Frérot,", "Taximan,"],

@@ -1,7 +1,23 @@
 {
-"origin":["[myPlace:#path#]#line#"],
-"line":["#reaction# #sentiment#. #souhait#"],
-"reaction":["Mais vous êtes malade!", "Qui vous a donné votre permis?", "Vous vous croyez dans des autotamponeuses ou quoi?"],
-"sentiment":["Vous êtes fou", "Pourquoi est-ce que je suis monté dans cette voiture ...", "Même mon gamin de 6 ans conduis mieux que lui"],
-"souhait":["Que ça s'arrête!!!.", "Je vais vous faire virer !!", "Vous faites honte au travail des conducteurs!!"]
+	"origin": [
+		"[myPlace:#path#]#line#"
+	],
+	"line": [
+		"#reaction# #sentiment#. #souhait#"
+	],
+	"reaction": [
+		"Mais vous êtes malade!",
+		"Qui vous a donné votre permis?",
+		"Vous vous croyez dans des autotamponeuses ou quoi?"
+	],
+	"sentiment": [
+		"Vous êtes fou",
+		"Pourquoi est-ce que je suis monté dans cette voiture ...",
+		"Même mon gamin de 6 ans conduis mieux que lui"
+	],
+	"souhait": [
+		"Que ça s'arrête!!!.",
+		"Je vais vous faire virer !!",
+		"Vous faites honte au travail des conducteurs!!"
+	]
 }
