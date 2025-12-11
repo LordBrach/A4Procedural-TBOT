@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bib07te5reau7"]
+[gd_scene load_steps=15 format=3 uid="uid://bib07te5reau7"]
 
 [ext_resource type="Script" uid="uid://c0tc77spyevjo" path="res://scripts/player.gd" id="1_ups2j"]
 [ext_resource type="Resource" uid="uid://b3nexs1nbtrff" path="res://resources/player_default_movement.tres" id="2_ay78m"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dtdfaefxq5nnw" path="res://scenes/player_attack.tscn" id="4_u74pk"]
 [ext_resource type="Texture2D" uid="uid://ba6noocs7rl74" path="res://sprites/playertaxi.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://4xqb43lmfesb" path="res://TheBindingOfTaxi/scenes/proto/UI/PlayerUI.tscn" id="5_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://bds087k0n7v4h" path="res://TheBindingOfTaxi/Audio/BlaBlubla-6.wav" id="6_smehm"]
+[ext_resource type="PackedScene" uid="uid://dbnr7bd1ew6p1" path="res://BGM.tscn" id="7_fjrip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eidcf"]
 
@@ -61,6 +63,15 @@ orientation = 1
 
 [node name="PlayerUI" parent="." instance=ExtResource("5_tuyoq")]
 
+[node name="Text" parent="PlayerUI/CanvasTextbox/BG" index="0"]
+text = ""
+visible_characters = 11
+
+[node name="AudioStreamPlayer2D" parent="PlayerUI/CanvasTextbox" index="1"]
+stream = ExtResource("6_smehm")
+volume_db = -18.26
+pitch_scale = 0.8
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eidcf")
 
@@ -74,4 +85,7 @@ texture = ExtResource("5_qlg0r")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
+[node name="BGMPlayer" parent="." instance=ExtResource("7_fjrip")]
+
 [editable path="PlayerUI"]
+[editable path="PlayerUI/CanvasTextbox"]

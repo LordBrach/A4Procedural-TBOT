@@ -10,6 +10,8 @@ static var Instance : Player
 @export var  CustomerList : Dictionary[int, Customer]
 @export var SavedExits : Array[QuestEnd]
 
+@onready var TraceryFuncs : TraceryHelperFuncs = $PlayerUI/TraceryHelper
+
 var idCustomer : int = 0;
 
 # Collectible
@@ -113,6 +115,7 @@ func add_customer(data : Customer) -> void:
 		CustomerList[idCustomer] = data
 		idCustomer += 1
 		OnPickupCustomer.emit() 
+		TraceryFuncs._SendLineToTextbox(data.SelectedCustomer.CustomerType, Globals.CUSTOMER_DIALOGUE_TYPE.INTRO)
 		data.pickup_result(true)
 		link_to_quest(data)
 	else :

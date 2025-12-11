@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c8p1svsul65sb" path="res://TheBindingOfTaxi/scripts/customer_behavior.gd" id="1_pbt83"]
 [ext_resource type="Resource" uid="uid://bwt1nlqgdjnr0" path="res://TheBindingOfTaxi/ressources/customers/CustomerDataBase.tres" id="2_epvia"]
 [ext_resource type="Texture2D" uid="uid://c00v7lyyfj48h" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0050.png" id="2_o3vwd"]
-[ext_resource type="Resource" uid="uid://c5swxlv1ws6nb" path="res://TheBindingOfTaxi/ressources/customers/CultistCustomerData.tres" id="3_epvia"]
+[ext_resource type="Resource" path="res://TheBindingOfTaxi/ressources/customers/CultistCustomerData.tres" id="3_epvia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
 size = Vector2(39, 30)

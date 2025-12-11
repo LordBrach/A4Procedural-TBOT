@@ -4,14 +4,13 @@
 [ext_resource type="TileSet" uid="uid://dqy6nw870lq50" path="res://TheBindingOfTaxi/sprites/tilesets/roadTileset.tres" id="2_6ju7u"]
 [ext_resource type="PackedScene" uid="uid://ble85riwql7h0" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn" id="4_nphxq"]
 
-[node name="lake" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer", "DecorationLayer", "QuestEndParent")]
+[node name="lake" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer", "DecorationLayer")]
 script = ExtResource("1_8fllh")
 roomName = "lake"
 RoadLayer = NodePath("RoadLayer")
 WallLayer = NodePath("WallLayer")
 ClientNPropsLayer = NodePath("Client&PropsLayer")
 DecorationLayer = NodePath("EmptyLayer")
-QuestEndParent = NodePath("@Node@23071")
 roomSize = Vector2i(4, 3)
 ActiveExits = Dictionary[int, bool]({
 1: false,

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwdkjr6cu2p5a"]
+[gd_scene load_steps=7 format=3 uid="uid://dwdkjr6cu2p5a"]
 
 [ext_resource type="Script" uid="uid://mlkoce8y5cto" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/TraceryHelperFuncs.gd" id="1_psu27"]
 [ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="2_3o1ut"]
-[ext_resource type="Resource" uid="uid://btmnr2d3ph8dq" path="res://TheBindingOfTaxi/ressources/dialogue/default_dialogue.tres" id="3_3o1ut"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/debug.json" id="3_mciyt"]
 [ext_resource type="PackedScene" uid="uid://ba3eux3e67oea" path="res://TheBindingOfTaxi/scenes/proto/UI/text_box_base.tscn" id="4_gbkyc"]
 [ext_resource type="Texture2D" uid="uid://crjljq3bm0a6w" path="res://TheBindingOfTaxi/sprites/dreapu_neo_nanterre.png" id="5_5u7yt"]
@@ -19,9 +18,6 @@ metadata/_custom_type_script = "uid://byyndf7qbn2np"
 [node name="TestTracery" type="Node2D" node_paths=PackedStringArray("outputbox")]
 script = ExtResource("1_psu27")
 outputbox = NodePath("CanvasLayer")
-CustomerDicts = Dictionary[int, ExtResource("2_3o1ut")]({
-0: ExtResource("3_3o1ut")
-})
 test_json_dict = SubResource("Resource_cf3s8")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_gbkyc")]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbnr7bd1ew6p1"]
+
+[ext_resource type="AudioStream" uid="uid://ys6snbicicro" path="res://TheBindingOfTaxi/Audio/JazzyMusicaSexy.mp3" id="2_q8d6t"]
+
+[node name="BGMPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("2_q8d6t")
+autoplay = true

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="customer_sprite_collection" load_steps=19 format=3 uid="uid://31kem3xwh8jy"]
+[gd_resource type="Resource" script_class="customer_sprite_collection" load_steps=19 format=3 uid="uid://cxtijym2nhu2h"]
 
 [ext_resource type="Script" uid="uid://dqisaygy3bj1x" path="res://TheBindingOfTaxi/scripts/customer_sprite_collection.gd" id="1_6gfkx"]
 [ext_resource type="Script" uid="uid://bm7blovk4wjy0" path="res://TheBindingOfTaxi/scripts/texture_per_direction.gd" id="2_o8126"]

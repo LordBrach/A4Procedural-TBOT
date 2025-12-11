@@ -36,12 +36,8 @@ func _testTextbox():
 
 func _SendLineToTextbox(customer_type : Globals.CUSTOMER_TYPE, dialogue_chosen : Globals.CUSTOMER_DIALOGUE_TYPE) -> void:
 	if(is_instance_valid(outputbox)):
-		#var content = CustomerDicts.get(customer_type).values.get(dialogue_chosen).data
-		print("Dicts: ", CustomerDicts)
 		var SelectedCustomerDict : tracery_dict = CustomerDicts.get(customer_type)
-		print("SelectedCustomer: ", SelectedCustomerDict)
 		var SelectedDialogueChosen = SelectedCustomerDict.values.get(dialogue_chosen)
-		print("SelectedDialogueChosen: ", SelectedDialogueChosen)
 		var content = SelectedDialogueChosen.data
 		print(content)
 		outputbox.EnableTextBox(_oneLiner(content))
@@ -73,5 +69,6 @@ func _replaceBalise(inString : String,  inNewWord : String, Balise : String) -> 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
+	outputbox.EnableTextBox("ZAZAAAAAAAAAAAAAAAAAA")
 	#print(_oneLinerDebug())
 #
