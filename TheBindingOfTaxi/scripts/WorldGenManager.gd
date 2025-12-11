@@ -60,9 +60,12 @@ func CreateChunkSpecialRoom(a_pos : Vector2i, a_room : RoomResource) -> void :
 	var instance : Chunk = chunk.instantiate()
 	self.add_child(instance)
 	
+	if (a_room == null) :
+		printerr("Generate Chunk Error : The given room to generate is null")
+		return
 	var biome = specialsBiome.get(a_room, Biomes.None)
 	if (biome == Biomes.None) :
-		print("Generate Chunk Warning : the given room '", a_room.room_name, "' didn't have an associated biome")
+		printerr("Generate Chunk Error : the given room '", a_room.room_name, "' didn't have an associated biome")
 	
 	instance.StartGeneration(a_pos, biome, a_room)
 	chunksTiles.set(a_pos, instance)
@@ -171,15 +174,15 @@ func SetSpecialsQuestEnd(a_data : RoomData) -> void :
 	existingSpecials.append(a_data)
 	return
 
-func GetQuestEnd(a_data : ClientData) -> Vector2 :
+func GetQuestEnd(a_customer : Customer, a_clientID : int) -> Vector2 :
 	var destination : QuestEnd = null
-	var exit : Globals.EXIT_TYPES = a_data.GetDestination()
+	var exit : Globals.EXIT_TYPES = a_customer.SelectedDestination
 	
 	if (exit == Globals.EXIT_TYPES.Any || 
 	exit == Globals.EXIT_TYPES.Parking ||
 	exit == Globals.EXIT_TYPES.Bench ||
 	exit == Globals.EXIT_TYPES.House) :
-		var distance : Globals.DIFFICULTY_OPTIONS = a_data.GetDifficulty()
+		var distance : Globals.DIFFICULTY_OPTIONS = a_customer.SelectedDifficulty
 		var target = PlayerGlobal.global_position + Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * distance
 		
 		var chunkTarget : Vector2i = WorldToChunkPos(target)
@@ -195,7 +198,9 @@ func GetQuestEnd(a_data : ClientData) -> Vector2 :
 			list.append_array(GetExistingSpecial(room))
 		
 		if (list.is_empty()) :
-			GenerateClosestChunk(last_Player_Pos, rooms.pick_random())
+			if (Vector2i.ZERO == GenerateClosestChunk(last_Player_Pos, rooms.pick_random())) :
+				printerr("Get QuestEnd Error : Cannot generate a chunk for QuestEnd of type '", exit, "'")
+				return Vector2.ZERO
 			for room in rooms :
 				list.append_array(GetExistingSpecial(room))
 		
@@ -206,8 +211,12 @@ func GetQuestEnd(a_data : ClientData) -> Vector2 :
 				distance = (target.global_position - PlayerGlobal.global_position).length()
 				destination = target
 	
-	destination.activate(PlayerGlobal.idCustomer)
-	return destination.global_position
+	if (destination != null) :
+		destination.activate(a_clientID)
+		return destination.global_position
+	else :
+		printerr("Get QuestEnd Error : No quest end found")
+		return Vector2.ZERO
 
 func GenerateClosestChunk(a_pos : Vector2i, a_room : RoomResource) -> Vector2i :
 	var toVerify : Array[Vector2i] = []

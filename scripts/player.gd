@@ -11,6 +11,10 @@ static var Instance : Player
 @export var SavedExits : Array[QuestEnd]
 
 var idCustomer : int = 0;
+var customerDestination : Vector2 = Vector2.ZERO
+
+var hasDestination : bool = false
+@export var arrowSprite : Sprite2D
 
 # Collectible
 var key_count : int
@@ -26,14 +30,18 @@ func _init() -> void:
 
 func _ready() -> void:
 	_set_state(STATE.IDLE)
+	hasDestination = false
+	arrowSprite.modulate.a = 0
 
 
 func _process(delta: float) -> void:
 	super(delta)
 	_update_inputs()
 	#_update_room()
-	
-	
+
+	if (hasDestination) :
+		var target = (customerDestination - global_position).normalized()
+		arrowSprite.rotation = target.angle()
 
 
 #region prototype
@@ -112,25 +120,51 @@ func add_customer(data : Customer) -> void:
 		print(data.SelectedCustomer)
 		CustomerList[idCustomer] = data
 		idCustomer += 1
-		OnPickupCustomer.emit() 
-		data.pickup_result(true)
-		link_to_quest(data)
+		if (!link_to_quest(data)) :
+			CustomerList.erase(idCustomer)
+			OnPickupCustomerFailed.emit()
+			data.pickup_result(false)
+		else :
+			OnPickupCustomer.emit() 
+			data.pickup_result(true)
 	else :
 		OnPickupCustomerFailed.emit()
 		data.pickup_result(false)
 		pass
 
-func link_to_quest(customer : Customer) -> void:
-	for element in SavedExits :
-		if(element.PossibleDestinations.has(customer.SelectedDestination)) :
-			print("Linked Customer to exit !")
-			element.activate(idCustomer)
-			return
-	print("Couldnt find suitable exit for client...")
+func link_to_quest(customer : Customer) -> bool:
+	if (WorldGen != null) :
+		customerDestination = WorldGen.GetQuestEnd(customer, idCustomer)
+		if (customerDestination == Vector2.ZERO) :
+			hasDestination = false
+			arrowSprite.modulate.a = 0
+			printerr("Customer Pickup Error : Couldnt find suitable exit for client...")
+			return false
+		else :
+			hasDestination = true
+			arrowSprite.modulate.a = 1
+			print("OK")
+			return true
+	else :
+		OnPickupCustomerFailed.emit()
+		printerr("Customer Pickup Error : WorldGenManager instance not found")
+		return false
+	
+	#for element in SavedExits :
+		#if(element.PossibleDestinations.has(customer.SelectedDestination)) :
+			#print("Linked Customer to exit !")
+			#element.activate(idCustomer)
+			#return
+	#print("Couldnt find suitable exit for client...")
 
 ## When a quest is completed, removes the client linked to the quest from the car
 func complete_quest(LinkedClientId : int) ->void:
 	CustomerList.erase(LinkedClientId)
+	
+	hasDestination = false
+	arrowSprite.modulate.a = 0
+	customerDestination = Vector2.ZERO
+	
 	OnQuestFinished.emit()
 	pass
 #endregion

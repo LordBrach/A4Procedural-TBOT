@@ -2,22 +2,23 @@
 
 [ext_resource type="Script" uid="uid://dpgrtlb34gopg" path="res://TheBindingOfTaxi/scripts/roomdata.gd" id="1_8fllh"]
 [ext_resource type="TileSet" uid="uid://dqy6nw870lq50" path="res://TheBindingOfTaxi/sprites/tilesets/roadTileset.tres" id="2_6ju7u"]
-[ext_resource type="PackedScene" uid="uid://ble85riwql7h0" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn" id="4_nphxq"]
+[ext_resource type="Script" uid="uid://dtv8mfwxst5" path="res://TheBindingOfTaxi/scripts/quest_end.gd" id="3_6ju7u"]
 
-[node name="Corner-NE" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer", "DecorationLayer")]
+[node name="2by2" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer", "DecorationLayer", "QuestEndParent", "QuestEndList")]
 script = ExtResource("1_8fllh")
 roomName = "2by2"
 RoadLayer = NodePath("RoadLayer")
 WallLayer = NodePath("WallLayer")
 ClientNPropsLayer = NodePath("Client&PropsLayer")
 DecorationLayer = NodePath("EmptyLayer")
+QuestEndParent = NodePath("Exits")
+QuestEndList = [NodePath("Exits/Quest_End_0"), NodePath("Exits/Quest_End_1")]
 roomSize = Vector2i(2, 2)
-currentPos = Vector2i(1, 2)
 ActiveExits = Dictionary[int, bool]({
-1: true,
+1: false,
 2: false,
 4: false,
-8: false
+8: true
 })
 
 [node name="RoadLayer" type="TileMapLayer" parent="."]
@@ -37,12 +38,15 @@ tile_set = ExtResource("2_6ju7u")
 
 [node name="Exits" type="Node" parent="."]
 
-[node name="Quest_End" parent="Exits" instance=ExtResource("4_nphxq")]
+[node name="Quest_End_0" type="Node2D" parent="Exits"]
 position = Vector2(56, 107)
+script = ExtResource("3_6ju7u")
+PossibleDestinations = Array[int]([0, 2, 1])
 
-[node name="Quest_End2" parent="Exits" instance=ExtResource("4_nphxq")]
+[node name="Quest_End_1" type="Node2D" parent="Exits"]
 position = Vector2(256, 112)
+script = ExtResource("3_6ju7u")
 PossibleDestinations = Array[int]([1])
 
-[connection signal="body_entered" from="Client&PropsLayer/Customer" to="Client&PropsLayer/Customer" method="_on_body_entered"]
-[connection signal="body_entered" from="Client&PropsLayer/@Area2D@29173" to="Client&PropsLayer/@Area2D@29173" method="_on_body_entered"]
+[connection signal="body_entered" from="Client&PropsLayer/@Area2D@26347" to="Client&PropsLayer/@Area2D@26347" method="_on_body_entered"]
+[connection signal="body_entered" from="Client&PropsLayer/@Area2D@26348" to="Client&PropsLayer/@Area2D@26348" method="_on_body_entered"]

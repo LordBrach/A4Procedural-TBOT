@@ -103,21 +103,21 @@ func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes, a_room : RoomR
 	
 	var roomlist : Array[RoomResource] = WorldGen.GetRooms(a_biome)
 	if (roomlist.is_empty()) :
-		print("list is null : ", a_biome)
+		printerr("Chunk Generation error : list is null for '", a_biome, "'")
 		return
 	
 	if (WorldGen != null) :
 		SetExits()
 		Generation(roomlist, a_room)
 	else :
-		print("Chunk Generation error : WorldGenManager instance not found")
+		printerr("Chunk Generation error : WorldGenManager instance not found")
 
 func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) -> void :
 	
 	var placed : bool = false
 	
 	#region FirstRoom
-	var specials = WorldGen.GetSpecialRooms(chunkBiome)
+	var specials = WorldGen.GetSpecialsBiome(chunkBiome)
 	specials.shuffle()
 	
 	if (a_room != null) :
@@ -135,12 +135,12 @@ func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) 
 	if (placed == false) :
 		var firstRoom : RoomResource = a_roomList.pick_random()
 		if (firstRoom == null) :
-			print("Chunk Generation error : First room is null")
+			printerr("Chunk Generation error : First room is null")
 			return
 	
 		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(firstRoom.room_size.x / 2, firstRoom.room_size.y / 2)
 		if (!TryPlaceRoom(position, firstRoom)) :
-			print("Chunk Generation error : First room is invalid")
+			printerr("Chunk Generation error : First room is invalid")
 			return
 	#endregion
 	
@@ -170,15 +170,12 @@ func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) 
 						print(room.allExits)
 						break
 				if (placed == false) :
-					print("Failed 3+ exits")
 					for room in shuffledRooms :
-						print(room.allExits & target[exitTile], " in ", room.allExits, " and ", TryPlaceRoomBySize(exitTile, room))
 						if (room.allExits & target[exitTile]
 						&& TryPlaceRoomBySize(exitTile, room)) :
 							placed = true
 							print(room.allExits)
 							break
-				print("")
 		#endregion
 		#region Fill Left Roads
 		else :
@@ -219,7 +216,7 @@ func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) 
 	#endregion
 	
 	if (iteration >= 3) :
-		print("Chunk Generation Error : Cannot generate the required numbers of tiles")
+		printerr("Chunk Generation Error : Cannot generate the required numbers of tiles")
 	
 	return
 
@@ -324,7 +321,7 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	
 	roadsAvailables.merge(GetTilesFromExits(roomInstance))
 	
-	if (roomInstance.is_special_room) :
+	if (roomInstance.isImportantBuilding) :
 		WorldGen.SetSpecialsQuestEnd(roomInstance)
 	
 	return true
@@ -414,7 +411,7 @@ func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Que
 		for room in roomTiles :
 			var current : QuestEnd = roomTiles[room].GetClosestQuestEnd(a_pos, a_exitType)
 			
-			if (distance == -1 || (a_pos - current.global_position).length() < distance) :
+			if (current != null && (distance == -1 || (a_pos - current.global_position).length() < distance)) :
 				distance = (a_pos - current.global_position).length() 
 				target = current
 	
