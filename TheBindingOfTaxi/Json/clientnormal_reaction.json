@@ -1,0 +1,7 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#reaction# #sentiment#. #souhait#"],
+"reaction":["Pas sûr qu'on conduise comme ça normalement ARHHHHH", "Ca me semble pas super homologué comme conduite çaaaaaa!", "Vous avez eu votre permis dans une pochette surprise?"],
+"sentiment":["'Vomi'", "'S'accroche de toutes ses forces'", "'Perds connaissance'"],
+"souhait":["Sauvez moi ...", "Pitié ...", "Aidez-moi ..."]
+}
