@@ -19,7 +19,7 @@ var customerDestination : Vector2
 
 var hasDestination : bool = false
 @export var arrowSprite : Node2D
-var SavedCustomer : Customer
+var SavedCustomerType : Globals.CUSTOMER_TYPE
 # Collectible
 var key_count : int
 # Signals
@@ -46,9 +46,8 @@ func _process(delta: float) -> void:
 		if (arrowSprite.modulate.a == 0) :
 			arrowSprite.modulate.a = 1
 		arrowSprite.look_at(customerDestination)
-	if(is_instance_valid(SavedCustomer)):
-		await get_tree().create_timer(15).timeout
-		on_blabla()
+	await get_tree().create_timer(15).timeout
+	on_blabla()
 
 #region prototype
 func enter_room(room : Room) -> void:
@@ -129,7 +128,7 @@ func add_customer(data : Customer) -> void:
 			OnPickupCustomerFailed.emit()
 			data.pickup_result(false)
 		else :
-			SavedCustomer = data
+			SavedCustomerType = data.SelectedCustomer.CustomerType
 			OnPickupCustomer.emit()
 			TraceryFuncs._SendLineToTextbox(data.SelectedCustomer.CustomerType, Globals.CUSTOMER_DIALOGUE_TYPE.INTRO)
 			CustomerList[idCustomer] = data
@@ -164,8 +163,8 @@ func complete_quest(LinkedClientId : int) ->void:
 	PlayerQuestComplete.play()
 	CustomerList.erase(LinkedClientId)
 	TraceryFuncs._SendLineToTextbox(
-		SavedCustomer.SelectedCustomer.CustomerType,
-		 Globals.CUSTOMER_DIALOGUE_TYPE.OUTRO)
+		SavedCustomerType,
+		 Globals.CUSTOMER_DIALOGUE_TYsPE.OUTRO)
 	hasDestination = false
 	arrowSprite.modulate.a = 0
 	customerDestination = Vector2.ZERO
@@ -176,10 +175,10 @@ func complete_quest(LinkedClientId : int) ->void:
 
 func on_runoverclient():
 		TraceryFuncs._SendLineToTextbox(
-		SavedCustomer.SelectedCustomer.CustomerType,
+		SavedCustomerType,
 		 Globals.CUSTOMER_DIALOGUE_TYPE.REACT)
 		
 func on_blabla():
 		TraceryFuncs._SendLineToTextbox(
-		SavedCustomer.SelectedCustomer.CustomerType,
+		SavedCustomerType,
 		 Globals.CUSTOMER_DIALOGUE_TYPE.COMMENT)
