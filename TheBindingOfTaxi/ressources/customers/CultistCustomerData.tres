@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ClientData" load_steps=3 format=3 uid="uid://c5swxlv1ws6nb"]
 
-[ext_resource type="Resource" uid="uid://31kem3xwh8jy" path="res://TheBindingOfTaxi/ressources/customers/CultistCustomerSpriteCollection.tres" id="1_gtxpl"]
+[ext_resource type="Resource" uid="uid://cxtijym2nhu2h" path="res://TheBindingOfTaxi/ressources/customers/CultistCustomerSpriteCollection.tres" id="1_gtxpl"]
 [ext_resource type="Script" uid="uid://cktjqncw6fv4b" path="res://TheBindingOfTaxi/scripts/customer_data.gd" id="2_wriek"]
 
 [resource]
