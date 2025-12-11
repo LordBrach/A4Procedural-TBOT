@@ -1,6 +1,6 @@
 class_name WorldGenManager extends Node2D
 
-enum Biomes { None, Biome1, Biome2, Biome3 }
+enum Biomes { None, Biome1, Biome2 }
 
 @export var chunksTiles : Dictionary[Vector2i, Chunk] = {}
 
@@ -12,17 +12,14 @@ var existingSpecials : Array[RoomData]
 @export_group("Regular Rooms")
 @export var biome1Rooms : Array[RoomResource]
 @export var biome2Rooms : Array[RoomResource]
-@export var biome3Rooms : Array[RoomResource]
 
 @export_group("Dead Ends Rooms")
 @export var biome1DeadEnds : Array[RoomResource]
 @export var biome2DeadEnds : Array[RoomResource]
-@export var biome3DeadEnds : Array[RoomResource]
 
 @export_group("NoRoads Rooms")
 @export var biome1NoRoads : Array[RoomResource]
 @export var biome2NoRoads : Array[RoomResource]
-@export var biome3NoRoads : Array[RoomResource]
 
 var last_Player_Pos : Vector2i = Vector2i(1000, 1000)
 
@@ -112,8 +109,6 @@ func GetBiomeNoRoads(a_biome : Biomes) -> Array[RoomResource] :
 			return biome1NoRoads
 		Biomes.Biome2 :
 			return biome2NoRoads
-		Biomes.Biome3 :
-			return biome3NoRoads
 			
 		_:
 			return biome1NoRoads
@@ -124,8 +119,6 @@ func GetBiomeDeadEnd(a_biome : Biomes) -> Array[RoomResource] :
 			return biome1DeadEnds
 		Biomes.Biome2 :
 			return biome2DeadEnds
-		Biomes.Biome3 :
-			return biome3DeadEnds
 			
 		_:
 			return biome1DeadEnds
@@ -138,8 +131,6 @@ func GetRooms(a_biome : Biomes) -> Array[RoomResource] :
 			result = biome1Rooms
 		Biomes.Biome2 :
 			result = biome2Rooms
-		Biomes.Biome3 :
-			result = biome3Rooms
 	
 	return result
 
