@@ -93,7 +93,7 @@ func _IsTileInside(a_pos : Vector2i) -> bool :
 	
 	return result
 
-func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
+func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes, a_room : RoomResource = null) -> void :
 	chunkPosition = a_pos
 	global_position = Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
 	 - Vector2(Globals.GetPixelChunkSize().x / 2, - Globals.GetPixelChunkSize().y / 2)
@@ -101,41 +101,46 @@ func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes) -> void :
 	name = "Chunk_" + str(chunkPosition)
 	chunkBiome = a_biome
 	
-	
 	var roomlist : Array[RoomResource] = WorldGen.GetRooms(a_biome)
 	if (roomlist.is_empty()) :
-		print("list is null : ", a_biome)
+		printerr("Chunk Generation error : list is null for '", a_biome, "'")
 		return
 	
 	if (WorldGen != null) :
 		SetExits()
-		Generation(roomlist)
+		Generation(roomlist, a_room)
 	else :
-		print("Chunk Generation error : WorldGenManager instance not found")
+		printerr("Chunk Generation error : WorldGenManager instance not found")
 
-func Generation(a_roomList : Array[RoomResource]) -> void :
+func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) -> void :
 	
 	var placed : bool = false
 	
 	#region FirstRoom
-	var specials = WorldGen.GetSpecialRooms(chunkBiome)
+	var specials = WorldGen.GetSpecialsBiome(chunkBiome)
 	specials.shuffle()
 	
-	for room in specials :
-		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(room.room_size.x / 2, room.room_size.y / 2)
-		if (TryPlaceRoom(position, room)) :
+	if (a_room != null) :
+		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(a_room.room_size.x / 2, a_room.room_size.y / 2)
+		if (TryPlaceRoom(position, a_room)) :
 			placed = true
-			break
+	
+	if (placed == false) :
+		for room in specials :
+			var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(room.room_size.x / 2, room.room_size.y / 2)
+			if (TryPlaceRoom(position, room)) :
+				placed = true
+				break
 	
 	if (placed == false) :
 		var firstRoom : RoomResource = a_roomList.pick_random()
 		if (firstRoom == null) :
-			print("Chunk Generation error : First room is null")
+			printerr("Chunk Generation error : First room is null")
 			return
 	
 		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(firstRoom.room_size.x / 2, firstRoom.room_size.y / 2)
 		if (!TryPlaceRoom(position, firstRoom)) :
-			print("Chunk Generation error : First room is invalid")
+			printerr("Chunk Generation error : First room is invalid")
 			return
 	#endregion
 	
@@ -165,15 +170,12 @@ func Generation(a_roomList : Array[RoomResource]) -> void :
 						print(room.allExits)
 						break
 				if (placed == false) :
-					print("Failed 3+ exits")
 					for room in shuffledRooms :
-						print(room.allExits & target[exitTile], " in ", room.allExits, " and ", TryPlaceRoomBySize(exitTile, room))
 						if (room.allExits & target[exitTile]
 						&& TryPlaceRoomBySize(exitTile, room)) :
 							placed = true
 							print(room.allExits)
 							break
-				print("")
 		#endregion
 		#region Fill Left Roads
 		else :
@@ -214,7 +216,7 @@ func Generation(a_roomList : Array[RoomResource]) -> void :
 	#endregion
 	
 	if (iteration >= 3) :
-		print("Chunk Generation Error : Cannot generate the required numbers of tiles")
+		printerr("Chunk Generation Error : Cannot generate the required numbers of tiles")
 	
 	return
 
@@ -302,7 +304,8 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 	
 	roomInstance.currentPos = a_roomTilePos
 	roomInstance.name = str(roomInstance.currentPos) + a_room.room_name
-	roomInstance.position = Vector2((a_roomTilePos.x * Globals.GetPixelRoomSize().x), -(a_roomTilePos.y * Globals.GetPixelRoomSize().y))
+	roomInstance.position = Vector2((a_roomTilePos.x * Globals.GetPixelRoomSize().x),
+	-(a_roomTilePos.y * Globals.GetPixelRoomSize().y) - (a_room.room_size.y * Globals.GetPixelRoomSize().y))
 	roomInstance.load_room_data(a_room)
 	
 	#print("Room Gen Info : Room Instance '", roomInstance.name, "' created at (", roomInstance.position.x, ", ", roomInstance.position.y, ")")
@@ -317,6 +320,14 @@ func TryPlaceRoom(a_roomTilePos : Vector2i, a_room : RoomResource) -> bool :
 				roadsAvailables.erase(pos)
 	
 	roadsAvailables.merge(GetTilesFromExits(roomInstance))
+	
+	var index = 0
+	for end in roomInstance.QuestEndList :
+		end.global_position = roomInstance.global_position + a_room.quest_end_list.find_key(index)
+		index += 1
+	
+	if (roomInstance.isImportantBuilding) :
+		WorldGen.SetSpecialsQuestEnd(roomInstance)
 	
 	return true
 
@@ -393,20 +404,20 @@ func GetDir(a_start : Vector2i, a_target : Vector2i) -> int :
 	
 	return 0
 
-func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Vector2 :
-	var target : Vector2 = Vector2.ZERO
+func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> QuestEnd :
+	var target : QuestEnd = null
 	
 	var tile : RoomData = roomTiles.get(_GetTilePosFromGlobalPos(a_pos))
 	if (tile != null) :
 		target = tile.GetClosestQuestEnd(a_pos, a_exitType)
 	
-	if (target == Vector2.ZERO) :
+	if (target == null) :
 		var distance : float = -1
 		for room in roomTiles :
-			var current : Vector2 = roomTiles[room].GetClosestQuestEnd(a_pos, a_exitType)
+			var current : QuestEnd = roomTiles[room].GetClosestQuestEnd(a_pos, a_exitType)
 			
-			if (distance == -1 || (a_pos - current).length() < distance) :
-				distance = (a_pos - current).length() 
+			if (current != null && (distance == -1 || (a_pos - current.global_position).length() < distance)) :
+				distance = (a_pos - current.global_position).length() 
 				target = current
 	
 	return target

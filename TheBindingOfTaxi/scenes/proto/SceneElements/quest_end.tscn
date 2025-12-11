@@ -5,9 +5,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
 size = Vector2(39, 30)
 
-[node name="Quest_End" type="Area2D"]
+[node name="Quest_End" type="Area2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_l3iok")
 PossibleDestinations = Array[int]([0, 2, 1])
+hitbox = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1)
