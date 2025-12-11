@@ -140,7 +140,7 @@ func GetSpecialRooms(a_biome : Biomes) -> Array[RoomResource] :
 func GetQuestEnd(a_data : ClientData) -> Vector2 :
 	
 	
-	if (a_data.TargetDestinations.has(Globals.EXIT_TYPES.Any)) :
+	if (a_data.TargetDestinations.has(Globals.EXIT_TYPES.Random)) :
 		pass
 	
 	return Vector2.ZERO

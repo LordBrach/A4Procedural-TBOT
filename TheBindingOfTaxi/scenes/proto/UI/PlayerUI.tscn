@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://4xqb43lmfesb"]
+
+[ext_resource type="PackedScene" uid="uid://ba3eux3e67oea" path="res://TheBindingOfTaxi/scenes/proto/UI/text_box_base.tscn" id="1_qwd5t"]
+[ext_resource type="Script" uid="uid://mlkoce8y5cto" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/TraceryHelperFuncs.gd" id="2_pf331"]
+[ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="3_50c3i"]
+[ext_resource type="Resource" uid="uid://btmnr2d3ph8dq" path="res://TheBindingOfTaxi/ressources/dialogue/default_dialogue.tres" id="3_b1whj"]
+[ext_resource type="Resource" uid="uid://cnq8y3v82v6th" path="res://TheBindingOfTaxi/ressources/dialogue/example_otherdialogue.tres" id="5_5mut0"]
+
+[node name="PlayerUI" type="Node"]
+
+[node name="CanvasTextbox" parent="." instance=ExtResource("1_qwd5t")]
+visible = false
+
+[node name="TraceryHelper" type="Node" parent="." node_paths=PackedStringArray("outputbox")]
+script = ExtResource("2_pf331")
+outputbox = NodePath("../CanvasTextbox")
+CustomerDicts = Dictionary[int, ExtResource("3_50c3i")]({
+0: ExtResource("3_b1whj"),
+1: ExtResource("5_5mut0"),
+2: ExtResource("3_b1whj"),
+3: ExtResource("3_b1whj")
+})
+test_json_dict = ExtResource("3_b1whj")

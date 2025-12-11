@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ba3eux3e67oea"]
 
-[ext_resource type="Script" uid="uid://ctgc61rvqgoe5" path="res://TheBindingOfTaxi/scripts/textbox.gd" id="1_lyn75"]
+[ext_resource type="Script" uid="uid://ctgc61rvqgoe5" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/textbox.gd" id="1_lyn75"]
 [ext_resource type="Texture2D" uid="uid://dekpmc640ypay" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0066.png" id="1_ojprh"]
 [ext_resource type="FontFile" uid="uid://c6uut6uco2c1s" path="res://TheBindingOfTaxi/sprites/GrapeSoda.ttf" id="2_jvihg"]
 
