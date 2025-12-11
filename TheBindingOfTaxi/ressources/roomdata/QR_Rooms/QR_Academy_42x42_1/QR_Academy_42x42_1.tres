@@ -11,6 +11,12 @@ road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Academ
 wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Academy_42x42_1/wall_layer.tres"
 clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Academy_42x42_1/ClientNProps_layer.tres"
 decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Academy_42x42_1/decoration_layer.tres"
+quest_end_list = Dictionary[Vector2, int]({
+Vector2(328, 499): 0,
+Vector2(655, 294): 1
+})
+quest_end_values = Array[Array]([Array[int]([6, 0, 3, 7]), Array[int]([1])])
+quest_end_size = Array[Vector2]([Vector2(32, 32), Vector2(32, 32)])
 exits = Dictionary[Vector2i, int]({
 Vector2i(0, 0): 8,
 Vector2i(0, 1): 1,
