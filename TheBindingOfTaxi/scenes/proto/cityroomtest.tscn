@@ -6,6 +6,7 @@
 
 [node name="Corner-NE" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer")]
 script = ExtResource("1_8fllh")
+directory = "TheBindingOfTaxi/ressources/roomdata/QR_Rooms/"
 RoadLayer = NodePath("RoadLayer")
 WallLayer = NodePath("WallLayer")
 ClientNPropsLayer = NodePath("Client&PropsLayer")
@@ -33,6 +34,3 @@ position = Vector2(56, 107)
 [node name="Quest_End2" parent="Exits" instance=ExtResource("4_nphxq")]
 position = Vector2(256, 112)
 PossibleDestinations = Array[int]([1])
-
-[connection signal="body_entered" from="Client&PropsLayer/Customer" to="Client&PropsLayer/Customer" method="_on_body_entered"]
-[connection signal="body_entered" from="Client&PropsLayer/@Area2D@25928" to="Client&PropsLayer/@Area2D@25928" method="_on_body_entered"]
