@@ -29,13 +29,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	last_Player_Pos = WorldToChunkPos(PlayerGlobal.global_position) #Position du player
-	#print ("Player position : ", playerChunkPos)
-	#if (last_Player_Pos != playerChunkPos) :
-		#for x in range(-1, 2) :
-			#for y in range(-1, 2) :
-				#if (!chunksTiles.has(Vector2i(x, y))) :
-					#CreateChunk(Vector2i(x, y), Biomes.Biome1)
+	var playerChunkPos = WorldToChunkPos(PlayerGlobal.global_position) #Position du player
+	if (last_Player_Pos != playerChunkPos) :
+		for x in range(-1, 2) :
+			for y in range(-1, 2) :
+				if (!chunksTiles.has(Vector2i(x, y))) :
+					CreateChunk(Vector2i(x, y), Biomes.Biome1)
+	
+	last_Player_Pos = playerChunkPos
 
 func WorldToChunkPos(a_pos : Vector2) -> Vector2i :
 	
