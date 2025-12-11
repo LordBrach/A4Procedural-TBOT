@@ -20,13 +20,15 @@ var customerDestination : Vector2
 var hasDestination : bool = false
 @export var arrowSprite : Node2D
 var SavedCustomerType : Globals.CUSTOMER_TYPE
+var tryPlayBlabla: bool = false
+var isAwaitingBlabla: bool = false
+
 # Collectible
 var key_count : int
 # Signals
 var OnPickupCustomer : Signal
 var OnPickupCustomerFailed : Signal
 var OnQuestFinished : Signal
-
 func _init() -> void:
 	Instance = self
 
@@ -41,13 +43,20 @@ func _process(delta: float) -> void:
 	super(delta)
 	_update_inputs()
 	#_update_room()
+	if(tryPlayBlabla == true):
+		tryPlayBlabla = false
+		isAwaitingBlabla = true
+		await get_tree().create_timer(10).timeout
+		if(isAwaitingBlabla == true) :
+			isAwaitingBlabla = false
+			TraceryFuncs._SendLineToTextbox(SavedCustomerType,Globals.CUSTOMER_DIALOGUE_TYPE.COMMENT)
+			
+		
 	
 	if (hasDestination) :
 		if (arrowSprite.modulate.a == 0) :
 			arrowSprite.modulate.a = 1
 		arrowSprite.look_at(customerDestination)
-	await get_tree().create_timer(15).timeout
-	on_blabla()
 
 #region prototype
 func enter_room(room : Room) -> void:
@@ -135,6 +144,7 @@ func add_customer(data : Customer) -> void:
 			idCustomer += 1
 			data.pickup_result(true)
 			PlayerQuestAccepted.play()
+			tryPlayBlabla = true
 	else :
 		OnPickupCustomerFailed.emit()
 		data.pickup_result(false)
@@ -160,11 +170,13 @@ func link_to_quest(customer : Customer) -> bool:
 
 ## When a quest is completed, removes the client linked to the quest from the car
 func complete_quest(LinkedClientId : int) ->void:
+	tryPlayBlabla = false
+	isAwaitingBlabla = false
 	PlayerQuestComplete.play()
 	CustomerList.erase(LinkedClientId)
 	TraceryFuncs._SendLineToTextbox(
 		SavedCustomerType,
-		 Globals.CUSTOMER_DIALOGUE_TYsPE.OUTRO)
+		 Globals.CUSTOMER_DIALOGUE_TYPE.OUTRO)
 	hasDestination = false
 	arrowSprite.modulate.a = 0
 	customerDestination = Vector2.ZERO

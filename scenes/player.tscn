@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bib07te5reau7"]
+[gd_scene load_steps=24 format=3 uid="uid://bib07te5reau7"]
 
 [ext_resource type="Script" uid="uid://c0tc77spyevjo" path="res://scripts/player.gd" id="1_ups2j"]
 [ext_resource type="Resource" uid="uid://b3nexs1nbtrff" path="res://resources/player_default_movement.tres" id="2_ay78m"]
@@ -8,9 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://4xqb43lmfesb" path="res://TheBindingOfTaxi/scenes/proto/UI/PlayerUI.tscn" id="5_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://bliibiacuhcu7" path="res://TheBindingOfTaxi/Audio/BlaBlubla-3.wav" id="6_3v2ag"]
 [ext_resource type="PackedScene" uid="uid://dbnr7bd1ew6p1" path="res://BGM.tscn" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="7_qfm1y"]
+[ext_resource type="Resource" uid="uid://btmnr2d3ph8dq" path="res://TheBindingOfTaxi/ressources/dialogue/default_dialogue.tres" id="8_fulsm"]
+[ext_resource type="Resource" uid="uid://ugm16qmv45eu" path="res://TheBindingOfTaxi/ressources/dialogue/mafiosoclient_dialogue.tres" id="9_4r5pv"]
 [ext_resource type="AudioStream" uid="uid://d0m7xdj0mv57w" path="res://TheBindingOfTaxi/Audio/SFX_TypewriterBell.wav" id="9_ur7pv"]
+[ext_resource type="Resource" uid="uid://chv0qrxr5dfk4" path="res://TheBindingOfTaxi/ressources/dialogue/crazyclient_dialogue.tres" id="10_60mlk"]
 [ext_resource type="AudioStream" uid="uid://skprlk1201hb" path="res://TheBindingOfTaxi/Audio/ScreamerCri.wav" id="10_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://bj610bbd57y7r" path="res://TheBindingOfTaxi/Audio/WrongSound.wav" id="11_d2wvv"]
+[ext_resource type="Resource" uid="uid://cnuvj45kg6o4h" path="res://TheBindingOfTaxi/ressources/dialogue/richeclient_dialogue.tres" id="11_i4ail"]
 [ext_resource type="Texture2D" uid="uid://coi5gxqifgofc" path="res://TheBindingOfTaxi/sprites/Arrow.png" id="12_3v2ag"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eidcf"]
@@ -68,10 +73,24 @@ orientation = 1
 
 [node name="PlayerUI" parent="." instance=ExtResource("5_tuyoq")]
 
+[node name="CanvasTextbox" parent="PlayerUI" index="0"]
+DelayBetweenLetters = 0.1
+
+[node name="Text" parent="PlayerUI/CanvasTextbox/BG" index="0"]
+visible_characters = 21
+
 [node name="AudioStreamPlayer2D" parent="PlayerUI/CanvasTextbox" index="1"]
 stream = ExtResource("6_3v2ag")
 volume_db = -18.26
 pitch_scale = 0.8
+
+[node name="TraceryHelper" parent="PlayerUI" index="1"]
+CustomerDicts = Dictionary[int, ExtResource("7_qfm1y")]({
+0: ExtResource("8_fulsm"),
+1: ExtResource("9_4r5pv"),
+2: ExtResource("10_60mlk"),
+3: ExtResource("11_i4ail")
+})
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eidcf")
@@ -89,6 +108,7 @@ zoom = Vector2(4, 4)
 [node name="Sounds" type="Node" parent="."]
 
 [node name="BGMPlayer" parent="Sounds" instance=ExtResource("7_fjrip")]
+volume_db = -4.455
 
 [node name="SFXQuestComplete" parent="Sounds" instance=ExtResource("7_fjrip")]
 stream = ExtResource("9_ur7pv")
