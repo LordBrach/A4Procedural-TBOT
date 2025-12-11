@@ -13,7 +13,7 @@ var buttonLoad = load_room
 @export var isImportantBuilding : bool = false
 var lastSaveName : String = ""
 var lastSaveTry : bool = false
-const tg : String = "res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn"
+const questEndPath : String = "res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn"
 
 @export_group("TileMapLayers")
 @export var RoadLayer : TileMapLayer
@@ -335,7 +335,7 @@ func set_quest_end(a_roomData : RoomResource) :
 	
 	var n : int = 0
 	for data in  a_roomData.quest_end_list :
-		var loadedQuest = preload(tg)
+		var loadedQuest = preload(questEndPath)
 		var questObj : QuestEnd = loadedQuest.instantiate()
 		QuestEndList.append(questObj)
 		QuestEndParent.add_child(questObj)
