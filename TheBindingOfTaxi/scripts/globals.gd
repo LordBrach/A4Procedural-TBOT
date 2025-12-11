@@ -50,7 +50,6 @@ func GetRandomBiome() -> WorldGen.Biomes :
 	match rand :
 		0 : biome = WorldGen.Biomes.Biome1
 		1 : biome = WorldGen.Biomes.Biome2
-		2 : biome = WorldGen.Biomes.Biome3
 		_ : biome = WorldGen.Biomes.Biome1
 	
 	return biome

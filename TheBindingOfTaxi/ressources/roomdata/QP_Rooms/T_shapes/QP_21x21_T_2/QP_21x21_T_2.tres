@@ -5,7 +5,6 @@
 [resource]
 script = ExtResource("1_wq0jr")
 room_name = "QP_21x21_T_2"
-is_special_room = true
 road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_2/road_layer.tres"
 wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_2/wall_layer.tres"
 clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_2/ClientNProps_layer.tres"

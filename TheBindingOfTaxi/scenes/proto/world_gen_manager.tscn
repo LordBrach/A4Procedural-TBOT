@@ -1,28 +1,87 @@
-[gd_scene load_steps=20 format=3 uid="uid://hal8wo2d5im2"]
+[gd_scene load_steps=46 format=3 uid="uid://hal8wo2d5im2"]
 
 [ext_resource type="Script" uid="uid://5dyhrm5ml28n" path="res://TheBindingOfTaxi/scripts/WorldGenManager.gd" id="1_u6qgw"]
 [ext_resource type="Script" uid="uid://dxgkdedfy84ry" path="res://TheBindingOfTaxi/scripts/resources/RoomResource.gd" id="2_obu3s"]
-[ext_resource type="Resource" uid="uid://cj386hdrogsdq" path="res://TheBindingOfTaxi/ressources/roomdata/new_room/new_room.tres" id="3_al6d5"]
-[ext_resource type="Resource" uid="uid://g6yiga3m65ak" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-NE/Corner-NE.tres" id="3_rvagh"]
-[ext_resource type="Resource" uid="uid://deh6goyrddmfv" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-NW/Corner-NW.tres" id="4_hb658"]
-[ext_resource type="Resource" uid="uid://dn1x1qxvse3t1" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-SE/Corner-SE.tres" id="5_ueo2w"]
-[ext_resource type="Resource" uid="uid://dhhoymb4iisq2" path="res://TheBindingOfTaxi/ressources/roomdata/Corner-SW/Corner-SW.tres" id="6_g211k"]
-[ext_resource type="Resource" uid="uid://dfbml8ftpt0am" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_East/Cross_East.tres" id="7_xdyai"]
-[ext_resource type="Resource" uid="uid://0l4uragl4v3v" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_North/Cross_North.tres" id="8_yhiil"]
-[ext_resource type="Resource" uid="uid://cy7dokmw4s7ox" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_South/Cross_South.tres" id="9_r2871"]
-[ext_resource type="Resource" uid="uid://lxyjgc7djqyb" path="res://TheBindingOfTaxi/ressources/roomdata/Cross_West/Cross_West.tres" id="10_idx2x"]
-[ext_resource type="Resource" uid="uid://dm5275matrtkx" path="res://TheBindingOfTaxi/ressources/roomdata/Horizontal/Horizontal.tres" id="11_72kcc"]
-[ext_resource type="Resource" uid="uid://orxnbppw1jr1" path="res://TheBindingOfTaxi/ressources/roomdata/Vertical/Vertical.tres" id="12_7m4w8"]
+[ext_resource type="Resource" uid="uid://ce5jada4l555h" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Academy_42x42_1/QR_Academy_42x42_1.tres" id="3_idx2x"]
+[ext_resource type="Resource" uid="uid://ccg2grfinq7ce" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Commerce_21x63/QR_Commerce_21x63.tres" id="4_72kcc"]
+[ext_resource type="Resource" uid="uid://cdagn4ohpya7p" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_Commerce_21x63_2/QR_Commerce_21x63_2.tres" id="5_7m4w8"]
+[ext_resource type="Resource" uid="uid://dpfqrwo7o2l75" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_TreePlace_21x21/QR_TreePlace_21x21.tres" id="6_8v853"]
+[ext_resource type="Resource" uid="uid://cowut58gjqd00" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_TreePlace_21x21_Var-NWE/QR_TreePlace_21x21_Var-NWE.tres" id="7_rvfow"]
+[ext_resource type="Resource" uid="uid://bdkw7bk2ecvim" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_TreePlace_21x21_Var-SNE/QR_TreePlace_21x21_Var-SNE.tres" id="8_woj30"]
+[ext_resource type="Resource" uid="uid://cp6b3lhicau1f" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_TreePlace_21x21_Var-SNW/QR_TreePlace_21x21_Var-SNW.tres" id="9_rxjh1"]
+[ext_resource type="Resource" uid="uid://ce00rlkrsb1bw" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_TreePlace_21x21_Var-SWE/QR_TreePlace_21x21_Var-SWE.tres" id="10_fvmrl"]
+[ext_resource type="Resource" uid="uid://cnu3seahad4jc" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_1/QR_21x21_1.tres" id="11_wgn2w"]
+[ext_resource type="Resource" uid="uid://c76chck514ka2" path="res://TheBindingOfTaxi/ressources/roomdata/parc_42x42/parc_42x42.tres" id="11_wl4c7"]
+[ext_resource type="Resource" uid="uid://d38vxgcr8yla8" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_1_Var-NE/QR_21x21_1_Var-NE.tres" id="12_mhnpa"]
+[ext_resource type="Resource" uid="uid://bu8p8hh44ippd" path="res://TheBindingOfTaxi/ressources/roomdata/parc_42x42_3/parc_42x42_3.tres" id="12_ug18j"]
+[ext_resource type="Resource" uid="uid://ct6oq1jov0yho" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_1_Var-SE/QR_21x21_1_Var-SE.tres" id="13_3fwqn"]
+[ext_resource type="Resource" uid="uid://xkl3ar2636ua" path="res://TheBindingOfTaxi/ressources/roomdata/parc_42x42_2/parc_42x42_2.tres" id="13_q44lk"]
+[ext_resource type="Resource" uid="uid://dq2u2mthdok2t" path="res://TheBindingOfTaxi/ressources/roomdata/lake/lake.tres" id="14_0usvj"]
 [ext_resource type="Resource" uid="uid://dtamwwpylaph0" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-East/DeadEnd-East.tres" id="14_8v853"]
-[ext_resource type="Resource" uid="uid://b0ucgsj2mpjlc" path="res://TheBindingOfTaxi/ressources/roomdata/2by2/2by2.tres" id="14_hb658"]
+[ext_resource type="Resource" uid="uid://cmkvbeevshy7k" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_1_Var-SW/QR_21x21_1_Var-SW.tres" id="14_ucij4"]
+[ext_resource type="Resource" uid="uid://k5yhrgur6ieg" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_2/QR_21x21_2.tres" id="15_g568a"]
+[ext_resource type="Resource" uid="uid://wpjc8yc6tffv" path="res://TheBindingOfTaxi/ressources/roomdata/lake_2/lake_2.tres" id="15_mt2eh"]
 [ext_resource type="Resource" uid="uid://bknx8vsb0rah1" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-North/DeadEnd-North.tres" id="15_rvfow"]
+[ext_resource type="Resource" uid="uid://csyajdy5fmeh5" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_2-Var-NS/QR_21x21_2-Var-NS.tres" id="16_02h5o"]
 [ext_resource type="Resource" uid="uid://cjkvms74fwtfc" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/DeadEnd-South.tres" id="16_woj30"]
+[ext_resource type="Resource" uid="uid://drog1adwm6cca" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_3/QR_21x21_3.tres" id="17_mslja"]
 [ext_resource type="Resource" uid="uid://lvoubg5xnn2q" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-West/DeadEnd-West.tres" id="17_rxjh1"]
-[ext_resource type="Resource" uid="uid://rycagntgfyj7" path="res://TheBindingOfTaxi/ressources/roomdata/NoRoad/NoRoad.tres" id="18_fvmrl"]
+[ext_resource type="Resource" uid="uid://csdtqlo0o5ljf" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_3_Var-4sided/QR_21x21_3_Var-4sided.tres" id="18_n21pe"]
+[ext_resource type="Resource" uid="uid://elewlh2mktvp" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_3_Var-WE/QR_21x21_3_Var-WE.tres" id="19_tmlfl"]
+[ext_resource type="Resource" uid="uid://ol7g0d33eq0u" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_5/QR_21x21_5.tres" id="20_qaxvt"]
+[ext_resource type="Resource" uid="uid://dyb7xlwyn6gwo" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_6/QR_21x21_6.tres" id="21_wl4c7"]
+[ext_resource type="Resource" uid="uid://b8rm1ba15ptwr" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/QP_21x21_1/QP_21x21_1.tres" id="22_mhnpa"]
+[ext_resource type="Resource" uid="uid://4k6qrixc8f6d" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/QP_21x21_2/QP_21x21_2.tres" id="23_3fwqn"]
+[ext_resource type="Resource" uid="uid://bw3tl6nkwiyi8" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/QP_21x21_3/QP_21x21_3.tres" id="24_ucij4"]
+[ext_resource type="Resource" uid="uid://c7u1qba4olj41" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/QP_21x21_4/QP_21x21_4.tres" id="25_g568a"]
+[ext_resource type="Resource" uid="uid://bb4k7n1cpw23p" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/QP_21x42_1/QP_21x42_1.tres" id="26_02h5o"]
+[ext_resource type="Resource" uid="uid://wwvyrj4sof72" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_1/QP_21x21_T_1.tres" id="27_mslja"]
+[ext_resource type="Resource" uid="uid://dd45ol86vdg7m" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_2/QP_21x21_T_2.tres" id="28_n21pe"]
+[ext_resource type="Resource" uid="uid://dww8t4aclr4cn" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_3/QP_21x21_T_3.tres" id="29_tmlfl"]
+[ext_resource type="Resource" uid="uid://700yt0fmn80p" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/QP_21x21_T_4.tres" id="30_qaxvt"]
+[ext_resource type="Resource" uid="uid://eux8k5momelk" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_1/QP_21x21_DE_1.tres" id="40_702xc"]
+[ext_resource type="Resource" uid="uid://dm2sw8qytvdjd" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_2/QP_21x21_DE_2.tres" id="41_a8at0"]
+[ext_resource type="Resource" uid="uid://bw8o0uj0u0rd2" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_3/QP_21x21_DE_3.tres" id="42_4w4wm"]
+[ext_resource type="Resource" uid="uid://bpb1bkktpjq3o" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_4/QP_21x21_DE_4.tres" id="43_q2xyu"]
+[ext_resource type="Resource" uid="uid://borjbohp0dblr" path="res://TheBindingOfTaxi/ressources/roomdata/Biome1NoRoads/Biome1NoRoads.tres" id="44_q44lk"]
+[ext_resource type="Resource" uid="uid://dfi363dsbkm0f" path="res://TheBindingOfTaxi/ressources/roomdata/Biome2NoRoads/Biome2NoRoads.tres" id="45_0usvj"]
 
 [node name="WorldGenManager" type="Node2D"]
 script = ExtResource("1_u6qgw")
-biome1Rooms = Array[ExtResource("2_obu3s")]([ExtResource("3_rvagh"), ExtResource("4_hb658"), ExtResource("5_ueo2w"), ExtResource("6_g211k"), ExtResource("7_xdyai"), ExtResource("8_yhiil"), ExtResource("9_r2871"), ExtResource("10_idx2x"), ExtResource("11_72kcc"), ExtResource("12_7m4w8"), ExtResource("3_al6d5"), ExtResource("14_hb658")])
+specialsBiome = Dictionary[ExtResource("2_obu3s"), int]({
+ExtResource("3_idx2x"): 1,
+ExtResource("4_72kcc"): 1,
+ExtResource("5_7m4w8"): 1,
+ExtResource("6_8v853"): 1,
+ExtResource("7_rvfow"): 1,
+ExtResource("8_woj30"): 1,
+ExtResource("9_rxjh1"): 1,
+ExtResource("10_fvmrl"): 1,
+ExtResource("11_wl4c7"): 2,
+ExtResource("12_ug18j"): 2,
+ExtResource("13_q44lk"): 2,
+ExtResource("14_0usvj"): 2,
+ExtResource("15_mt2eh"): 2
+})
+typeSpecials = Dictionary[ExtResource("2_obu3s"), int]({
+ExtResource("10_fvmrl"): 7,
+ExtResource("9_rxjh1"): 3,
+ExtResource("7_rvfow"): 7,
+ExtResource("8_woj30"): 3,
+ExtResource("6_8v853"): 3,
+ExtResource("5_7m4w8"): 7,
+ExtResource("4_72kcc"): 7,
+ExtResource("3_idx2x"): 6,
+ExtResource("11_wl4c7"): 4,
+ExtResource("13_q44lk"): 4,
+ExtResource("12_ug18j"): 4,
+ExtResource("14_0usvj"): 5,
+ExtResource("15_mt2eh"): 5
+})
+biome1Rooms = Array[ExtResource("2_obu3s")]([ExtResource("11_wgn2w"), ExtResource("12_mhnpa"), ExtResource("13_3fwqn"), ExtResource("14_ucij4"), ExtResource("15_g568a"), ExtResource("16_02h5o"), ExtResource("17_mslja"), ExtResource("18_n21pe"), ExtResource("19_tmlfl"), ExtResource("20_qaxvt"), ExtResource("21_wl4c7")])
+biome2Rooms = Array[ExtResource("2_obu3s")]([ExtResource("22_mhnpa"), ExtResource("23_3fwqn"), ExtResource("24_ucij4"), ExtResource("25_g568a"), ExtResource("26_02h5o"), ExtResource("27_mslja"), ExtResource("28_n21pe"), ExtResource("29_tmlfl"), ExtResource("30_qaxvt")])
 biome1DeadEnds = Array[ExtResource("2_obu3s")]([ExtResource("14_8v853"), ExtResource("15_rvfow"), ExtResource("16_woj30"), ExtResource("17_rxjh1")])
-biome1NoRoads = Array[ExtResource("2_obu3s")]([ExtResource("18_fvmrl")])
+biome2DeadEnds = Array[ExtResource("2_obu3s")]([ExtResource("40_702xc"), ExtResource("41_a8at0"), ExtResource("42_4w4wm"), ExtResource("43_q2xyu")])
+biome1NoRoads = Array[ExtResource("2_obu3s")]([ExtResource("44_q44lk")])
+biome2NoRoads = Array[ExtResource("2_obu3s")]([ExtResource("45_0usvj")])
 metadata/_custom_type_script = "uid://5dyhrm5ml28n"
