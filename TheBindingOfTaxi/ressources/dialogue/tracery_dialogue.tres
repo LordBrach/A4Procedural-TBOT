@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="tracery_dict" load_steps=3 format=3 uid="uid://btmnr2d3ph8dq"]
+
+[ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/tracery_dict.gd" id="1_wxb1u"]
+[ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/debug.json" id="2_6wjml"]
+
+[resource]
+script = ExtResource("1_wxb1u")
+values = Dictionary[int, JSON]({
+0: ExtResource("2_6wjml"),
+1: ExtResource("2_6wjml"),
+2: ExtResource("2_6wjml"),
+3: ExtResource("2_6wjml")
+})
