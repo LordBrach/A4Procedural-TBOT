@@ -1,0 +1,7 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#reaction#, #sentiment#. #souhait#"],
+"reaction":["Ohhhhh ça me plait", "Vous vous savez me donner du divertissement", "Ouahh le boss aurait adoré"],
+"sentiment":["c'était formidable", "je vous aime bien", "ça c'est du strike", "en plein de mille il n'avait aucune chance"],
+"souhait":["Faites le encore.", "Refaite le, je filme cette fois-ci", "Quand vous voulez pour le deuxième services", "J'ai un poste à vous proposer, vu votre conduite ça pourrait vous intéresser"]
+} 

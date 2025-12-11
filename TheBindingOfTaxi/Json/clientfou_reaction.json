@@ -1,0 +1,7 @@
+{
+"origin":["[myPlace:#path#]#line#"],
+"line":["#reaction#, #sentiment#. #souhait#"],
+"reaction":["Nom d'une locomotive", "Nom d'une courroie inversé", "Nom d'un boulon à double torsade", "Nom d'un caténaire"],
+"sentiment":["Le dieu l'avais annoncé", "C'ETAIT ECRIT", "LE DESTIN NOUS BENI"],
+"souhait":["Versez du sang pour sa GRANDEUR !!!", "ACCOMPLISSEZ SA VOLONTE", "CHANTEZ SES LOUANGES ET RECOLTEZ SON COURROUX"]
+}
