@@ -1,14 +1,16 @@
-[gd_resource type="TileSet" load_steps=20 format=3 uid="uid://dqy6nw870lq50"]
+[gd_resource type="TileSet" load_steps=22 format=3 uid="uid://dqy6nw870lq50"]
 
 [ext_resource type="PackedScene" uid="uid://nmpi1435amt" path="res://scenes/key_collectible.tscn" id="1_n87tu"]
 [ext_resource type="PackedScene" uid="uid://dov4nkfsf27hs" path="res://scenes/heart_collectible.tscn" id="2_bf4ht"]
+[ext_resource type="PackedScene" uid="uid://demyhmmawl5v4" path="res://TheBindingOfTaxi/scenes/hittablethingy.tscn" id="3_1s7s2"]
 [ext_resource type="Texture2D" uid="uid://dkkti4sg4v785" path="res://sprites/tilemapfloor.png" id="3_paueh"]
 [ext_resource type="PackedScene" uid="uid://b0ahenmxn2ain" path="res://scenes/enemy.tscn" id="4_hch8v"]
 [ext_resource type="PackedScene" uid="uid://cinljgej7owpj" path="res://scenes/spikes.tscn" id="5_k2d8t"]
 [ext_resource type="PackedScene" uid="uid://caqkxr3u45dsp" path="res://scenes/door_closed.tscn" id="6_s324g"]
 [ext_resource type="Texture2D" uid="uid://c0tfbsm6oqvxt" path="res://imports/kenney_rpg-urban-pack/Tilemap/tilemap_packed.png" id="7_vnqca"]
-[ext_resource type="Script" path="res://TheBindingOfTaxi/scripts/exitdata.gd" id="8_bf4ht"]
+[ext_resource type="Script" uid="uid://dfvrya3wq8tod" path="res://TheBindingOfTaxi/scripts/exitdata.gd" id="8_bf4ht"]
 [ext_resource type="PackedScene" uid="uid://dhpfd5occg8hd" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/customer_base.tscn" id="9_paueh"]
+[ext_resource type="PackedScene" uid="uid://c6ajqk62og3ck" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/hittable_element.tscn" id="11_kdtnq"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ci8pb"]
 tile_data = PackedInt32Array(0, 65539, 15, 65536, 65539, 16, 131072, 65539, 17, 1, 65539, 15, 65537, 65539, 16, 131073, 65539, 17, 2, 65539, 15, 65538, 65539, 16, 131074, 65539, 17, 3, 65539, 15, 65539, 65539, 16, 131075, 65539, 17)
@@ -23,6 +25,7 @@ tile_data = PackedInt32Array(0, 131075, 17, 65536, 131075, 17, 131072, 131075, 1
 resource_name = "Collectibles"
 scenes/1/scene = ExtResource("1_n87tu")
 scenes/2/scene = ExtResource("2_bf4ht")
+scenes/3/scene = ExtResource("3_1s7s2")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyah5"]
 resource_name = "Placeholder"
@@ -1691,6 +1694,8 @@ _bundled = {
 resource_name = "TBOT Tiles"
 scenes/1/scene = SubResource("PackedScene_hch8v")
 scenes/2/scene = ExtResource("9_paueh")
+scenes/3/scene = ExtResource("3_1s7s2")
+scenes/4/scene = ExtResource("11_kdtnq")
 
 [resource]
 resource_name = "RoadTileset"

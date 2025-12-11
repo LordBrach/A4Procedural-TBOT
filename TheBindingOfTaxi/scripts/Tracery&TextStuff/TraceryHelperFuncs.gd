@@ -71,6 +71,6 @@ func _replaceBalise(inString : String,  inNewWord : String, Balise : String) -> 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	outputbox.EnableTextBox("ZAZAAAAAAAAAAAAAAAAAA")
+	#outputbox.EnableTextBox("")
 	#print(_oneLinerDebug())
 #

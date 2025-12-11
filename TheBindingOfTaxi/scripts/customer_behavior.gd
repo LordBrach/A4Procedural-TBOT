@@ -31,10 +31,10 @@ func randomizeCustomerValues() -> void:
 	SelectedDrivingCondition = RandomWeightedDictionnary(SelectedCustomer.DrivingConditions)
 	SelectedDestination = RandomWeightedDictionnary(SelectedCustomer.TargetDestinations)
 
-	print("Customer type: ", Globals.CUSTOMER_TYPE.keys()[SelectedCustomer.CustomerType]);
-	print("Selected Difficulty Option: ", Globals.DIFFICULTY_OPTIONS.keys()[SelectedDifficulty]);
-	print("Selected Driving Condition: ", Globals.DRIVING_CONDITIONS.keys()[SelectedDrivingCondition]);
-	print("Selected Destination : ", Globals.EXIT_TYPES.keys()[SelectedDestination]);
+	#print("Customer type: ", Globals.CUSTOMER_TYPE.keys()[SelectedCustomer.CustomerType]);
+	#print("Selected Difficulty Option: ", Globals.DIFFICULTY_OPTIONS.keys()[SelectedDifficulty]);
+	#print("Selected Driving Condition: ", Globals.DRIVING_CONDITIONS.keys()[SelectedDrivingCondition]);
+	#print("Selected Destination : ", Globals.EXIT_TYPES.keys()[SelectedDestination]);
 
 func RandomWeightedDictionnary(dict):
 	var sumWeights : float = 0.0;

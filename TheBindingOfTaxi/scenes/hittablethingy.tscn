@@ -4,16 +4,17 @@
 [ext_resource type="Script" uid="uid://ggsxlk7rrbyv" path="res://TheBindingOfTaxi/scripts/hittablethingy.gd" id="2_sst3o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_as2kn"]
-radius = 85.6
+radius = 130.38403
 
 [node name="Area2D" type="Area2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("2_sst3o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qfeno")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_as2kn")
-script = ExtResource("2_sst3o")
 
 [node name="DelaybeforeDeath" type="Timer" parent="."]
 wait_time = 2.06

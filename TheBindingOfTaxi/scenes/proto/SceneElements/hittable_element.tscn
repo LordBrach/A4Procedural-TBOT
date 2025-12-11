@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6ajqk62og3ck"]
+
+[ext_resource type="Script" uid="uid://ggsxlk7rrbyv" path="res://TheBindingOfTaxi/scripts/hittablethingy.gd" id="1_38a1y"]
+[ext_resource type="Texture2D" uid="uid://c00v7lyyfj48h" path="res://imports/kenney_rpg-urban-pack/Tiles/tile_0050.png" id="4_en7h7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
+size = Vector2(39, 30)
+
+[node name="Customer" type="Area2D"]
+script = ExtResource("1_38a1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_qxpyt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.17233e-07, 0)
+texture = ExtResource("4_en7h7")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="DelaybeforeDeath" type="Timer" parent="."]
+wait_time = 2.06
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
