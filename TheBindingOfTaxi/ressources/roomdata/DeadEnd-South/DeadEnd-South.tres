@@ -8,7 +8,6 @@ room_name = "DeadEnd-South"
 road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/road_layer.tres"
 wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/wall_layer.tres"
 clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/ClientNProps_layer.tres"
-empty_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/empty_layer.tres"
 exits = Dictionary[Vector2i, int]({
 Vector2i(0, 0): 8
 })

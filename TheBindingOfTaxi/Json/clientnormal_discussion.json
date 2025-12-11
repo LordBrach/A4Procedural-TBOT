@@ -1,10 +1,46 @@
 {
-"origin":["[myPlace:#path#]#line#"],
-"line":["#intro# #verbe# que #sujet# #information#. #conséquence#. #question#"],
-"intro":["Dites,", "A propos,", "D'ailleurs,", "Hé,", "Vous avez vu?"],
-"verbe":["Il parait", "Les nouvelles racontent", "Il semblerait"],
-"sujet":["les mines du sud seraient", "les galeries commerçantes seraient", "Néo-Courbevoie serait", "la grande place serait", "les quartiers populaires seraient", "les quartiers riches seraient", "le marché souterrain serait"],
-"information":["victime d'infestation par les rats", "sous le contrôle d'une secte étrange vénérant un dieu train", "la cible de la mafia à but de domination pour étendre leur cartel", "en procès avec les chauffeurs Ubers"],
-"conséquence":["Le maire Douglas à décidé de lancer une enquête", "Le président du Royaume de Belgique à envoyé l'armée pour s'en occuper", "C'est l'anarchie complète la bas", "Il parais que la commune voisine de Néo-Puteaux serait entrain de monter une équipe pour négocier avec eux"],
-"question":["Vous pensez qu'on doit s'en soucier?", "Votre avis sur le sujet?", "Inquiétant vous ne trouvez pas?"]
+	"origin": [
+		"[myPlace:#path#]#line#"
+	],
+	"line": [
+		"#intro# #verbe# que #sujet# #information#. #conséquence#. #question#"
+	],
+	"intro": [
+		"Dites,",
+		"A propos,",
+		"D'ailleurs,",
+		"Hé,",
+		"Vous avez vu?"
+	],
+	"verbe": [
+		"Il parait",
+		"Les nouvelles racontent",
+		"Il semblerait"
+	],
+	"sujet": [
+		"les mines du sud seraient",
+		"les galeries commerçantes seraient",
+		"Néo-Courbevoie serait",
+		"la grande place serait",
+		"les quartiers populaires seraient",
+		"les quartiers riches seraient",
+		"le marché souterrain serait"
+	],
+	"information": [
+		"victime d'infestation par les rats",
+		"sous le contrôle d'une secte étrange vénérant un dieu train",
+		"la cible de la mafia à but de domination pour étendre leur cartel",
+		"en procès avec les chauffeurs Ubers"
+	],
+	"conséquence": [
+		"Le maire Douglas à décidé de lancer une enquête",
+		"Le président du Royaume de Belgique à envoyé l'armée pour s'en occuper",
+		"C'est l'anarchie complète la bas",
+		"Il parais que la commune voisine de Néo-Puteaux serait entrain de monter une équipe pour négocier avec eux"
+	],
+	"question": [
+		"Vous pensez qu'on doit s'en soucier?",
+		"Votre avis sur le sujet?",
+		"Inquiétant vous ne trouvez pas?"
+	]
 }
