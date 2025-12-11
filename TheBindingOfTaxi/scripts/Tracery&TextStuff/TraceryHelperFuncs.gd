@@ -10,11 +10,13 @@ class_name TraceryHelperFuncs extends Node
 @export var test_dialogue_type : Globals.CUSTOMER_DIALOGUE_TYPE
 
 var ExitDialogueSnippets : Dictionary [Globals.EXIT_TYPES, String] = {
-	Globals.EXIT_TYPES.Random : "[debug]",
+	Globals.EXIT_TYPES.Any : "[debug]",
 	Globals.EXIT_TYPES.Parking : "au parking",
 	Globals.EXIT_TYPES.Bench : "à mon banc",
-	Globals.EXIT_TYPES.Park : "au parc",
 	Globals.EXIT_TYPES.House : "chez moi",
+	Globals.EXIT_TYPES.Park : "au parc",
+	Globals.EXIT_TYPES.Lake : " au lac ",
+	Globals.EXIT_TYPES.University : " à mon université ",
 	Globals.EXIT_TYPES.Shop : "au magasin"
 }
 @export_group("Test Buttons")

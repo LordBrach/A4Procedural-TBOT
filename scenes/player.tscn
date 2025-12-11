@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bib07te5reau7"]
+[gd_scene load_steps=19 format=3 uid="uid://bib07te5reau7"]
 
 [ext_resource type="Script" uid="uid://c0tc77spyevjo" path="res://scripts/player.gd" id="1_ups2j"]
 [ext_resource type="Resource" uid="uid://b3nexs1nbtrff" path="res://resources/player_default_movement.tres" id="2_ay78m"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://d0m7xdj0mv57w" path="res://TheBindingOfTaxi/Audio/SFX_TypewriterBell.wav" id="9_ur7pv"]
 [ext_resource type="AudioStream" uid="uid://skprlk1201hb" path="res://TheBindingOfTaxi/Audio/ScreamerCri.wav" id="10_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://bj610bbd57y7r" path="res://TheBindingOfTaxi/Audio/WrongSound.wav" id="11_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://coi5gxqifgofc" path="res://TheBindingOfTaxi/sprites/Arrow.png" id="12_3v2ag"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eidcf"]
 
@@ -50,13 +51,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "attack_spawn_point")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "arrowSprite", "attack_spawn_point")]
 z_index = 256
 collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ups2j")
 PlayerSprite = NodePath("AnimatedSprite2D")
+arrowSprite = NodePath("Arrow")
 dead_color = Color(0.413595, 0.399579, 0.385991, 1)
 default_movement = ExtResource("2_ay78m")
 stunned_movemement = ExtResource("3_8ktro")
@@ -103,6 +105,12 @@ autoplay = false
 [node name="SFXQuestRefused" parent="Sounds" instance=ExtResource("7_fjrip")]
 stream = ExtResource("11_d2wvv")
 autoplay = false
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("12_3v2ag")
+flip_h = true
 
 [editable path="PlayerUI"]
 [editable path="PlayerUI/CanvasTextbox"]

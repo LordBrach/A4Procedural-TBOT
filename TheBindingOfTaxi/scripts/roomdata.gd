@@ -6,11 +6,6 @@ var buttonSave = save_room
 @export_tool_button("Load Room")
 var buttonLoad = load_room
 
-@export_group("Edit Exits Data")
-@export_tool_button("Serialize Exits at Current Pos")
-var buttonDirection = save_direction
-@export_tool_button("Show Exits Saved")
-var buttonShowDirection = show_direction
 
 @export_category("General Infos")
 @export var roomName : String = "new_room"
@@ -18,6 +13,7 @@ var buttonShowDirection = show_direction
 @export var isImportantBuilding : bool = false
 var lastSaveName : String = ""
 var lastSaveTry : bool = false
+const questEndPath : String = "res://TheBindingOfTaxi/scenes/proto/SceneElements/quest_end.tscn"
 
 @export_group("TileMapLayers")
 @export var RoadLayer : TileMapLayer
@@ -31,7 +27,13 @@ var lastSaveTry : bool = false
 
 @export_group("")
 @export var roomSize : Vector2i = Vector2i.ONE
+
 @export_group("Exits Parameters")
+@export_tool_button("Serialize Exits at Current Pos")
+var buttonDirection = save_direction
+@export_tool_button("Show Exits Saved")
+var buttonShowDirection = show_direction
+
 @export var currentPos : Vector2i = Vector2i.ONE
 #@export_flags("WEST", "NORTH", "SOUTH", "EAST") var DirectionTest : int = 0;
 #@export var exits : Array[Exit]
@@ -49,15 +51,15 @@ func _ready() -> void:
 func getExits(a_worldPos : Vector2i) -> int:
 	return exits.get(a_worldPos - currentPos, 0)
 
-func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> Vector2 :
-	var choosen : Vector2 = Vector2.ZERO
+func GetClosestQuestEnd(a_pos : Vector2, a_exitType : Globals.EXIT_TYPES) -> QuestEnd :
+	var choosen : QuestEnd = null
 	var distance : float = -1
 	for end in QuestEndList :
 		var index : int = end.PossibleDestinations.rfind(a_exitType)
-		if (index != -1 &&
+		if ((a_exitType == Globals.EXIT_TYPES.Any || index != -1) &&
 		(distance == -1 || (a_pos - end.global_position).length() < distance)) :
 			distance = (a_pos - end.global_position).length()
-			choosen = end.global_position
+			choosen = end
 	
 	return choosen
 
@@ -68,11 +70,11 @@ func save_direction() -> void : #Editor Only
 	var newPos = currentPos - Vector2i.ONE
 	
 	if (roomSize.x * roomSize.y <= 0) :
-		print("Serialize Exits Failed : Invalid Room Size, must be at (1, 1) or above")
+		printerr("Serialize Exits Failed : Invalid Room Size, must be at (1, 1) or above")
 		return
 	
 	if (newPos.x >= roomSize.x || newPos.x < 0 || newPos.y >= roomSize.y || newPos.y < 0) :
-		print("Serialize Exits Failed : Invalid Current Position, must be between (1, 1) (", roomSize.x,", ", roomSize.y, ") or above")
+		printerr("Serialize Exits Failed : Invalid Current Position, must be between (1, 1) (", roomSize.x,", ", roomSize.y, ") or above")
 		return
 	
 	if (exits.size() < roomSize.x * roomSize.y || exits.size() > roomSize.x * roomSize.y) :
@@ -91,14 +93,14 @@ func save_direction() -> void : #Editor Only
 		count += 1
 	
 	exits[newPos] = value
-	print("Serialized exits at (", currentPos.x, ", ", currentPos.y, ")")
+	print_rich("[color=green]Serialized exits at (", currentPos.x, ", ", currentPos.y, ")")
 
 func show_direction() -> void : #Editor Only
 	var y : int = roomSize.y - 1
 	var text : Array[String] = []
 	
 	if (roomSize.x * roomSize.y != exits.size()) :
-		print("Show Exits Failed : Room Size indicated wasn't the same has the number of Exits, pls save again at the correct coordinate of exits")
+		printerr("Show Exits Failed : Room Size indicated wasn't the same has the number of Exits, pls save again at the correct coordinate of exits")
 		return
 	
 	while(y >= 0) :
@@ -110,21 +112,21 @@ func show_direction() -> void : #Editor Only
 			var dir : int = exits[Vector2i(x, y)]
 			
 			if (dir & 1 << 2) :
-				top += "XX|XX"
+				top += "XX[color=green]|[color=grey]XX"
 			else :
 				top += "XXXXX"
 			
 			if (dir & 1 << 0 && dir & 1 << 1) :
-				middle += "-   -"
+				middle += "[color=green]-   -[color=grey]"
 			elif (dir & 1 << 0) :
-				middle += "-   X"
+				middle += "[color=green]-[color=grey]   X"
 			elif (dir & 1 << 1) :
-				middle += "X   -"
+				middle += "X   [color=green]-[color=grey]"
 			else :
 				middle += "X   X"
 			
 			if (dir & 1 << 3) :
-				bottom += "XX|XX"
+				bottom += "XX[color=green]|[color=grey]XX"
 			else :
 				bottom += "XXXXX"
 		
@@ -136,13 +138,13 @@ func show_direction() -> void : #Editor Only
 	
 	print("Exits patterns :")
 	for line in text :
-		print(line)
+		print_rich(line)
 	print("")
 
 func save_room() -> void : #Editor Only
 	#region Error Proof
 	if (roomName == null || roomName.is_empty()) :
-		print("Save Room Failed : Room Name is empty")
+		printerr("Save Room Failed : Room Name is empty")
 	
 	if (directory != null && !directory.is_empty() && !directory.ends_with("/")) :
 		directory += "/"
@@ -169,7 +171,7 @@ func save_room() -> void : #Editor Only
 			DirAccess.remove_absolute(dirPath)
 			dir = DirAccess.make_dir_recursive_absolute(dirPath)
 		else :
-			print("Save Room ! WARNING ! : '" + roomName + "' already exist in this directory. If you want to overwrite this directory, press 'Save Room' button again")
+			print_rich("[color=yellow]Save Room ! WARNING ! : '" + roomName + "' already exist in this directory. If you want to overwrite this directory, press 'Save Room' button again")
 			lastSaveName = roomName
 			lastSaveTry = true
 			return
@@ -180,9 +182,10 @@ func save_room() -> void : #Editor Only
 	lastSaveName = ""
 	lastSaveTry = false
 	
-	print("Saving ", roomName, " file...")
+	print_rich("[color=yellow]Saving ", roomName, " file...")
 	
 	var room_data = RoomResource.new()
+	
 	var road_layer_data : TilemapResource
 	var wall_layer_data : TilemapResource
 	var clientNProps_layer_data : TilemapResource
@@ -190,41 +193,43 @@ func save_room() -> void : #Editor Only
 	
 	#region Layers
 	if(RoadLayer == null):
-		print("Save Room Failed : Missing RoadLayer TileMapLayer value")
+		printerr("Save Room Failed : Missing RoadLayer TileMapLayer value")
 		return
 	else :
 		road_layer_data = get_tilemap_data(RoadLayer)
 	if(WallLayer == null):
-		print("Save Room Failed : Missing WallLayer TileMapLayer value")
+		printerr("Save Room Failed : Missing WallLayer TileMapLayer value")
 		return
 	else :
 		wall_layer_data = get_tilemap_data(WallLayer)
 	if(ClientNPropsLayer == null):
-		print("Save Room Failed : Missing ClientNPropsLayer TileMapLayer value")
+		printerr("Save Room Failed : Missing ClientNPropsLayer TileMapLayer value")
 		return
 	else :
 		clientNProps_layer_data = get_tilemap_data(ClientNPropsLayer)
 	if(DecorationLayer == null):
-		print("Save Room Failed : Missing DecorationLayer TileMapLayer value")
+		printerr("Save Room Failed : Missing DecorationLayer TileMapLayer value")
 		return
 	else :
 		decoration_layer_data = get_tilemap_data(DecorationLayer)
 	
 	if (road_layer_data.size.x % Globals.roomSize.x != 0 || road_layer_data.size.y % Globals.roomSize.y != 0 || road_layer_data.size.x * road_layer_data.size.y <= 0) :
-		print("Save Room Failed : Room size (", road_layer_data.size.x, ", ", road_layer_data.size.y, ") is not correct, make sure the RoadLayer size is a multiple of (", Globals.roomSize.x, ", ", Globals.roomSize.y, ")")
+		printerr("Save Room Failed : Room size (", road_layer_data.size.x, ", ", road_layer_data.size.y, ") is not correct, make sure the RoadLayer size is a multiple of (", Globals.roomSize.x, ", ", Globals.roomSize.y, ")")
 		return
 	elif (road_layer_data.size.x / Globals.roomSize.x != roomSize.x || road_layer_data.size.y / Globals.roomSize.y != roomSize.y) :
 		roomSize.x = road_layer_data.size.x / Globals.roomSize.x
 		roomSize.y = road_layer_data.size.y / Globals.roomSize.y
 		save_direction()
-		print("Save Room Failed : indicated Rome size wasn't accurate, it was fix and Exits have been reset")
+		printerr("Save Room Failed : indicated Rome size wasn't accurate, it was fix and Exits have been reset")
 		show_direction()
 		return
 	#endregion
 	
 	#region Quest End
 	for end in QuestEndList :
-		room_data.quest_end_list.set(end._getPos(), end.PossibleDestinations)
+		room_data.quest_end_values.append(end.PossibleDestinations)
+		room_data.quest_end_size.append(end.hitbox.shape.get_rect().size)
+		room_data.quest_end_list.set(end.global_position, room_data.quest_end_values.size() -1)
 	#endregion
 	
 	room_data.room_name = roomName
@@ -232,7 +237,7 @@ func save_room() -> void : #Editor Only
 	
 	room_data.room_size = Vector2i(road_layer_data.size.x / Globals.roomSize.x, road_layer_data.size.y / Globals.roomSize.y)
 	if (exits.size() != roomSize.x * roomSize.y) :
-		print("Save Room Failed : Missing exits reference, check 'Show Direction Saved' and call the button 'Save Direction at Current Pos' if necessary")
+		printerr("Save Room Failed : Missing exits reference, check 'Show Direction Saved' and call the button 'Save Direction at Current Pos' if necessary")
 		return
 		
 	room_data.exits = exits
@@ -249,7 +254,7 @@ func save_room() -> void : #Editor Only
 	
 	ResourceSaver.save(room_data, dirPath + "/" + roomName + ".tres")
 	
-	print(roomName, ".tres Saved")
+	print_rich("[color=green]",roomName, ".tres Saved")
 
 func get_all_exits(a_exits : Dictionary[Vector2i, int]) -> int :
 	var result : int = 0
@@ -284,7 +289,7 @@ func load_room() -> void : #Editor Only
 	
 	var dirPath = "res://" + directory + roomName
 	if (DirAccess.open(dirPath) == null) :
-		print("Load Room Failed : no directory")
+		printerr("Load Room Failed : no directory")
 	
 	#print("loading ", roomName, " file...")
 	var room_data : RoomResource = load(dirPath + "/" + roomName + ".tres")
@@ -305,14 +310,14 @@ func load_room_data(a_roomData : RoomResource) -> void :
 	
 	set_quest_end(a_roomData)
 	
-	#print(roomName, " file loaded")
+	print_rich("[color=green]", roomName, " file loaded")
 
 func set_tilemap_data(a_tilemap : TileMapLayer, a_data : TilemapResource) -> void :
 	if (a_tilemap == null) :
-		print("Load Room Error : Current TilemapLayer is null, pls check if the TileMapLayers are correctly set")
+		printerr("Load Room Error : Current TilemapLayer is null, pls check if the TileMapLayers are correctly set")
 		return
 	if (a_data == null) :
-		print("Load Room Error : Given TilemapRessource is null and cannot be read for '", a_tilemap.name, "'")
+		printerr("Load Room Error : Given TilemapRessource is null and cannot be read for '", a_tilemap.name, "'")
 		return
 	
 	a_tilemap.clear()
@@ -324,15 +329,25 @@ func set_quest_end(a_roomData : RoomResource) :
 		QuestEndParent.name = "Exits"
 		self.add_child(QuestEndParent)
 	
+	for quest in QuestEndList :
+		if (quest != null) :
+			quest.free()
+	
+	QuestEndList.clear()
+	
 	var n : int = 0
 	for data in  a_roomData.quest_end_list :
-		var questObj = QuestEnd.new()
-		questObj.name = "Quest_End_" + str(n)
-		questObj.position = data
-		questObj.PossibleDestinations = a_roomData.quest_end_list[data]
-		
+		var loadedQuest = preload(questEndPath)
+		var questObj : QuestEnd = loadedQuest.instantiate()
 		QuestEndList.append(questObj)
 		QuestEndParent.add_child(questObj)
+		questObj.owner = self
+		
+		questObj.name = "Quest_End_" + str(n)
+		questObj.position = data
+		questObj.PossibleDestinations = a_roomData.quest_end_values[a_roomData.quest_end_list[data]]
+		questObj.hitbox.shape.get_rect().size = a_roomData.quest_end_size[a_roomData.quest_end_list[data]]
+		
 		n += 1
 
 #endregion
