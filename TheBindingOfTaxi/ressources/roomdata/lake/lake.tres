@@ -10,6 +10,11 @@ road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/road_layer.tr
 wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/wall_layer.tres"
 clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/ClientNProps_layer.tres"
 decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/lake/decoration_layer.tres"
+quest_end_list = Dictionary[Vector2, int]({
+Vector2(679, 484): 0
+})
+quest_end_values = Array[Array]([Array[int]([0, 5])])
+quest_end_size = Array[Vector2]([Vector2(32, 32)])
 exits = Dictionary[Vector2i, int]({
 Vector2i(0, 0): 9,
 Vector2i(0, 1): 1,

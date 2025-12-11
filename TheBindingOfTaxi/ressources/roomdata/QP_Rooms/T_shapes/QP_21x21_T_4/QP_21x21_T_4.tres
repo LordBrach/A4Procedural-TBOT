@@ -5,10 +5,15 @@
 [resource]
 script = ExtResource("1_63vuj")
 room_name = "QP_21x21_T_4"
-road_layer_path = "res:///TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/road_layer.tres"
-wall_layer_path = "res:///TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/wall_layer.tres"
-clientNProps_layer_path = "res:///TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/ClientNProps_layer.tres"
-decoration_layer_path = "res:///TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/decoration_layer.tres"
+road_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/road_layer.tres"
+wall_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/wall_layer.tres"
+clientNProps_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/ClientNProps_layer.tres"
+decoration_layer_path = "res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/decoration_layer.tres"
+quest_end_list = Dictionary[Vector2, int]({
+Vector2(264, 151): 0
+})
+quest_end_values = Array[Array]([Array[int]([0, 1, 3])])
+quest_end_size = Array[Vector2]([Vector2(32, 32)])
 exits = Dictionary[Vector2i, int]({
 Vector2i(0, 0): 14
 })

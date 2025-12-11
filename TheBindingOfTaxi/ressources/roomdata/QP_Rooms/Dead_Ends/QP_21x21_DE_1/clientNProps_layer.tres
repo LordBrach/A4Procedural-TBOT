@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="TilemapResource" load_steps=2 format=4 uid="uid://bbmvbbyqy5evj"]
 
-[ext_resource type="Script" uid="uid://brvtu63u0yhby" path="res://TheBindingOfTaxi/scripts/resources/TilemapResource.gd" id="1_ttijk"]
+[ext_resource type="Script" uid="uid://brvtu63u0yhby" path="res://TheBindingOfTaxi/scripts/resources/TilemapResource.gd" id="1_auwfh"]
 
 [resource]
-script = ExtResource("1_ttijk")
+script = ExtResource("1_auwfh")
 size = Vector2i(5, 13)
 tilesbit = PackedByteArray("AAAFAA8AAwADAA0AAAAFAAwAAwADAA0AAAAJABEAAwAFAAYAAAAFAA4AAwAYAAMAAAAGAAYAAwAaAAIAAAAJABIAAwAEAAcAAAA=")
