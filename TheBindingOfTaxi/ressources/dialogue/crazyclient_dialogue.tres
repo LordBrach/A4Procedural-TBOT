@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="1_jyqw2"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/clientfou_intro.json" id="2_jyqw2"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/clientfou_discussion.json" id="3_kei5h"]
-[ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/debug.json" id="4_wm0kd"]
+[ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/clientfou_reaction.json" id="4_jyqw2"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/clientfou_outro.json" id="5_50iwy"]
 
 [resource]
@@ -11,6 +11,6 @@ script = ExtResource("1_jyqw2")
 values = Dictionary[int, JSON]({
 0: ExtResource("2_jyqw2"),
 1: ExtResource("3_kei5h"),
-2: ExtResource("4_wm0kd"),
+2: ExtResource("4_jyqw2"),
 3: ExtResource("5_50iwy")
 })

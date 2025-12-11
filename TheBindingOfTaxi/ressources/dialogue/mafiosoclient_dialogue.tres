@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="tracery_dict" load_steps=6 format=3 uid="uid://ugm16qmv45eu"]
+[gd_resource type="Resource" script_class="tracery_dict" load_steps=6 format=3 uid="uid://c16c0ty4i78ui"]
 
 [ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="1_ofs8o"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/mafieux_intro.json" id="2_ofs8o"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/mafieux_discussion.json" id="3_u50xj"]
-[ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/debug.json" id="4_ag6wt"]
+[ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/mafieux_reaction.json" id="4_ofs8o"]
 [ext_resource type="JSON" path="res://TheBindingOfTaxi/Json/mafieux_outro.json" id="5_1qkrr"]
 
 [resource]
@@ -11,6 +11,6 @@ script = ExtResource("1_ofs8o")
 values = Dictionary[int, JSON]({
 0: ExtResource("2_ofs8o"),
 1: ExtResource("3_u50xj"),
-2: ExtResource("4_ag6wt"),
+2: ExtResource("4_ofs8o"),
 3: ExtResource("5_1qkrr")
 })
