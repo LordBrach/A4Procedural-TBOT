@@ -10,7 +10,7 @@ func _on_body_entered(body:Node2D) -> void:
 	if (body is Player && boolenabled == true):
 		Player.Instance.on_runoverclient()
 		boolenabled = false
-		dir = -(body.position - self.position).normalized()
+		dir = -(body.global_position - global_position).normalized()
 		intensity = PlayerGlobal.velocity.length() * 1.5
 		$AudioStreamPlayer2D.play()
 		$DelaybeforeDeath.start()

@@ -22,7 +22,7 @@ var hasDestination : bool = false
 var SavedCustomerType : Globals.CUSTOMER_TYPE
 var tryPlayBlabla: bool = false
 var isAwaitingBlabla: bool = false
-
+@export var FUEL : float = 100.0
 # Collectible
 var key_count : int
 # Signals
@@ -41,6 +41,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
+	FUEL -= 0.01
+	if(FUEL <= 0):
+		$PlayerUI/CanvasTextbox/END.show()
 	_update_inputs()
 	#_update_room()
 	if(tryPlayBlabla == true):
@@ -50,13 +53,21 @@ func _process(delta: float) -> void:
 		if(isAwaitingBlabla == true) :
 			isAwaitingBlabla = false
 			TraceryFuncs._SendLineToTextbox(SavedCustomerType,Globals.CUSTOMER_DIALOGUE_TYPE.COMMENT)
-			
-		
-	
+	var fuel_string: String = "Essence: %s" % int(FUEL)
+	$PlayerUI/CanvasTextbox/Fuel.text = fuel_string
+
+	if hasDestination:
+		var distance = int(customerDestination.distance_to(global_position))
+		var actual_string = "Point de drop du client: %s" % distance
+		$PlayerUI/CanvasTextbox/Distance.text = actual_string
+	else:
+		$PlayerUI/CanvasTextbox/Distance.text = "Trouve un client!"
+
 	if (hasDestination) :
 		if (arrowSprite.modulate.a == 0) :
 			arrowSprite.modulate.a = 1
 		arrowSprite.look_at(customerDestination)
+
 
 #region prototype
 func enter_room(room : Room) -> void:
@@ -176,21 +187,23 @@ func complete_quest(LinkedClientId : int) ->void:
 	CustomerList.erase(LinkedClientId)
 	TraceryFuncs._SendLineToTextbox(
 		SavedCustomerType,
-		 Globals.CUSTOMER_DIALOGUE_TYPE.OUTRO)
+			Globals.CUSTOMER_DIALOGUE_TYPE.OUTRO)
 	hasDestination = false
 	arrowSprite.modulate.a = 0
 	customerDestination = Vector2.ZERO
-	
 	OnQuestFinished.emit()
+	FUEL += 20
 	pass
 #endregion
 
 func on_runoverclient():
-		TraceryFuncs._SendLineToTextbox(
-		SavedCustomerType,
-		 Globals.CUSTOMER_DIALOGUE_TYPE.REACT)
+		if hasDestination:
+			TraceryFuncs._SendLineToTextbox(
+			SavedCustomerType,
+				Globals.CUSTOMER_DIALOGUE_TYPE.REACT)
 		
 func on_blabla():
-		TraceryFuncs._SendLineToTextbox(
-		SavedCustomerType,
-		 Globals.CUSTOMER_DIALOGUE_TYPE.COMMENT)
+		if hasDestination:
+			TraceryFuncs._SendLineToTextbox(
+			SavedCustomerType,
+				Globals.CUSTOMER_DIALOGUE_TYPE.COMMENT)
