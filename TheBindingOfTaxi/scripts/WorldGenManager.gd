@@ -25,7 +25,6 @@ var last_Player_Pos : Vector2i = Vector2i(1000, 1000)
 
 func _ready() -> void:
 	CreateChunk(Vector2i.ZERO, Biomes.Biome1)
-	CreateChunk(Vector2i.DOWN, Biomes.Biome1)
 
 func _process(delta: float) -> void:
 	
