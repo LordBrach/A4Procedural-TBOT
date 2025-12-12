@@ -1,11 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://4xqb43lmfesb"]
+[gd_scene load_steps=11 format=3 uid="uid://4xqb43lmfesb"]
 
 [ext_resource type="PackedScene" uid="uid://ba3eux3e67oea" path="res://TheBindingOfTaxi/scenes/proto/UI/text_box_base.tscn" id="1_qwd5t"]
 [ext_resource type="AudioStream" uid="uid://dff1mihma8nm1" path="res://TheBindingOfTaxi/Audio/BlaBlubla-8.wav" id="2_ocsoo"]
 [ext_resource type="Script" uid="uid://mlkoce8y5cto" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/TraceryHelperFuncs.gd" id="2_pf331"]
+[ext_resource type="FontFile" uid="uid://c6uut6uco2c1s" path="res://TheBindingOfTaxi/sprites/GrapeSoda.ttf" id="3_7hm61"]
 [ext_resource type="Script" uid="uid://byyndf7qbn2np" path="res://TheBindingOfTaxi/scripts/Tracery&TextStuff/tracery_dict.gd" id="3_50c3i"]
+[ext_resource type="Texture2D" uid="uid://dlen37q5128u6" path="res://TheBindingOfTaxi/sprites/GameOver.png" id="3_874pe"]
 [ext_resource type="Resource" uid="uid://btmnr2d3ph8dq" path="res://TheBindingOfTaxi/ressources/dialogue/default_dialogue.tres" id="3_b1whj"]
+[ext_resource type="Texture2D" uid="uid://cd6mn6n3ouym2" path="res://TheBindingOfTaxi/sprites/GBKZqc3bwAA8QeC.jpg" id="4_khwk5"]
 [ext_resource type="Resource" uid="uid://ubu82c20dkrp" path="res://TheBindingOfTaxi/ressources/dialogue/richeclient_dialogue.tres" id="5_5mut0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_874pe"]
+font = ExtResource("3_7hm61")
+font_size = 45
 
 [node name="PlayerUI" type="Node"]
 
@@ -20,6 +27,105 @@ visible_characters = 93
 stream = ExtResource("2_ocsoo")
 pitch_scale = 0.6
 max_polyphony = 2
+
+[node name="END" type="TextureRect" parent="CanvasTextbox"]
+visible = false
+z_index = 1685
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -2.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_874pe")
+expand_mode = 1
+
+[node name="END2" type="TextureRect" parent="CanvasTextbox/END"]
+z_index = 1685
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.89400005
+anchor_right = 0.39100003
+anchor_bottom = 0.975
+offset_top = -75.55603
+offset_right = -0.2590332
+offset_bottom = 15.075012
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_khwk5")
+expand_mode = 1
+
+[node name="END3" type="TextureRect" parent="CanvasTextbox/END"]
+z_index = 1685
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.89400005
+anchor_right = 0.39100003
+anchor_bottom = 0.975
+offset_left = 701.0
+offset_top = -72.55603
+offset_right = 700.74097
+offset_bottom = 18.075012
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_khwk5")
+expand_mode = 1
+flip_h = true
+
+[node name="END4" type="TextureRect" parent="CanvasTextbox/END"]
+z_index = 1685
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.89400005
+anchor_right = 0.39100003
+anchor_bottom = 0.975
+offset_left = 994.0
+offset_top = -114.55603
+offset_right = 689.74097
+offset_bottom = -103.92499
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_khwk5")
+expand_mode = 1
+flip_h = true
+
+[node name="END5" type="TextureRect" parent="CanvasTextbox/END"]
+z_index = 1685
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.89400005
+anchor_right = 0.39100003
+anchor_bottom = 0.975
+offset_left = 539.0
+offset_top = -337.55603
+offset_right = 171.74097
+offset_bottom = -360.925
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_khwk5")
+expand_mode = 1
+
+[node name="Distance" type="Label" parent="CanvasTextbox"]
+anchors_preset = -1
+anchor_right = 0.238
+anchor_bottom = 0.16800001
+offset_right = -0.17599487
+offset_bottom = 0.13599396
+text = "Distance to client drop: "
+label_settings = SubResource("LabelSettings_874pe")
+
+[node name="Fuel" type="Label" parent="CanvasTextbox"]
+anchors_preset = -1
+anchor_top = 0.086
+anchor_right = 0.238
+anchor_bottom = 0.25500003
+offset_top = 0.27199936
+offset_right = 15.824005
+offset_bottom = -0.24002075
+text = "Fuel:"
+label_settings = SubResource("LabelSettings_874pe")
 
 [node name="TraceryHelper" type="Node" parent="." node_paths=PackedStringArray("outputbox")]
 script = ExtResource("2_pf331")
