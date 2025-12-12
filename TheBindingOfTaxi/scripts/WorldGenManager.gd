@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		for x in range(-1, 2) :
 			for y in range(-1, 2) :
 				if (!chunksTiles.has(Vector2i(x, y))) :
-					CreateChunk(Vector2i(x, y), Biomes.Biome1)
+					CreateChunk(Vector2i(x, y), Globals.GetRandomBiome())
 	
 	last_Player_Pos = playerChunkPos
 
