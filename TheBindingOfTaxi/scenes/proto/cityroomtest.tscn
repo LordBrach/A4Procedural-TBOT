@@ -3,15 +3,14 @@
 [ext_resource type="Script" uid="uid://dpgrtlb34gopg" path="res://TheBindingOfTaxi/scripts/roomdata.gd" id="1_8fllh"]
 [ext_resource type="TileSet" uid="uid://dqy6nw870lq50" path="res://TheBindingOfTaxi/sprites/tilesets/roadTileset.tres" id="2_6ju7u"]
 
-[node name="azdfadsqsdqqqqqqqqqqqsdqsd" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer", "DecorationLayer", "QuestEndParent", "QuestEndList")]
+[node name="azdfadsqsdqqqqqqqqqqqsdqsd" type="Node2D" node_paths=PackedStringArray("RoadLayer", "WallLayer", "ClientNPropsLayer", "DecorationLayer", "QuestEndList")]
 script = ExtResource("1_8fllh")
 roomName = "azdfadsqsdqqqqqqqqqqqsdqsd"
 RoadLayer = NodePath("RoadLayer")
 WallLayer = NodePath("WallLayer")
 ClientNPropsLayer = NodePath("Client&PropsLayer")
 DecorationLayer = NodePath("EmptyLayer")
-QuestEndParent = NodePath("@Node@29179")
-QuestEndList = [NodePath("@Node@29179/Quest_End_0"), NodePath("@Node@29179/Quest_End_1")]
+QuestEndList = [null, null]
 roomSize = Vector2i(2, 2)
 
 [node name="RoadLayer" type="TileMapLayer" parent="."]
@@ -32,7 +31,5 @@ tile_set = ExtResource("2_6ju7u")
 [node name="Exits" type="Node" parent="."]
 
 [connection signal="body_entered" from="Client&PropsLayer/Customer" to="Client&PropsLayer/Customer" method="_on_body_entered"]
-[connection signal="body_entered" from="Client&PropsLayer/@Area2D@71174" to="Client&PropsLayer/@Area2D@71174" method="_on_body_entered"]
+[connection signal="body_entered" from="Client&PropsLayer/@Area2D@32672" to="Client&PropsLayer/@Area2D@32672" method="_on_body_entered"]
 [connection signal="body_entered" from="Client&PropsLayer/HittableDude" to="Client&PropsLayer/HittableDude" method="_on_body_entered"]
-[connection signal="body_entered" from="@Node@29179/Quest_End_0" to="@Node@29179/Quest_End_0" method="_on_body_entered"]
-[connection signal="body_entered" from="@Node@29179/Quest_End_1" to="@Node@29179/Quest_End_1" method="_on_body_entered"]

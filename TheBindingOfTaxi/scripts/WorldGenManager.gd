@@ -49,7 +49,8 @@ func CreateChunk(a_pos : Vector2i, a_biome : Biomes) -> void :
 	var instance : Chunk = chunk.instantiate()
 	self.add_child(instance)
 	
-	instance.StartGeneration(a_pos, a_biome)
+	if (!instance.StartGeneration(a_pos, a_biome)) :
+		instance.StartGeneration(a_pos, Biomes.Biome1)
 	chunksTiles.set(a_pos, instance)
 
 func CreateChunkSpecialRoom(a_pos : Vector2i, a_room : RoomResource) -> void :
@@ -65,7 +66,8 @@ func CreateChunkSpecialRoom(a_pos : Vector2i, a_room : RoomResource) -> void :
 		printerr("Generate Chunk Error : the given room '", a_room.room_name, "' didn't have an associated biome")
 		return
 	
-	instance.StartGeneration(a_pos, biome, a_room)
+	if (!instance.StartGeneration(a_pos, biome, a_room)) :
+		instance.StartGeneration(a_pos, Biomes.Biome1)
 	chunksTiles.set(a_pos, instance)
 
 func Getchunk(a_pos : Vector2i) -> Chunk :
