@@ -63,6 +63,7 @@ func CreateChunkSpecialRoom(a_pos : Vector2i, a_room : RoomResource) -> void :
 	var biome = specialsBiome.get(a_room, Biomes.None)
 	if (biome == Biomes.None) :
 		printerr("Generate Chunk Error : the given room '", a_room.room_name, "' didn't have an associated biome")
+		return
 	
 	instance.StartGeneration(a_pos, biome, a_room)
 	chunksTiles.set(a_pos, instance)

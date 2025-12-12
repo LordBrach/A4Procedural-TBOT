@@ -93,7 +93,7 @@ func _IsTileInside(a_pos : Vector2i) -> bool :
 	
 	return result
 
-func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes, a_room : RoomResource = null) -> void :
+func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes, a_room : RoomResource = null) -> bool :
 	chunkPosition = a_pos
 	global_position = Vector2(chunkPosition.x * Globals.GetPixelChunkSize().x, chunkPosition.y * Globals.GetPixelChunkSize().y)\
 	 - Vector2(Globals.GetPixelChunkSize().x / 2, - Globals.GetPixelChunkSize().y / 2)
@@ -104,15 +104,16 @@ func StartGeneration(a_pos : Vector2i, a_biome : WorldGen.Biomes, a_room : RoomR
 	var roomlist : Array[RoomResource] = WorldGen.GetRooms(a_biome)
 	if (roomlist.is_empty()) :
 		printerr("Chunk Generation error : list is null for '", a_biome, "'")
-		return
+		return false
 	
 	if (WorldGen != null) :
 		SetExits()
-		Generation(roomlist, a_room)
+		return Generation(roomlist, a_room)
 	else :
 		printerr("Chunk Generation error : WorldGenManager instance not found")
+		return false
 
-func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) -> void :
+func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) -> bool :
 	
 	var placed : bool = false
 	
@@ -136,12 +137,12 @@ func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) 
 		var firstRoom : RoomResource = a_roomList.pick_random()
 		if (firstRoom == null) :
 			printerr("Chunk Generation error : First room is null")
-			return
+			return false
 	
 		var position : Vector2i = Vector2i(Globals.chunkSize.x / 2, Globals.chunkSize.y / 2) - Vector2i(firstRoom.room_size.x / 2, firstRoom.room_size.y / 2)
 		if (!TryPlaceRoom(position, firstRoom)) :
 			printerr("Chunk Generation error : First room is invalid")
-			return
+			return false
 	#endregion
 	
 	var iteration = 0 # Debug purpose only
@@ -218,7 +219,7 @@ func Generation(a_roomList : Array[RoomResource], a_room : RoomResource = null) 
 	if (iteration >= 3) :
 		printerr("Chunk Generation Error : Cannot generate the required numbers of tiles")
 	
-	return
+	return true
 
 func IsOccupied(a_roomTilePos : Vector2i, a_roomSize : Vector2i = Vector2i(1, 1)) -> bool :
 	for i in range(0, a_roomSize.x):
