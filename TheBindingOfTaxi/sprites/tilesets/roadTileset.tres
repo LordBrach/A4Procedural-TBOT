@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cinljgej7owpj" path="res://scenes/spikes.tscn" id="5_k2d8t"]
 [ext_resource type="PackedScene" uid="uid://caqkxr3u45dsp" path="res://scenes/door_closed.tscn" id="6_s324g"]
 [ext_resource type="Texture2D" uid="uid://c0tfbsm6oqvxt" path="res://imports/kenney_rpg-urban-pack/Tilemap/tilemap_packed.png" id="7_vnqca"]
-[ext_resource type="Script" path="res://TheBindingOfTaxi/scripts/exitdata.gd" id="8_bf4ht"]
+[ext_resource type="Script" uid="uid://dfvrya3wq8tod" path="res://TheBindingOfTaxi/scripts/exitdata.gd" id="8_bf4ht"]
 [ext_resource type="PackedScene" uid="uid://dhpfd5occg8hd" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/customer_base.tscn" id="9_paueh"]
 [ext_resource type="PackedScene" uid="uid://c6ajqk62og3ck" path="res://TheBindingOfTaxi/scenes/proto/SceneElements/hittable_element.tscn" id="11_kdtnq"]
 
