@@ -17,15 +17,11 @@
 [ext_resource type="Resource" uid="uid://ct6oq1jov0yho" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_1_Var-SE/QR_21x21_1_Var-SE.tres" id="13_3fwqn"]
 [ext_resource type="Resource" uid="uid://xkl3ar2636ua" path="res://TheBindingOfTaxi/ressources/roomdata/parc_42x42_2/parc_42x42_2.tres" id="13_q44lk"]
 [ext_resource type="Resource" uid="uid://dq2u2mthdok2t" path="res://TheBindingOfTaxi/ressources/roomdata/lake/lake.tres" id="14_0usvj"]
-[ext_resource type="Resource" uid="uid://dtamwwpylaph0" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-East/DeadEnd-East.tres" id="14_8v853"]
 [ext_resource type="Resource" uid="uid://cmkvbeevshy7k" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_1_Var-SW/QR_21x21_1_Var-SW.tres" id="14_ucij4"]
 [ext_resource type="Resource" uid="uid://k5yhrgur6ieg" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_2/QR_21x21_2.tres" id="15_g568a"]
 [ext_resource type="Resource" uid="uid://wpjc8yc6tffv" path="res://TheBindingOfTaxi/ressources/roomdata/lake_2/lake_2.tres" id="15_mt2eh"]
-[ext_resource type="Resource" uid="uid://bknx8vsb0rah1" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-North/DeadEnd-North.tres" id="15_rvfow"]
 [ext_resource type="Resource" uid="uid://csyajdy5fmeh5" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_2-Var-NS/QR_21x21_2-Var-NS.tres" id="16_02h5o"]
-[ext_resource type="Resource" uid="uid://cjkvms74fwtfc" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-South/DeadEnd-South.tres" id="16_woj30"]
 [ext_resource type="Resource" uid="uid://drog1adwm6cca" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_3/QR_21x21_3.tres" id="17_mslja"]
-[ext_resource type="Resource" uid="uid://lvoubg5xnn2q" path="res://TheBindingOfTaxi/ressources/roomdata/DeadEnd-West/DeadEnd-West.tres" id="17_rxjh1"]
 [ext_resource type="Resource" uid="uid://csdtqlo0o5ljf" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_3_Var-4sided/QR_21x21_3_Var-4sided.tres" id="18_n21pe"]
 [ext_resource type="Resource" uid="uid://elewlh2mktvp" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_3_Var-WE/QR_21x21_3_Var-WE.tres" id="19_tmlfl"]
 [ext_resource type="Resource" uid="uid://ol7g0d33eq0u" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_5/QR_21x21_5.tres" id="20_qaxvt"]
@@ -39,6 +35,10 @@
 [ext_resource type="Resource" uid="uid://dd45ol86vdg7m" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_2/QP_21x21_T_2.tres" id="28_n21pe"]
 [ext_resource type="Resource" uid="uid://dww8t4aclr4cn" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_3/QP_21x21_T_3.tres" id="29_tmlfl"]
 [ext_resource type="Resource" uid="uid://700yt0fmn80p" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/T_shapes/QP_21x21_T_4/QP_21x21_T_4.tres" id="30_qaxvt"]
+[ext_resource type="Resource" uid="uid://d3083c4uh574i" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_Var_N/QR_21x21_4_Var_N.tres" id="36_q44lk"]
+[ext_resource type="Resource" uid="uid://ck8htwswwfr0l" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_Var-W/QR_21x21_4_Var-W.tres" id="37_0usvj"]
+[ext_resource type="Resource" uid="uid://dq6nu85x1w620" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4_E/QR_21x21_4_E.tres" id="38_mt2eh"]
+[ext_resource type="Resource" uid="uid://dii5y5aoshc1a" path="res://TheBindingOfTaxi/ressources/roomdata/QR_Rooms/QR_21x21_4/QR_21x21_4.tres" id="39_702xc"]
 [ext_resource type="Resource" uid="uid://eux8k5momelk" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_1/QP_21x21_DE_1.tres" id="40_702xc"]
 [ext_resource type="Resource" uid="uid://dm2sw8qytvdjd" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_2/QP_21x21_DE_2.tres" id="41_a8at0"]
 [ext_resource type="Resource" uid="uid://bw8o0uj0u0rd2" path="res://TheBindingOfTaxi/ressources/roomdata/QP_Rooms/Dead_Ends/QP_21x21_DE_3/QP_21x21_DE_3.tres" id="42_4w4wm"]
@@ -80,7 +80,7 @@ ExtResource("15_mt2eh"): 5
 })
 biome1Rooms = Array[ExtResource("2_obu3s")]([ExtResource("11_wgn2w"), ExtResource("12_mhnpa"), ExtResource("13_3fwqn"), ExtResource("14_ucij4"), ExtResource("15_g568a"), ExtResource("16_02h5o"), ExtResource("17_mslja"), ExtResource("18_n21pe"), ExtResource("19_tmlfl"), ExtResource("20_qaxvt"), ExtResource("21_wl4c7")])
 biome2Rooms = Array[ExtResource("2_obu3s")]([ExtResource("22_mhnpa"), ExtResource("23_3fwqn"), ExtResource("24_ucij4"), ExtResource("25_g568a"), ExtResource("26_02h5o"), ExtResource("27_mslja"), ExtResource("28_n21pe"), ExtResource("29_tmlfl"), ExtResource("30_qaxvt")])
-biome1DeadEnds = Array[ExtResource("2_obu3s")]([ExtResource("14_8v853"), ExtResource("15_rvfow"), ExtResource("16_woj30"), ExtResource("17_rxjh1")])
+biome1DeadEnds = Array[ExtResource("2_obu3s")]([ExtResource("36_q44lk"), ExtResource("37_0usvj"), ExtResource("38_mt2eh"), ExtResource("39_702xc")])
 biome2DeadEnds = Array[ExtResource("2_obu3s")]([ExtResource("40_702xc"), ExtResource("41_a8at0"), ExtResource("42_4w4wm"), ExtResource("43_q2xyu")])
 biome1NoRoads = Array[ExtResource("2_obu3s")]([ExtResource("44_q44lk")])
 biome2NoRoads = Array[ExtResource("2_obu3s")]([ExtResource("45_0usvj")])
